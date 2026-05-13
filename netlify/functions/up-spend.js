@@ -25,7 +25,6 @@ exports.handler = async function (event) {
       }
       pageUrl = json.links?.next || null;
     }
-
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
