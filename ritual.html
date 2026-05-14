@@ -1,685 +1,686 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Ritual</title>
-  <link rel="icon" type="image/png" href="data:image/png;base64,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"/>
-  <link rel="apple-touch-icon" href="data:image/png;base64,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"/>
+  <link rel="icon" type="image/png" href="icon.png"/>
+  <link rel="apple-touch-icon" href="icon.png"/>
   <meta name="theme-color" content="#eeecf4"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
   <meta name="apple-mobile-web-app-title" content="Ritual"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body { background: #eeecf4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body { background: #eeecf4; font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
   </style>
 </head>
 <body>
   <div id="root"></div>
   <script type="text/babel">
 
-const { useState, useEffect, useRef, useCallback } = React;
+const { useState, useEffect, useRef } = React;
 
 const DEFAULT_HABITS = [
-  { id: "career",   label: "Career conversation", prompt: "Who did you connect with?", emoji: "💼", isDate: false, type: "weekly" },
-  { id: "date",     label: "Date",                 prompt: "Who with & where?",          emoji: "🍷", isDate: true,  type: "weekly" },
-  { id: "recipe",   label: "New recipe",           prompt: "What did you make?",         emoji: "🍳", isDate: false, type: "weekly" },
-  { id: "friends",  label: "Friends catch-up",     prompt: "Who did you see?",           emoji: "🤝", isDate: false, type: "weekly" },
-  { id: "reading",  label: "Reading",              prompt: "What are you reading?",      emoji: "📚", isDate: false, type: "nights", target: 3 },
-  { id: "spending", label: "Under spending goal",  prompt: "Weekly budget",              emoji: "💳", isDate: false, type: "spending" },
+{ id: “career”,   label: “Career conversation”, prompt: “Who did you connect with?”, emoji: “💼”, isDate: false, type: “weekly” },
+{ id: “date”,     label: “Date”,                 prompt: “Who with & where?”,          emoji: “🍷”, isDate: true,  type: “weekly” },
+{ id: “recipe”,   label: “New recipe”,           prompt: “What did you make?”,         emoji: “🍳”, isDate: false, type: “weekly” },
+{ id: “friends”,  label: “Friends catch-up”,     prompt: “Who did you see?”,           emoji: “🤝”, isDate: false, type: “weekly” },
+{ id: “reading”,  label: “Reading”,              prompt: “What are you reading?”,      emoji: “📚”, isDate: false, type: “nights”, target: 3 },
+{ id: “spending”, label: “Under spending goal”,  prompt: “Weekly budget”,              emoji: “💳”, isDate: false, type: “spending” },
 ];
 
-const EMOJI_OPTIONS = ["💼","🍷","🍳","🤝","📚","💳","✨","🌿","🎨","🏃","🧘","🎵","🌍","💪","🎯","🌱"];
-const DAY_LABELS = ["M","T","W","T","F","S","S"];
+const EMOJI_OPTIONS = [“💼”,“🍷”,“🍳”,“🤝”,“📚”,“💳”,“✨”,“🌿”,“🎨”,“🏃”,“🧘”,“🎵”,“🌍”,“💪”,“🎯”,“🌱”];
+const DAY_LABELS = [“M”,“T”,“W”,“T”,“F”,“S”,“S”];
 
 function getWeekKey(d = new Date()) {
-  const x = new Date(d); x.setHours(0,0,0,0);
-  x.setDate(x.getDate() - ((x.getDay()+6)%7));
-  return x.toISOString().slice(0,10);
+const x = new Date(d); x.setHours(0,0,0,0);
+x.setDate(x.getDate() - ((x.getDay()+6)%7));
+return x.toISOString().slice(0,10);
 }
 function offsetWeek(wk, n) {
-  const d = new Date(wk); d.setDate(d.getDate()+n*7); return d.toISOString().slice(0,10);
+const d = new Date(wk); d.setDate(d.getDate()+n*7); return d.toISOString().slice(0,10);
 }
 function weekDates(wk) {
-  return Array.from({length:7},(_,i)=>{ const d=new Date(wk); d.setDate(d.getDate()+i); return d; });
+return Array.from({length:7},(*,i)=>{ const d=new Date(wk); d.setDate(d.getDate()+i); return d; });
 }
 function fmtRange(wk) {
-  const [s,e] = [weekDates(wk)[0], weekDates(wk)[6]];
-  const mo = d => d.toLocaleDateString("en-AU",{month:"short"});
-  return s.getMonth()===e.getMonth() ? `${mo(s)} ${s.getDate()}–${e.getDate()}` : `${mo(s)} ${s.getDate()} – ${mo(e)} ${e.getDate()}`;
+const [s,e] = [weekDates(wk)[0], weekDates(wk)[6]];
+const mo = d => d.toLocaleDateString(“en-AU”,{month:“short”});
+return s.getMonth()===e.getMonth() ? `${mo(s)} ${s.getDate()}–${e.getDate()}` : `${mo(s)} ${s.getDate()} – ${mo(e)} ${e.getDate()}`;
 }
 function daysLeftInWeek() {
-  const now = new Date(); now.setHours(0,0,0,0);
-  const end = new Date(getWeekKey()); end.setDate(end.getDate()+6);
-  return Math.max(0, Math.round((end-now)/86400000));
+const now = new Date(); now.setHours(0,0,0,0);
+const end = new Date(getWeekKey()); end.setDate(end.getDate()+6);
+return Math.max(0, Math.round((end-now)/86400000));
 }
 function isHabitDone(data, id, wk, habit) {
-  if (!habit) return false;
-  if (habit.type==="nights") return (data[`${wk}:${id}:nights`]||[]).length >= (habit.target||3);
-  if (habit.type==="spending") return !!(data[`${wk}:${id}`]?.done);
-  return !!(data[`${wk}:${id}`]?.done);
+if (!habit) return false;
+if (habit.type===“nights”) return (data[`${wk}:${id}:nights`]||[]).length >= (habit.target||3);
+if (habit.type===“spending”) return !!(data[`${wk}:${id}`]?.done);
+return !!(data[`${wk}:${id}`]?.done);
 }
 function getStreak(data, id, currentWk, habits) {
-  const habit = habits.find(h=>h.id===id);
-  let s=0, wk=currentWk;
-  while (isHabitDone(data, id, wk, habit)) { s++; wk=offsetWeek(wk,-1); }
-  return s;
+const habit = habits.find(h=>h.id===id);
+let s=0, wk=currentWk;
+while (isHabitDone(data, id, wk, habit)) { s++; wk=offsetWeek(wk,-1); }
+return s;
 }
 function useConfetti(trigger) {
-  const [particles, setParticles] = useState([]);
-  useEffect(()=>{
-    if(!trigger) return;
-    const cols=["#7b6fa0","#a89cc8","#c8b8e8","#e8d8f8","#f0e8ff","#9591a4"];
-    setParticles(Array.from({length:48},(_,i)=>({
-      id:i, x:Math.random()*100, delay:Math.random()*0.5,
-      color:cols[Math.floor(Math.random()*cols.length)],
-      size:Math.random()*7+4, dur:Math.random()*0.9+0.9
-    })));
-    setTimeout(()=>setParticles([]),2600);
-  },[trigger]);
-  return particles;
+const [particles, setParticles] = useState([]);
+useEffect(()=>{
+if(!trigger) return;
+const cols=[”#7b6fa0”,”#a89cc8”,”#c8b8e8”,”#e8d8f8”,”#f0e8ff”,”#9591a4”];
+setParticles(Array.from({length:48},(*,i)=>({
+id:i, x:Math.random()*100, delay:Math.random()*0.5,
+color:cols[Math.floor(Math.random()*cols.length)],
+size:Math.random()*7+4, dur:Math.random()*0.9+0.9
+})));
+setTimeout(()=>setParticles([]),2600);
+},[trigger]);
+return particles;
 }
 
 // ── Onboarding ────────────────────────────────────────────────────────────────
 function Onboarding({ onDone }) {
-  const [step, setStep]         = useState(0);
-  const [name, setName]         = useState("");
-  const [habits, setHabits]     = useState(DEFAULT_HABITS.map(h=>({...h})));
-  const [budget, setBudget]     = useState("");
-  const [upToken, setUpToken]   = useState("");
-  const [editIdx, setEditIdx]   = useState(null);
-  const [editLabel, setEditLabel] = useState("");
-  const [editEmoji, setEditEmoji] = useState("");
+const [step, setStep]         = useState(0);
+const [name, setName]         = useState(””);
+const [habits, setHabits]     = useState(DEFAULT_HABITS.map(h=>({…h})));
+const [budget, setBudget]     = useState(””);
+const [upToken, setUpToken]   = useState(””);
+const [editIdx, setEditIdx]   = useState(null);
+const [editLabel, setEditLabel] = useState(””);
+const [editEmoji, setEditEmoji] = useState(””);
 
-  const startEdit = i => { setEditIdx(i); setEditLabel(habits[i].label); setEditEmoji(habits[i].emoji); };
-  const saveEdit  = () => {
-    setHabits(habits.map((h,i)=>i===editIdx?{...h,label:editLabel||h.label,emoji:editEmoji}:h));
-    setEditIdx(null);
-  };
+const startEdit = i => { setEditIdx(i); setEditLabel(habits[i].label); setEditEmoji(habits[i].emoji); };
+const saveEdit  = () => {
+setHabits(habits.map((h,i)=>i===editIdx?{…h,label:editLabel||h.label,emoji:editEmoji}:h));
+setEditIdx(null);
+};
 
-  return (
-    <div style={{minHeight:"100vh",background:"#eeecf4",display:"flex",alignItems:"center",justifyContent:"center",padding:"20px 24px"}}>
-      <div className="ob-card">
-        {step===0 && (<>
-          <div className="ob-step">Welcome</div>
-          <div className="ob-title">What should we call you?</div>
-          <div className="ob-sub">We'll personalise your weekly check-ins.</div>
-          <input className="ob-input" placeholder="Your name" value={name} autoFocus
-            onChange={e=>setName(e.target.value)}
-            onKeyDown={e=>e.key==="Enter"&&name.trim()&&setStep(1)}/>
-          <button className="btn-primary" disabled={!name.trim()} onClick={()=>setStep(1)} style={{width:"100%",marginTop:12}}>Continue →</button>
-        </>)}
+return (
+<div style={{minHeight:“100vh”,background:”#eeecf4”,display:“flex”,alignItems:“center”,justifyContent:“center”,padding:“20px 24px”}}>
+<div className="ob-card">
+{step===0 && (<>
+<div className="ob-step">Welcome</div>
+<div className="ob-title">What should we call you?</div>
+<div className="ob-sub">We’ll personalise your weekly check-ins.</div>
+<input className=“ob-input” placeholder=“Your name” value={name} autoFocus
+onChange={e=>setName(e.target.value)}
+onKeyDown={e=>e.key===“Enter”&&name.trim()&&setStep(1)}/>
+<button className=“btn-primary” disabled={!name.trim()} onClick={()=>setStep(1)} style={{width:“100%”,marginTop:12}}>Continue →</button>
+</>)}
 
-        {step===1 && editIdx===null && (<>
-          <div className="ob-step">Step 2 of 3</div>
-          <div className="ob-title">Make it yours</div>
-          <div className="ob-sub">Tap any habit to rename it.</div>
-          {habits.map((h,i)=>(
-            <div key={h.id} className="ob-habit-row" onClick={()=>startEdit(i)}>
-              <span style={{fontSize:22}}>{h.emoji}</span>
-              <div style={{flex:1,fontSize:15,fontWeight:600,color:"#2d2840"}}>{h.label}</div>
-              <div style={{fontSize:11,color:"#b8b4c8",fontWeight:700,letterSpacing:".06em",textTransform:"uppercase"}}>Edit</div>
-            </div>
-          ))}
-          <button className="btn-primary" onClick={()=>setStep(2)} style={{width:"100%",marginTop:12}}>Continue →</button>
-        </>)}
+```
+    {step===1 && editIdx===null && (<>
+      <div className="ob-step">Step 2 of 3</div>
+      <div className="ob-title">Make it yours</div>
+      <div className="ob-sub">Tap any habit to rename it.</div>
+      {habits.map((h,i)=>(
+        <div key={h.id} className="ob-habit-row" onClick={()=>startEdit(i)}>
+          <span style={{fontSize:22}}>{h.emoji}</span>
+          <div style={{flex:1,fontSize:15,fontWeight:600,color:"#2d2840"}}>{h.label}</div>
+          <div style={{fontSize:11,color:"#b8b4c8",fontWeight:700,letterSpacing:".06em",textTransform:"uppercase"}}>Edit</div>
+        </div>
+      ))}
+      <button className="btn-primary" onClick={()=>setStep(2)} style={{width:"100%",marginTop:12}}>Continue →</button>
+    </>)}
 
-        {step===1 && editIdx!==null && (<>
-          <div className="ob-step">Customise</div>
-          <div className="ob-title">Rename it</div>
-          <input className="ob-input" value={editLabel} autoFocus
-            onChange={e=>setEditLabel(e.target.value)}
-            onKeyDown={e=>e.key==="Enter"&&saveEdit()}/>
-          <div className="field-label" style={{marginTop:14}}>Emoji</div>
-          <div className="emoji-grid">
-            {EMOJI_OPTIONS.map(em=>(
-              <button key={em} className={`emoji-btn${editEmoji===em?" sel":""}`} onClick={()=>setEditEmoji(em)}>{em}</button>
-            ))}
-          </div>
-          <button className="btn-primary" onClick={saveEdit} style={{width:"100%",marginTop:14}}>Save</button>
-        </>)}
-
-        {step===2 && (<>
-          <div className="ob-step">Step 3 of 3</div>
-          <div className="ob-title">Spending goal 💳</div>
-          <div className="ob-sub">Set your weekly budget. Connect Up Bank to sync spend automatically.</div>
-          <div className="field-label">Weekly budget</div>
-          <div className="input-prefix">
-            <span className="prefix-sign">$</span>
-            <input className="prefix-input" type="number" placeholder="500" value={budget}
-              onChange={e=>setBudget(e.target.value)} autoFocus/>
-          </div>
-          <div className="field-label" style={{marginTop:14}}>Up Bank personal token <span style={{color:"#c0bcd0",fontWeight:500,textTransform:"none",letterSpacing:0}}>(optional)</span></div>
-          <input className="ob-input" placeholder="up:yeah:••••••••" value={upToken}
-            onChange={e=>setUpToken(e.target.value)} type="password"/>
-          <div style={{fontSize:12,color:"#9591a4",marginTop:6,lineHeight:1.5,marginBottom:4}}>
-            Up app → Settings → API → Create token. Read-only.
-          </div>
-          <button className="btn-primary" disabled={!budget} onClick={()=>onDone(name,habits,parseFloat(budget),upToken.trim())} style={{width:"100%",marginTop:14}}>Let's go →</button>
-          <button className="btn-ghost" onClick={()=>onDone(name,habits,500,"")} style={{width:"100%",marginTop:8}}>Skip for now</button>
-        </>)}
+    {step===1 && editIdx!==null && (<>
+      <div className="ob-step">Customise</div>
+      <div className="ob-title">Rename it</div>
+      <input className="ob-input" value={editLabel} autoFocus
+        onChange={e=>setEditLabel(e.target.value)}
+        onKeyDown={e=>e.key==="Enter"&&saveEdit()}/>
+      <div className="field-label" style={{marginTop:14}}>Emoji</div>
+      <div className="emoji-grid">
+        {EMOJI_OPTIONS.map(em=>(
+          <button key={em} className={`emoji-btn${editEmoji===em?" sel":""}`} onClick={()=>setEditEmoji(em)}>{em}</button>
+        ))}
       </div>
-    </div>
-  );
+      <button className="btn-primary" onClick={saveEdit} style={{width:"100%",marginTop:14}}>Save</button>
+    </>)}
+
+    {step===2 && (<>
+      <div className="ob-step">Step 3 of 3</div>
+      <div className="ob-title">Spending goal 💳</div>
+      <div className="ob-sub">Set your weekly budget. Connect Up Bank to sync spend automatically.</div>
+      <div className="field-label">Weekly budget</div>
+      <div className="input-prefix">
+        <span className="prefix-sign">$</span>
+        <input className="prefix-input" type="number" placeholder="500" value={budget}
+          onChange={e=>setBudget(e.target.value)} autoFocus/>
+      </div>
+      <div className="field-label" style={{marginTop:14}}>Up Bank personal token <span style={{color:"#c0bcd0",fontWeight:500,textTransform:"none",letterSpacing:0}}>(optional)</span></div>
+      <input className="ob-input" placeholder="up:yeah:••••••••" value={upToken}
+        onChange={e=>setUpToken(e.target.value)} type="password"/>
+      <div style={{fontSize:12,color:"#9591a4",marginTop:6,lineHeight:1.5,marginBottom:4}}>
+        Up app → Settings → API → Create token. Read-only.
+      </div>
+      <button className="btn-primary" disabled={!budget} onClick={()=>onDone(name,habits,parseFloat(budget),upToken.trim())} style={{width:"100%",marginTop:14}}>Let's go →</button>
+      <button className="btn-ghost" onClick={()=>onDone(name,habits,500,"")} style={{width:"100%",marginTop:8}}>Skip for now</button>
+    </>)}
+  </div>
+</div>
+```
+
+);
 }
 
 // ── Main App ──────────────────────────────────────────────────────────────────
 function App() {
-  const thisWeek = getWeekKey();
-  const [ready,          setReady]          = useState(false);
-  const [userName,       setUserName]       = useState("");
-  const [habits,         setHabits]         = useState(DEFAULT_HABITS);
-  const [weekKey,        setWeekKey]        = useState(thisWeek);
-  const [data,           setData]           = useState({});
-  const [tab,            setTab]            = useState("home");
-  const [logging,        setLogging]        = useState(null);
-  const [logText,        setLogText]        = useState("");
-  const [celebrated,     setCelebrated]     = useState({});
-  const [showCelebration,setShowCelebration]= useState(false);
-  const [editingHabit,   setEditingHabit]   = useState(null);
-  const [editLabel,      setEditLabel]      = useState("");
-  const [editEmoji,      setEditEmoji]      = useState("");
-  const [detailHabit,    setDetailHabit]    = useState(null);
-  const [budget,         setBudget]         = useState(500);
-  const [upToken,        setUpToken]        = useState("");
-  const [upSpend,        setUpSpend]        = useState(null);
-  const [upLoading,      setUpLoading]      = useState(false);
-  const [upError,        setUpError]        = useState(null);
-  const [showSettings,   setShowSettings]   = useState(false);
-  const [manualDraft,    setManualDraft]    = useState("");
-  const inputRef = useRef(null);
-  const confettiParticles = useConfetti(showCelebration);
+const thisWeek = getWeekKey();
+const [ready,          setReady]          = useState(false);
+const [userName,       setUserName]       = useState(””);
+const [habits,         setHabits]         = useState(DEFAULT_HABITS);
+const [weekKey,        setWeekKey]        = useState(thisWeek);
+const [data,           setData]           = useState({});
+const [tab,            setTab]            = useState(“home”);
+const [logging,        setLogging]        = useState(null);
+const [logText,        setLogText]        = useState(””);
+const [celebrated,     setCelebrated]     = useState({});
+const [showCelebration,setShowCelebration]= useState(false);
+const [editingHabit,   setEditingHabit]   = useState(null);
+const [editLabel,      setEditLabel]      = useState(””);
+const [editEmoji,      setEditEmoji]      = useState(””);
+const [detailHabit,    setDetailHabit]    = useState(null);
+const [budget,         setBudget]         = useState(500);
+const [upToken,        setUpToken]        = useState(””);
+const [upSpend,        setUpSpend]        = useState(null);
+const [upLoading,      setUpLoading]      = useState(false);
+const [upError,        setUpError]        = useState(null);
+const [showSettings,   setShowSettings]   = useState(false);
+const [manualDraft,    setManualDraft]    = useState(””);
+const inputRef = useRef(null);
+const confettiParticles = useConfetti(showCelebration);
 
-  useEffect(()=>{
-    try {
-      const s = localStorage.getItem("ritual-v4");
-      if (s) {
-        const p = JSON.parse(s);
-        setUserName(p.userName||""); setHabits(p.habits||DEFAULT_HABITS);
-        setData(p.data||{}); setCelebrated(p.celebrated||{});
-        setBudget(p.budget||500); setUpToken(p.upToken||"");
-        setReady(true);
-      }
-    } catch { setReady(false); }
-  },[]);
+useEffect(()=>{
+try {
+const s = localStorage.getItem(“ritual-v4”);
+if (s) {
+const p = JSON.parse(s);
+setUserName(p.userName||””); setHabits(p.habits||DEFAULT_HABITS);
+setData(p.data||{}); setCelebrated(p.celebrated||{});
+setBudget(p.budget||500); setUpToken(p.upToken||””);
+setReady(true);
+}
+} catch { setReady(false); }
+},[]);
 
-  const persist = useCallback((updates) => {
-    setUserName(u => {
-      const base = { userName:u, habits, data, celebrated, budget, upToken };
-      const next = {...base, ...updates};
-      try { localStorage.setItem("ritual-v4", JSON.stringify(next)); } catch {}
-      return updates.userName !== undefined ? updates.userName : u;
-    });
-    if (updates.habits     !== undefined) setHabits(updates.habits);
-    if (updates.data       !== undefined) setData(updates.data);
-    if (updates.celebrated !== undefined) setCelebrated(updates.celebrated);
-    if (updates.budget     !== undefined) setBudget(updates.budget);
-    if (updates.upToken    !== undefined) setUpToken(updates.upToken);
-  }, [habits, data, celebrated, budget, upToken]);
+const stateRef = useRef({});
+useEffect(() => {
+stateRef.current = { userName, habits, data, celebrated, budget, upToken };
+});
 
-  const saveAll = (updates) => {
-    const next = { userName, habits, data, celebrated, budget, upToken, ...updates };
-    try { localStorage.setItem("ritual-v4", JSON.stringify(next)); } catch {}
-    if (updates.userName   !== undefined) setUserName(updates.userName);
-    if (updates.habits     !== undefined) setHabits(updates.habits);
-    if (updates.data       !== undefined) setData(updates.data);
-    if (updates.celebrated !== undefined) setCelebrated(updates.celebrated);
-    if (updates.budget     !== undefined) setBudget(updates.budget);
-    if (updates.upToken    !== undefined) setUpToken(updates.upToken);
-  };
+const saveAll = (updates) => {
+const next = { …stateRef.current, …updates };
+try { localStorage.setItem(“ritual-v4”, JSON.stringify(next)); } catch {}
+if (updates.userName   !== undefined) setUserName(updates.userName);
+if (updates.habits     !== undefined) setHabits(updates.habits);
+if (updates.data       !== undefined) setData(updates.data);
+if (updates.celebrated !== undefined) setCelebrated(updates.celebrated);
+if (updates.budget     !== undefined) setBudget(updates.budget);
+if (updates.upToken    !== undefined) setUpToken(updates.upToken);
+};
 
-  // Up Bank fetch — calls Netlify function if deployed, falls back gracefully
-  useEffect(()=>{
-    if (!upToken || !ready) return;
-    setUpLoading(true); setUpError(null);
-    fetch(`/.netlify/functions/up-spend?weekKey=${weekKey}`, {
-      headers: { Authorization: `Bearer ${upToken}` }
-    })
-    .then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(j=>{ setUpSpend(j.total); setUpLoading(false); })
-    .catch(e=>{ setUpError(e.message); setUpLoading(false); });
-  },[upToken, weekKey, ready]);
+// Up Bank fetch — calls Netlify function if deployed, falls back gracefully
+useEffect(()=>{
+if (!upToken || !ready) return;
+setUpLoading(true); setUpError(null);
+fetch(`/.netlify/functions/up-spend?weekKey=${weekKey}`, {
+headers: { Authorization: `Bearer ${upToken}` }
+})
+.then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
+.then(j=>{ setUpSpend(j.total); setUpLoading(false); })
+.catch(e=>{ setUpError(e.message); setUpLoading(false); });
+},[upToken, weekKey, ready]);
 
-  // auto-mark spending done/undone from Up data
-  useEffect(()=>{
-    if (upSpend===null) return;
-    const k=`${weekKey}:spending`, cur=data[k]||{};
-    const shouldBeDone = upSpend<=budget;
-    if (cur.done!==shouldBeDone) {
-      const newData={...data,[k]:{...cur,done:shouldBeDone,autoAmount:upSpend}};
-      setData(newData);
-      try { localStorage.setItem("ritual-v4", JSON.stringify({userName,habits,data:newData,celebrated,budget,upToken})); } catch {}
-    }
-  },[upSpend, budget]);
+// auto-mark spending done/undone from Up data
+useEffect(()=>{
+if (upSpend===null) return;
+const { data: d, budget: b, userName: u, habits: h, celebrated: c, upToken: t } = stateRef.current;
+const k=`${weekKey}:spending`, cur=d[k]||{};
+const shouldBeDone = upSpend<=b;
+if (cur.done!==shouldBeDone) {
+const newData={…d,[k]:{…cur,done:shouldBeDone,autoAmount:upSpend}};
+setData(newData);
+try { localStorage.setItem(“ritual-v4”, JSON.stringify({userName:u,habits:h,data:newData,celebrated:c,budget:b,upToken:t})); } catch {}
+}
+},[upSpend, budget]);
 
-  const onboardDone = (name, newHabits, bud, tok) => {
-    const s={userName:name,habits:newHabits,data:{},celebrated:{},budget:bud,upToken:tok};
-    try { localStorage.setItem("ritual-v4",JSON.stringify(s)); } catch {}
-    setUserName(name); setHabits(newHabits); setBudget(bud); setUpToken(tok);
-    setData({}); setCelebrated({}); setReady(true);
-  };
+const onboardDone = (name, newHabits, bud, tok) => {
+const s={userName:name,habits:newHabits,data:{},celebrated:{},budget:bud,upToken:tok};
+try { localStorage.setItem(“ritual-v4”,JSON.stringify(s)); } catch {}
+setUserName(name); setHabits(newHabits); setBudget(bud); setUpToken(tok);
+setData({}); setCelebrated({}); setReady(true);
+};
 
-  const habitDef   = id => habits.find(h=>h.id===id)||DEFAULT_HABITS.find(h=>h.id===id);
-  const entry      = (id,wk=weekKey) => data[`${wk}:${id}`]||{};
-  const isDone     = (id,wk=weekKey) => isHabitDone(data,id,wk,habitDef(id));
-  const nightsDone = (wk=weekKey)    => data[`${wk}:reading:nights`]||[];
+const habitDef   = id => habits.find(h=>h.id===id)||DEFAULT_HABITS.find(h=>h.id===id);
+const entry      = (id,wk=weekKey) => data[`${wk}:${id}`]||{};
+const isDone     = (id,wk=weekKey) => isHabitDone(data,id,wk,habitDef(id));
+const nightsDone = (wk=weekKey)    => data[`${wk}:reading:nights`]||[];
 
-  const toggle = id => {
-    const h=habitDef(id);
-    if(h?.type==="nights"||h?.type==="spending") return;
-    const k=`${weekKey}:${id}`, cur=entry(id);
-    const newData={...data,[k]:{...cur,done:!cur.done}};
-    const newTotal=habits.filter(hb=>isHabitDone(newData,hb.id,weekKey,hb)).length;
-    if(newTotal===habits.length&&!celebrated[weekKey]) {
-      setShowCelebration(true);
-      saveAll({data:newData,celebrated:{...celebrated,[weekKey]:true}});
-      setTimeout(()=>setShowCelebration(false),2600);
-    } else { saveAll({data:newData}); }
-  };
+const toggle = id => {
+const h=habitDef(id);
+if(h?.type===“nights”||h?.type===“spending”) return;
+const k=`${weekKey}:${id}`, cur=entry(id);
+const newData={…data,[k]:{…cur,done:!cur.done}};
+const newTotal=habits.filter(hb=>isHabitDone(newData,hb.id,weekKey,hb)).length;
+if(newTotal===habits.length&&!celebrated[weekKey]) {
+setShowCelebration(true);
+saveAll({data:newData,celebrated:{…celebrated,[weekKey]:true}});
+setTimeout(()=>setShowCelebration(false),2600);
+} else { saveAll({data:newData}); }
+};
 
-  const toggleNight = dayIdx => {
-    const k=`${weekKey}:reading:nights`, cur=data[k]||[];
-    const next=cur.includes(dayIdx)?cur.filter(d=>d!==dayIdx):[...cur,dayIdx];
-    saveAll({data:{...data,[k]:next}});
-  };
+const toggleNight = dayIdx => {
+const k=`${weekKey}:reading:nights`, cur=data[k]||[];
+const next=cur.includes(dayIdx)?cur.filter(d=>d!==dayIdx):[…cur,dayIdx];
+saveAll({data:{…data,[k]:next}});
+};
 
-  const openLog = id => { setLogText(entry(id).note||""); setLogging(id); setTimeout(()=>inputRef.current?.focus(),80); };
-  const saveLog = () => {
-    const k=`${weekKey}:${logging}`;
-    saveAll({data:{...data,[k]:{...entry(logging),note:logText.trim()}}});
-    setLogging(null);
-  };
+const openLog = id => { setLogText(entry(id).note||””); setLogging(id); setTimeout(()=>inputRef.current?.focus(),80); };
+const saveLog = () => {
+const k=`${weekKey}:${logging}`;
+saveAll({data:{…data,[k]:{…entry(logging),note:logText.trim()}}});
+setLogging(null);
+};
 
-  const openEditHabit = h => { setEditLabel(h.label); setEditEmoji(h.emoji); setEditingHabit(h.id); };
-  const saveEditHabit = () => {
-    saveAll({habits:habits.map(h=>h.id===editingHabit?{...h,label:editLabel,emoji:editEmoji}:h)});
-    setEditingHabit(null);
-  };
+const openEditHabit = h => { setEditLabel(h.label); setEditEmoji(h.emoji); setEditingHabit(h.id); };
+const saveEditHabit = () => {
+saveAll({habits:habits.map(h=>h.id===editingHabit?{…h,label:editLabel,emoji:editEmoji}:h)});
+setEditingHabit(null);
+};
 
-  if (!ready) return <Onboarding onDone={onboardDone}/>;
+if (!ready) return <Onboarding onDone={onboardDone}/>;
 
-  const isNow     = weekKey===thisWeek;
-  const dates     = weekDates(weekKey);
-  const today     = new Date(); today.setHours(0,0,0,0);
-  const totalDone = habits.filter(h=>isDone(h.id)).length;
-  const daysLeft  = daysLeftInWeek();
-  const remaining = habits.length-totalDone;
-  const histWeeks = Array.from({length:12},(_,i)=>offsetWeek(thisWeek,-i));
-  const firstName = userName.split(" ")[0];
-  const spendEntry= data[`${weekKey}:spending`]||{};
-  const spendAmt  = upSpend!==null ? upSpend : (spendEntry.manualAmount??null);
-  const spendPct  = spendAmt!==null ? Math.min((spendAmt/budget)*100,100) : 0;
-  const spendOver = spendAmt!==null && spendAmt>budget;
-  const lastMonthMemos = habits
-    .filter(h=>h.type!=="spending"&&h.type!=="nights")
-    .map(h=>({...h,note:data[`${offsetWeek(thisWeek,-4)}:${h.id}`]?.note}))
-    .filter(h=>h.note);
+const isNow     = weekKey===thisWeek;
+const dates     = weekDates(weekKey);
+const today     = new Date(); today.setHours(0,0,0,0);
+const totalDone = habits.filter(h=>isDone(h.id)).length;
+const daysLeft  = daysLeftInWeek();
+const remaining = habits.length-totalDone;
+const histWeeks = Array.from({length:12},(_,i)=>offsetWeek(thisWeek,-i));
+const firstName = userName.split(” “)[0];
+const spendEntry= data[`${weekKey}:spending`]||{};
+const spendAmt  = upSpend!==null ? upSpend : (spendEntry.manualAmount??null);
+const spendPct  = spendAmt!==null ? Math.min((spendAmt/budget)*100,100) : 0;
+const spendOver = spendAmt!==null && spendAmt>budget;
+const lastMonthMemos = habits
+.filter(h=>h.type!==“spending”&&h.type!==“nights”)
+.map(h=>({…h,note:data[`${offsetWeek(thisWeek,-4)}:${h.id}`]?.note}))
+.filter(h=>h.note);
 
-  return (
-    <div style={{minHeight:"100vh",background:"#eeecf4"}}>
+return (
+<div style={{minHeight:“100vh”,background:”#eeecf4”}}>
 
-      {/* confetti */}
-      {showCelebration && (
-        <div style={{position:"fixed",inset:0,zIndex:300,pointerEvents:"none",display:"flex",alignItems:"center",justifyContent:"center"}}>
-          {confettiParticles.map(p=>(
-            <div key={p.id} style={{position:"fixed",top:0,left:`${p.x}%`,width:p.size,height:p.size*1.4,background:p.color,borderRadius:2,animation:`fall ${p.dur}s linear ${p.delay}s both`}}/>
-          ))}
-          <div style={{fontSize:24,fontWeight:700,color:"#2d2840",background:"#fff",borderRadius:20,padding:"20px 28px",boxShadow:"0 8px 32px rgba(0,0,0,.12)",textAlign:"center",animation:"celebIn .4s cubic-bezier(.34,1.56,.64,1) both"}}>
-            🎉 Perfect week, {firstName}!<br/><span style={{fontSize:14,color:"#9591a4",fontWeight:500}}>All {habits.length} habits done.</span>
-          </div>
+```
+  {/* confetti */}
+  {showCelebration && (
+    <div style={{position:"fixed",inset:0,zIndex:300,pointerEvents:"none",display:"flex",alignItems:"center",justifyContent:"center"}}>
+      {confettiParticles.map(p=>(
+        <div key={p.id} style={{position:"fixed",top:0,left:`${p.x}%`,width:p.size,height:p.size*1.4,background:p.color,borderRadius:2,animation:`fall ${p.dur}s linear ${p.delay}s both`}}/>
+      ))}
+      <div style={{fontSize:24,fontWeight:700,color:"#2d2840",background:"#fff",borderRadius:20,padding:"20px 28px",boxShadow:"0 8px 32px rgba(0,0,0,.12)",textAlign:"center",animation:"celebIn .4s cubic-bezier(.34,1.56,.64,1) both"}}>
+        🎉 Perfect week, {firstName}!<br/><span style={{fontSize:14,color:"#9591a4",fontWeight:500}}>All {habits.length} habits done.</span>
+      </div>
+    </div>
+  )}
+
+  <div className="app">
+    {/* topbar */}
+    <div className="topbar">
+      <div>
+        <div style={{fontSize:20,fontWeight:700,color:"#2d2840"}}>Hey, {firstName} 👋</div>
+        <div style={{fontSize:13,color:"#9591a4",fontWeight:500,marginTop:1}}>
+          {isNow ? (daysLeft===0?"Last day of the week":`${daysLeft} day${daysLeft!==1?"s":""} left`) : fmtRange(weekKey)}
         </div>
-      )}
-
-      <div className="app">
-        {/* topbar */}
-        <div className="topbar">
-          <div>
-            <div style={{fontSize:20,fontWeight:700,color:"#2d2840"}}>Hey, {firstName} 👋</div>
-            <div style={{fontSize:13,color:"#9591a4",fontWeight:500,marginTop:1}}>
-              {isNow ? (daysLeft===0?"Last day of the week":`${daysLeft} day${daysLeft!==1?"s":""} left`) : fmtRange(weekKey)}
-            </div>
-          </div>
-          <div style={{display:"flex",alignItems:"center",gap:8}}>
-            <div className="tab-pills">
-              <button className={`tab-pill${tab==="home"?" active":""}`} onClick={()=>setTab("home")}>Weekly</button>
-              <button className={`tab-pill${tab==="history"?" active":""}`} onClick={()=>setTab("history")}>History</button>
-            </div>
-            <button style={{background:"none",border:"none",cursor:"pointer",fontSize:20,color:"#9591a4"}} onClick={()=>setShowSettings(true)}>⚙️</button>
-          </div>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <div className="tab-pills">
+          <button className={`tab-pill${tab==="home"?" active":""}`} onClick={()=>setTab("home")}>Weekly</button>
+          <button className={`tab-pill${tab==="history"?" active":""}`} onClick={()=>setTab("history")}>History</button>
         </div>
+        <button style={{background:"none",border:"none",cursor:"pointer",fontSize:20,color:"#9591a4"}} onClick={()=>setShowSettings(true)}>⚙️</button>
+      </div>
+    </div>
 
-        {/* week nav */}
-        <div className="week-nav">
-          <button className="wk-arrow" onClick={()=>setWeekKey(k=>offsetWeek(k,-1))}>←</button>
-          <div style={{textAlign:"center"}}>
-            <div style={{fontSize:14,fontWeight:700,color:"#2d2840"}}>{fmtRange(weekKey)}</div>
-            {isNow&&<div style={{fontSize:11,color:"#9591a4",fontWeight:600,marginTop:2}}>This week</div>}
-          </div>
-          <button className="wk-arrow" disabled={isNow} onClick={()=>setWeekKey(k=>offsetWeek(k,1))}>→</button>
-        </div>
+    {/* week nav */}
+    <div className="week-nav">
+      <button className="wk-arrow" onClick={()=>setWeekKey(k=>offsetWeek(k,-1))}>←</button>
+      <div style={{textAlign:"center"}}>
+        <div style={{fontSize:14,fontWeight:700,color:"#2d2840"}}>{fmtRange(weekKey)}</div>
+        {isNow&&<div style={{fontSize:11,color:"#9591a4",fontWeight:600,marginTop:2}}>This week</div>}
+      </div>
+      <button className="wk-arrow" disabled={isNow} onClick={()=>setWeekKey(k=>offsetWeek(k,1))}>→</button>
+    </div>
 
-        {/* ── HOME ── */}
-        {tab==="home" && (
-          <div className="fade-up">
-            {isNow&&remaining>0&&daysLeft<=2&&(
-              <div style={{background:"#7b6fa0",borderRadius:18,padding:"14px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-                <div>
-                  <div style={{fontSize:14,fontWeight:700,color:"#fff"}}>Don't break your streak!</div>
-                  <div style={{fontSize:12,color:"rgba(255,255,255,.7)",marginTop:2}}>{remaining} habit{remaining!==1?"s":""} still to log</div>
-                </div>
-                <div style={{textAlign:"center"}}>
-                  <div style={{fontSize:32,fontWeight:700,color:"#fff",lineHeight:1}}>{daysLeft}</div>
-                  <div style={{fontSize:10,color:"rgba(255,255,255,.7)",fontWeight:700,letterSpacing:".06em",textTransform:"uppercase"}}>day{daysLeft!==1?"s":""} left</div>
-                </div>
-              </div>
-            )}
-
-            {/* progress card */}
-            <div className="card" style={{marginBottom:14}}>
-              <div className="section-label">This week</div>
-              <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:14}}>
-                <div style={{fontSize:42,fontWeight:700,color:"#2d2840",lineHeight:1}}>{totalDone}</div>
-                <div style={{fontSize:20,color:"#c4c0d0",fontWeight:600}}>/ {habits.length}</div>
-                <div style={{fontSize:13,color:"#9591a4",fontWeight:500,flex:1,textAlign:"right"}}>
-                  {["Not started","Getting going","Halfway","Almost there","Almost there","Almost there","Complete ✦"][Math.min(totalDone,habits.length===totalDone?habits.length:totalDone)]}
-                </div>
-              </div>
-              <div style={{height:6,background:"#f0eef8",borderRadius:6,overflow:"hidden"}}>
-                <div style={{height:"100%",background:"#7b6fa0",borderRadius:6,width:`${(totalDone/habits.length)*100}%`,transition:"width .5s cubic-bezier(.4,0,.2,1)"}}/>
-              </div>
+    {/* ── HOME ── */}
+    {tab==="home" && (
+      <div className="fade-up">
+        {isNow&&remaining>0&&daysLeft<=2&&(
+          <div style={{background:"#7b6fa0",borderRadius:18,padding:"14px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+            <div>
+              <div style={{fontSize:14,fontWeight:700,color:"#fff"}}>Don't break your streak!</div>
+              <div style={{fontSize:12,color:"rgba(255,255,255,.7)",marginTop:2}}>{remaining} habit{remaining!==1?"s":""} still to log</div>
             </div>
-
-            {/* day strip */}
-            <div style={{display:"flex",gap:6,marginBottom:20}}>
-              {dates.map((d,i)=>{
-                const isToday=d.getTime()===today.getTime();
-                return (
-                  <div key={i} style={{flex:1,background:"#fff",borderRadius:14,padding:"10px 4px 8px",display:"flex",flexDirection:"column",alignItems:"center",gap:5,boxShadow:"0 1px 3px rgba(0,0,0,.05)",border:isToday?"2px solid #7b6fa0":"2px solid transparent"}}>
-                    <div style={{fontSize:11,fontWeight:700,color:isToday?"#7b6fa0":"#b8b4c8",letterSpacing:".04em"}}>{DAY_LABELS[i]}</div>
-                    <div style={{fontSize:15,fontWeight:700,color:"#2d2840"}}>{d.getDate()}</div>
-                    <div style={{width:5,height:5,borderRadius:"50%",background:"#7b6fa0",opacity:isToday&&totalDone>0?1:0}}/>
-                  </div>
-                );
-              })}
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:32,fontWeight:700,color:"#fff",lineHeight:1}}>{daysLeft}</div>
+              <div style={{fontSize:10,color:"rgba(255,255,255,.7)",fontWeight:700,letterSpacing:".06em",textTransform:"uppercase"}}>day{daysLeft!==1?"s":""} left</div>
             </div>
-
-            {/* habits */}
-            <div className="section-label">Habits</div>
-            <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:22}}>
-              {habits.map(h=>{
-                const done=isDone(h.id), note=entry(h.id).note, streak=getStreak(data,h.id,weekKey,habits);
-
-                if(h.type==="nights") {
-                  const n=nightsDone().length, hit=n>=(h.target||3);
-                  return (
-                    <div key={h.id} className={`hcard${hit?" done":""}`}>
-                      <div className="hcard-main">
-                        <div style={{fontSize:22}}>{h.emoji}</div>
-                        <div style={{flex:1}}>
-                          <div className="hcard-name"><span className="label">{h.label}</span><button className="edit-btn" onClick={()=>openEditHabit(h)}>✎</button></div>
-                          <div className="hcard-meta">{streak>0?<><span style={{color:"#7b6fa0",fontWeight:700}}>🔥 {streak}w</span> · </>:""}{h.target} nights/week</div>
-                        </div>
-                        <div className="check-circle" style={{pointerEvents:"none"}}><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5l3.5 3.5L11.5 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-                      </div>
-                      <div style={{borderTop:"1px solid #f4f2f9",padding:"12px 18px"}}>
-                        <div style={{fontSize:11,fontWeight:700,color:"#9591a4",letterSpacing:".08em",textTransform:"uppercase",marginBottom:10}}>Tap nights you read</div>
-                        <div style={{display:"flex",gap:6}}>
-                          {DAY_LABELS.map((lbl,i)=>(
-                            <button key={i} onClick={()=>toggleNight(i)}
-                              style={{flex:1,height:34,borderRadius:10,border:`2px solid ${nightsDone().includes(i)?"#7b6fa0":"#e8e4f0"}`,background:nightsDone().includes(i)?"#7b6fa0":"#f8f7fc",cursor:"pointer",fontSize:11,fontWeight:700,color:nightsDone().includes(i)?"#fff":"#b8b4c8",fontFamily:"inherit",transition:"all .2s"}}>
-                              {lbl}
-                            </button>
-                          ))}
-                        </div>
-                        <div style={{fontSize:12,color:"#9591a4",fontWeight:600,marginTop:8}}>
-                          <span style={{color:"#7b6fa0",fontWeight:700}}>{nightsDone().length}</span>/{h.target} nights{hit?" ✦ Done!":""}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-
-                if(h.type==="spending") {
-                  return (
-                    <div key={h.id} className={`hcard${done?" done":""}`}>
-                      <div className="hcard-main">
-                        <div style={{fontSize:22}}>{h.emoji}</div>
-                        <div style={{flex:1}}>
-                          <div className="hcard-name"><span className="label">{h.label}</span><button className="edit-btn" onClick={()=>openEditHabit(h)}>✎</button></div>
-                          <div className="hcard-meta">{streak>0?<><span style={{color:"#7b6fa0",fontWeight:700}}>🔥 {streak}w</span> · </>:""}Goal: ${budget}/wk</div>
-                        </div>
-                        <div className="check-circle" style={{pointerEvents:"none"}}><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5l3.5 3.5L11.5 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-                      </div>
-                      <div style={{padding:"12px 18px 16px",borderTop:"1px solid #f4f2f9"}}>
-                        {upLoading&&<div style={{fontSize:13,color:"#b8b4c8",fontStyle:"italic"}}>Fetching from Up…</div>}
-                        {upError&&<div style={{fontSize:13,color:"#e07070"}}>Up error — enter manually</div>}
-                        {spendAmt!==null&&!upLoading&&(<>
-                          <div style={{display:"flex",alignItems:"baseline",gap:6,marginBottom:10}}>
-                            <div style={{fontSize:28,fontWeight:700,lineHeight:1,color:spendOver?"#e07070":spendAmt<budget*0.9?"#7b6fa0":"#2d2840"}}>${spendAmt.toFixed(0)}</div>
-                            <div style={{fontSize:13,color:"#b8b4c8",fontWeight:600}}>/ ${budget}</div>
-                            {upToken&&!upError&&<div style={{fontSize:11,color:"#b8b4c8",marginLeft:"auto",fontWeight:600}}>via Up ↗</div>}
-                          </div>
-                          <div style={{height:6,background:"#f0eef8",borderRadius:6,overflow:"hidden",marginBottom:8}}>
-                            <div style={{height:"100%",borderRadius:6,background:spendOver?"#e07070":"#7b6fa0",width:`${spendPct}%`,transition:"width .5s cubic-bezier(.4,0,.2,1)"}}/>
-                          </div>
-                          <div style={{fontSize:12,fontWeight:600,color:spendOver?"#e07070":done?"#7b6fa0":"#9591a4"}}>
-                            {spendOver?`$${(spendAmt-budget).toFixed(0)} over budget`:done?`$${(budget-spendAmt).toFixed(0)} under — on track ✦`:`$${(budget-spendAmt).toFixed(0)} remaining`}
-                          </div>
-                        </>)}
-                        {!upToken&&(
-                          <div style={{display:"flex",gap:8,marginTop:spendAmt!==null?10:0}}>
-                            <input style={{flex:1,background:"#f8f7fc",border:"1.5px solid #e8e4f0",borderRadius:10,padding:"10px 12px",fontSize:14,color:"#2d2840",outline:"none",fontFamily:"inherit"}}
-                              type="number" placeholder={spendAmt!==null?"Update amount":"Enter this week's spend"}
-                              value={manualDraft} onChange={e=>setManualDraft(e.target.value)}/>
-                            <button style={{background:"#7b6fa0",color:"#fff",border:"none",borderRadius:10,padding:"10px 16px",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"inherit"}}
-                              onClick={()=>{
-                                const amt=parseFloat(manualDraft); if(isNaN(amt)) return;
-                                saveAll({data:{...data,[`${weekKey}:spending`]:{done:amt<=budget,manualAmount:amt}}});
-                                setManualDraft("");
-                              }}>Save</button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                }
-
-                return (
-                  <div key={h.id} className={`hcard${done?" done":""}`}>
-                    <div className="hcard-main">
-                      <div style={{fontSize:22}}>{h.emoji}</div>
-                      <div style={{flex:1}}>
-                        <div className="hcard-name"><span className="label">{h.label}</span><button className="edit-btn" onClick={()=>openEditHabit(h)}>✎</button></div>
-                        <div className="hcard-meta">{streak>0?<><span style={{color:"#7b6fa0",fontWeight:700}}>🔥 {streak}w</span> · </>:""}{h.prompt}</div>
-                      </div>
-                      <div className="check-circle" onClick={()=>toggle(h.id)}><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5l3.5 3.5L11.5 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-                    </div>
-                    <div style={{borderTop:"1px solid #f4f2f9",padding:"12px 18px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,cursor:"pointer"}}
-                      onClick={()=>{ if(h.isDate) setDetailHabit(h); else openLog(h.id); }}>
-                      {note
-                        ? <><div style={{fontSize:13,color:"#6e6880",flex:1,lineHeight:1.45}}>"{note}"</div><div style={{fontSize:11,color:"#c0bcd0",fontWeight:700,letterSpacing:".04em",textTransform:"uppercase",whiteSpace:"nowrap"}}>{h.isDate?"History →":"Edit"}</div></>
-                        : <div style={{fontSize:12,color:"#c0bcd0",fontWeight:600}}>+ {h.prompt}</div>
-                      }
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {lastMonthMemos.length>0&&(<>
-              <div className="section-label">This time last month</div>
-              <div style={{background:"#ede9f8",borderRadius:18,padding:"16px 18px",marginBottom:22}}>
-                {lastMonthMemos.map(h=>(
-                  <div key={h.id} style={{display:"flex",alignItems:"flex-start",gap:10,marginBottom:8}}>
-                    <span style={{fontSize:18}}>{h.emoji}</span>
-                    <div style={{fontSize:13,color:"#6e6880",lineHeight:1.45,flex:1}}><span style={{fontWeight:700,color:"#7b6fa0"}}>{h.label}:</span> {h.note}</div>
-                  </div>
-                ))}
-              </div>
-            </>)}
           </div>
         )}
 
-        {/* ── HISTORY ── */}
-        {tab==="history"&&(
-          <div className="fade-up">
-            <div style={{height:4}}/>
-            <div style={{display:"flex",gap:10,marginBottom:20}}>
-              {[
-                {val:histWeeks.filter(wk=>habits.every(h=>isDone(h.id,wk))).length, lbl:"Perfect weeks"},
-                {val:Math.max(...habits.map(h=>getStreak(data,h.id,thisWeek,habits)),0), lbl:"Best streak"},
-                {val:Object.keys(data).filter(k=>data[k]?.done).length, lbl:"Total done"},
-              ].map(s=>(
-                <div key={s.lbl} className="card" style={{flex:1}}>
-                  <div style={{fontSize:28,fontWeight:700,color:"#2d2840",lineHeight:1}}>{s.val}</div>
-                  <div style={{fontSize:10,fontWeight:700,color:"#b8b4c8",letterSpacing:".08em",textTransform:"uppercase",marginTop:4}}>{s.lbl}</div>
-                </div>
-              ))}
+        {/* progress card */}
+        <div className="card" style={{marginBottom:14}}>
+          <div className="section-label">This week</div>
+          <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:14}}>
+            <div style={{fontSize:42,fontWeight:700,color:"#2d2840",lineHeight:1}}>{totalDone}</div>
+            <div style={{fontSize:20,color:"#c4c0d0",fontWeight:600}}>/ {habits.length}</div>
+            <div style={{fontSize:13,color:"#9591a4",fontWeight:500,flex:1,textAlign:"right"}}>
+              {["Not started","Getting going","Halfway","Almost there","Almost there","Almost there","Complete ✦"][Math.min(totalDone,habits.length===totalDone?habits.length:totalDone)]}
             </div>
-            <div className="section-label" style={{marginBottom:10}}>Last 12 weeks</div>
-            <div style={{display:"flex",flexDirection:"column",gap:8}}>
-              {histWeeks.map(wk=>{
-                const score=habits.filter(h=>isDone(h.id,wk)).length, perfect=score===habits.length;
-                return (
-                  <div key={wk} className="card" style={{display:"flex",alignItems:"center",gap:12,cursor:"pointer",border:wk===thisWeek?"2px solid #7b6fa0":"2px solid transparent",padding:"14px 16px"}}
-                    onClick={()=>{ setWeekKey(wk); setTab("home"); }}>
-                    <div style={{fontSize:12,fontWeight:700,color:"#9591a4",width:68,flexShrink:0}}>{fmtRange(wk)}</div>
-                    <div style={{display:"flex",gap:5,flex:1}}>
-                      {habits.map(h=>(
-                        <div key={h.id} style={{width:28,height:28,borderRadius:9,background:isDone(h.id,wk)?(perfect?"#7b6fa0":"#ede9f8"):"#f4f2f9",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>
-                          {isDone(h.id,wk)?h.emoji:""}
-                        </div>
+          </div>
+          <div style={{height:6,background:"#f0eef8",borderRadius:6,overflow:"hidden"}}>
+            <div style={{height:"100%",background:"#7b6fa0",borderRadius:6,width:`${(totalDone/habits.length)*100}%`,transition:"width .5s cubic-bezier(.4,0,.2,1)"}}/>
+          </div>
+        </div>
+
+        {/* day strip */}
+        <div style={{display:"flex",gap:6,marginBottom:20}}>
+          {dates.map((d,i)=>{
+            const isToday=d.getTime()===today.getTime();
+            return (
+              <div key={i} style={{flex:1,background:"#fff",borderRadius:14,padding:"10px 4px 8px",display:"flex",flexDirection:"column",alignItems:"center",gap:5,boxShadow:"0 1px 3px rgba(0,0,0,.05)",border:isToday?"2px solid #7b6fa0":"2px solid transparent"}}>
+                <div style={{fontSize:11,fontWeight:700,color:isToday?"#7b6fa0":"#b8b4c8",letterSpacing:".04em"}}>{DAY_LABELS[i]}</div>
+                <div style={{fontSize:15,fontWeight:700,color:"#2d2840"}}>{d.getDate()}</div>
+                <div style={{width:5,height:5,borderRadius:"50%",background:"#7b6fa0",opacity:isToday&&totalDone>0?1:0}}/>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* habits */}
+        <div className="section-label">Habits</div>
+        <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:22}}>
+          {habits.map(h=>{
+            const done=isDone(h.id), note=entry(h.id).note, streak=getStreak(data,h.id,weekKey,habits);
+
+            if(h.type==="nights") {
+              const n=nightsDone().length, hit=n>=(h.target||3);
+              return (
+                <div key={h.id} className={`hcard${hit?" done":""}`}>
+                  <div className="hcard-main">
+                    <div style={{fontSize:22}}>{h.emoji}</div>
+                    <div style={{flex:1}}>
+                      <div className="hcard-name"><span className="label">{h.label}</span><button className="edit-btn" onClick={()=>openEditHabit(h)}>✎</button></div>
+                      <div className="hcard-meta">{streak>0?<><span style={{color:"#7b6fa0",fontWeight:700}}>🔥 {streak}w</span> · </>:""}{h.target} nights/week</div>
+                    </div>
+                    <div className="check-circle" style={{pointerEvents:"none"}}><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5l3.5 3.5L11.5 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
+                  </div>
+                  <div style={{borderTop:"1px solid #f4f2f9",padding:"12px 18px"}}>
+                    <div style={{fontSize:11,fontWeight:700,color:"#9591a4",letterSpacing:".08em",textTransform:"uppercase",marginBottom:10}}>Tap nights you read</div>
+                    <div style={{display:"flex",gap:6}}>
+                      {DAY_LABELS.map((lbl,i)=>(
+                        <button key={i} onClick={()=>toggleNight(i)}
+                          style={{flex:1,height:34,borderRadius:10,border:`2px solid ${nightsDone().includes(i)?"#7b6fa0":"#e8e4f0"}`,background:nightsDone().includes(i)?"#7b6fa0":"#f8f7fc",cursor:"pointer",fontSize:11,fontWeight:700,color:nightsDone().includes(i)?"#fff":"#b8b4c8",fontFamily:"inherit",transition:"all .2s"}}>
+                          {lbl}
+                        </button>
                       ))}
                     </div>
-                    <div style={{fontSize:13,fontWeight:700,color:perfect?"#7b6fa0":"#b8b4c8",width:28,textAlign:"right"}}>{score}/{habits.length}</div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* ── DATE TIMELINE ── */}
-      {detailHabit&&(
-        <div className="overlay" onClick={e=>e.target===e.currentTarget&&setDetailHabit(null)}>
-          <div className="sheet">
-            <div className="sheet-handle"/>
-            <div style={{fontSize:22,fontWeight:700,color:"#2d2840",marginBottom:4}}>{detailHabit.emoji} {detailHabit.label}</div>
-            <div style={{fontSize:13,color:"#9591a4",marginBottom:24}}>Every date logged</div>
-            {histWeeks.filter(wk=>isDone(detailHabit.id,wk)).length===0
-              ? <div style={{textAlign:"center",padding:"40px 0",color:"#b8b4c8",fontSize:14,fontWeight:600}}>Nothing logged yet</div>
-              : histWeeks.filter(wk=>isDone(detailHabit.id,wk)).map(wk=>(
-                  <div key={wk} style={{display:"flex",gap:14,marginBottom:16}}>
-                    <div style={{width:10,height:10,borderRadius:"50%",background:"#7b6fa0",flexShrink:0,marginTop:4}}/>
-                    <div style={{flex:1,background:"#fff",borderRadius:14,padding:"12px 14px",boxShadow:"0 1px 4px rgba(0,0,0,.06)"}}>
-                      <div style={{fontSize:11,fontWeight:700,color:"#9591a4",letterSpacing:".06em",textTransform:"uppercase",marginBottom:4}}>{fmtRange(wk)}</div>
-                      {data[`${wk}:${detailHabit.id}`]?.note
-                        ? <div style={{fontSize:14,color:"#2d2840",lineHeight:1.5}}>"{data[`${wk}:${detailHabit.id}`].note}"</div>
-                        : <div style={{fontSize:13,color:"#c0bcd0",fontStyle:"italic"}}>No details logged</div>}
+                    <div style={{fontSize:12,color:"#9591a4",fontWeight:600,marginTop:8}}>
+                      <span style={{color:"#7b6fa0",fontWeight:700}}>{nightsDone().length}</span>/{h.target} nights{hit?" ✦ Done!":""}
                     </div>
                   </div>
-                ))
+                </div>
+              );
             }
-            <button className="btn-primary" style={{width:"100%",marginTop:8}} onClick={()=>{ setDetailHabit(null); openLog(detailHabit.id); }}>+ Log this week's date</button>
-          </div>
-        </div>
-      )}
 
-      {/* ── SETTINGS ── */}
-      {showSettings&&(
-        <div className="overlay" onClick={e=>e.target===e.currentTarget&&setShowSettings(false)}>
-          <div className="sheet" style={{background:"#fff"}}>
-            <div className="sheet-handle"/>
-            <div style={{fontSize:18,fontWeight:700,color:"#2d2840",marginBottom:20}}>Settings</div>
-            {[
-              {lbl:"Your name", el:<input className="settings-input" value={userName} onChange={e=>saveAll({userName:e.target.value})}/>},
-            ].map(f=>(
-              <div key={f.lbl} style={{marginBottom:16}}>
-                <div className="field-label">{f.lbl}</div>
-                {f.el}
+            if(h.type==="spending") {
+              return (
+                <div key={h.id} className={`hcard${done?" done":""}`}>
+                  <div className="hcard-main">
+                    <div style={{fontSize:22}}>{h.emoji}</div>
+                    <div style={{flex:1}}>
+                      <div className="hcard-name"><span className="label">{h.label}</span><button className="edit-btn" onClick={()=>openEditHabit(h)}>✎</button></div>
+                      <div className="hcard-meta">{streak>0?<><span style={{color:"#7b6fa0",fontWeight:700}}>🔥 {streak}w</span> · </>:""}Goal: ${budget}/wk</div>
+                    </div>
+                    <div className="check-circle" style={{pointerEvents:"none"}}><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5l3.5 3.5L11.5 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
+                  </div>
+                  <div style={{padding:"12px 18px 16px",borderTop:"1px solid #f4f2f9"}}>
+                    {upLoading&&<div style={{fontSize:13,color:"#b8b4c8",fontStyle:"italic"}}>Fetching from Up…</div>}
+                    {upError&&<div style={{fontSize:13,color:"#e07070"}}>Up error — enter manually</div>}
+                    {spendAmt!==null&&!upLoading&&(<>
+                      <div style={{display:"flex",alignItems:"baseline",gap:6,marginBottom:10}}>
+                        <div style={{fontSize:28,fontWeight:700,lineHeight:1,color:spendOver?"#e07070":spendAmt<budget*0.9?"#7b6fa0":"#2d2840"}}>${spendAmt.toFixed(0)}</div>
+                        <div style={{fontSize:13,color:"#b8b4c8",fontWeight:600}}>/ ${budget}</div>
+                        {upToken&&!upError&&<div style={{fontSize:11,color:"#b8b4c8",marginLeft:"auto",fontWeight:600}}>via Up ↗</div>}
+                      </div>
+                      <div style={{height:6,background:"#f0eef8",borderRadius:6,overflow:"hidden",marginBottom:8}}>
+                        <div style={{height:"100%",borderRadius:6,background:spendOver?"#e07070":"#7b6fa0",width:`${spendPct}%`,transition:"width .5s cubic-bezier(.4,0,.2,1)"}}/>
+                      </div>
+                      <div style={{fontSize:12,fontWeight:600,color:spendOver?"#e07070":done?"#7b6fa0":"#9591a4"}}>
+                        {spendOver?`$${(spendAmt-budget).toFixed(0)} over budget`:done?`$${(budget-spendAmt).toFixed(0)} under — on track ✦`:`$${(budget-spendAmt).toFixed(0)} remaining`}
+                      </div>
+                    </>)}
+                    {!upToken&&(
+                      <div style={{display:"flex",gap:8,marginTop:spendAmt!==null?10:0}}>
+                        <input style={{flex:1,background:"#f8f7fc",border:"1.5px solid #e8e4f0",borderRadius:10,padding:"10px 12px",fontSize:14,color:"#2d2840",outline:"none",fontFamily:"inherit"}}
+                          type="number" placeholder={spendAmt!==null?"Update amount":"Enter this week's spend"}
+                          value={manualDraft} onChange={e=>setManualDraft(e.target.value)}/>
+                        <button style={{background:"#7b6fa0",color:"#fff",border:"none",borderRadius:10,padding:"10px 16px",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"inherit"}}
+                          onClick={()=>{
+                            const amt=parseFloat(manualDraft); if(isNaN(amt)) return;
+                            saveAll({data:{...data,[`${weekKey}:spending`]:{done:amt<=budget,manualAmount:amt}}});
+                            setManualDraft("");
+                          }}>Save</button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div key={h.id} className={`hcard${done?" done":""}`}>
+                <div className="hcard-main">
+                  <div style={{fontSize:22}}>{h.emoji}</div>
+                  <div style={{flex:1}}>
+                    <div className="hcard-name"><span className="label">{h.label}</span><button className="edit-btn" onClick={()=>openEditHabit(h)}>✎</button></div>
+                    <div className="hcard-meta">{streak>0?<><span style={{color:"#7b6fa0",fontWeight:700}}>🔥 {streak}w</span> · </>:""}{h.prompt}</div>
+                  </div>
+                  <div className="check-circle" onClick={()=>toggle(h.id)}><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5l3.5 3.5L11.5 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
+                </div>
+                <div style={{borderTop:"1px solid #f4f2f9",padding:"12px 18px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,cursor:"pointer"}}
+                  onClick={()=>{ if(h.isDate) setDetailHabit(h); else openLog(h.id); }}>
+                  {note
+                    ? <><div style={{fontSize:13,color:"#6e6880",flex:1,lineHeight:1.45}}>"{note}"</div><div style={{fontSize:11,color:"#c0bcd0",fontWeight:700,letterSpacing:".04em",textTransform:"uppercase",whiteSpace:"nowrap"}}>{h.isDate?"History →":"Edit"}</div></>
+                    : <div style={{fontSize:12,color:"#c0bcd0",fontWeight:600}}>+ {h.prompt}</div>
+                  }
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {lastMonthMemos.length>0&&(<>
+          <div className="section-label">This time last month</div>
+          <div style={{background:"#ede9f8",borderRadius:18,padding:"16px 18px",marginBottom:22}}>
+            {lastMonthMemos.map(h=>(
+              <div key={h.id} style={{display:"flex",alignItems:"flex-start",gap:10,marginBottom:8}}>
+                <span style={{fontSize:18}}>{h.emoji}</span>
+                <div style={{fontSize:13,color:"#6e6880",lineHeight:1.45,flex:1}}><span style={{fontWeight:700,color:"#7b6fa0"}}>{h.label}:</span> {h.note}</div>
               </div>
             ))}
-            <div style={{marginBottom:16}}>
-              <div className="field-label">Weekly spending budget</div>
-              <div style={{display:"flex",alignItems:"center",background:"#f8f7fc",border:"1.5px solid #e8e4f0",borderRadius:12,overflow:"hidden"}}>
-                <span style={{padding:"12px 4px 12px 14px",fontSize:15,color:"#9591a4"}}>$</span>
-                <input style={{flex:1,background:"transparent",border:"none",padding:"12px 14px 12px 4px",fontSize:15,color:"#2d2840",outline:"none",fontFamily:"inherit"}}
-                  type="number" value={budget} onChange={e=>saveAll({budget:parseFloat(e.target.value)||500})}/>
+          </div>
+        </>)}
+      </div>
+    )}
+
+    {/* ── HISTORY ── */}
+    {tab==="history"&&(
+      <div className="fade-up">
+        <div style={{height:4}}/>
+        <div style={{display:"flex",gap:10,marginBottom:20}}>
+          {[
+            {val:histWeeks.filter(wk=>habits.every(h=>isDone(h.id,wk))).length, lbl:"Perfect weeks"},
+            {val:Math.max(...habits.map(h=>getStreak(data,h.id,thisWeek,habits)),0), lbl:"Best streak"},
+            {val:Object.keys(data).filter(k=>data[k]?.done).length, lbl:"Total done"},
+          ].map(s=>(
+            <div key={s.lbl} className="card" style={{flex:1}}>
+              <div style={{fontSize:28,fontWeight:700,color:"#2d2840",lineHeight:1}}>{s.val}</div>
+              <div style={{fontSize:10,fontWeight:700,color:"#b8b4c8",letterSpacing:".08em",textTransform:"uppercase",marginTop:4}}>{s.lbl}</div>
+            </div>
+          ))}
+        </div>
+        <div className="section-label" style={{marginBottom:10}}>Last 12 weeks</div>
+        <div style={{display:"flex",flexDirection:"column",gap:8}}>
+          {histWeeks.map(wk=>{
+            const score=habits.filter(h=>isDone(h.id,wk)).length, perfect=score===habits.length;
+            return (
+              <div key={wk} className="card" style={{display:"flex",alignItems:"center",gap:12,cursor:"pointer",border:wk===thisWeek?"2px solid #7b6fa0":"2px solid transparent",padding:"14px 16px"}}
+                onClick={()=>{ setWeekKey(wk); setTab("home"); }}>
+                <div style={{fontSize:12,fontWeight:700,color:"#9591a4",width:68,flexShrink:0}}>{fmtRange(wk)}</div>
+                <div style={{display:"flex",gap:5,flex:1}}>
+                  {habits.map(h=>(
+                    <div key={h.id} style={{width:28,height:28,borderRadius:9,background:isDone(h.id,wk)?(perfect?"#7b6fa0":"#ede9f8"):"#f4f2f9",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>
+                      {isDone(h.id,wk)?h.emoji:""}
+                    </div>
+                  ))}
+                </div>
+                <div style={{fontSize:13,fontWeight:700,color:perfect?"#7b6fa0":"#b8b4c8",width:28,textAlign:"right"}}>{score}/{habits.length}</div>
               </div>
-            </div>
-            <div style={{marginBottom:20}}>
-              <div className="field-label">Up Bank token</div>
-              <input className="settings-input" type="password" value={upToken} placeholder="up:yeah:••••••••"
-                onChange={e=>saveAll({upToken:e.target.value.trim()})}/>
-              <div style={{fontSize:12,color:"#9591a4",marginTop:6,lineHeight:1.5}}>Up app → Settings → API → Create token</div>
-            </div>
-            <button className="btn-primary" style={{width:"100%"}} onClick={()=>setShowSettings(false)}>Done</button>
-          </div>
+            );
+          })}
         </div>
-      )}
+      </div>
+    )}
+  </div>
 
-      {/* ── LOG MODAL ── */}
-      {logging&&(
-        <div className="overlay" onClick={e=>e.target===e.currentTarget&&setLogging(null)}>
-          <div className="sheet" style={{background:"#fff"}}>
-            <div className="sheet-handle"/>
-            <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:4}}>
-              <span style={{fontSize:22}}>{habits.find(h=>h.id===logging)?.emoji}</span>
-              <div style={{fontSize:18,fontWeight:700,color:"#2d2840"}}>{habits.find(h=>h.id===logging)?.label}</div>
-            </div>
-            <div style={{fontSize:13,color:"#9591a4",marginBottom:16}}>{habits.find(h=>h.id===logging)?.prompt}</div>
-            <textarea ref={inputRef} className="modal-input" value={logText}
-              onChange={e=>setLogText(e.target.value)} placeholder="Add details…"
-              onKeyDown={e=>e.key==="Enter"&&e.metaKey&&saveLog()}/>
-            <div style={{display:"flex",gap:10,marginTop:14}}>
-              <button className="btn-ghost" onClick={()=>setLogging(null)}>Cancel</button>
-              <button className="btn-primary" style={{flex:1}} onClick={saveLog}>Save</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ── EDIT HABIT ── */}
-      {editingHabit&&(
-        <div className="overlay" onClick={e=>e.target===e.currentTarget&&setEditingHabit(null)}>
-          <div className="sheet" style={{background:"#fff"}}>
-            <div className="sheet-handle"/>
-            <div style={{fontSize:18,fontWeight:700,color:"#2d2840",marginBottom:4}}>Edit habit</div>
-            <div style={{fontSize:13,color:"#9591a4",marginBottom:16}}>Make it personal to you</div>
-            <input className="settings-input" style={{marginBottom:0}} value={editLabel}
-              onChange={e=>setEditLabel(e.target.value)}
-              onKeyDown={e=>e.key==="Enter"&&saveEditHabit()} autoFocus/>
-            <div className="field-label" style={{marginTop:14}}>Emoji</div>
-            <div className="emoji-grid">
-              {EMOJI_OPTIONS.map(em=>(
-                <button key={em} className={`emoji-btn${editEmoji===em?" sel":""}`} onClick={()=>setEditEmoji(em)}>{em}</button>
-              ))}
-            </div>
-            <div style={{display:"flex",gap:10,marginTop:14}}>
-              <button className="btn-ghost" onClick={()=>setEditingHabit(null)}>Cancel</button>
-              <button className="btn-primary" style={{flex:1}} onClick={saveEditHabit}>Save</button>
-            </div>
-          </div>
-        </div>
-      )}
+  {/* ── DATE TIMELINE ── */}
+  {detailHabit&&(
+    <div className="overlay" onClick={e=>e.target===e.currentTarget&&setDetailHabit(null)}>
+      <div className="sheet">
+        <div className="sheet-handle"/>
+        <div style={{fontSize:22,fontWeight:700,color:"#2d2840",marginBottom:4}}>{detailHabit.emoji} {detailHabit.label}</div>
+        <div style={{fontSize:13,color:"#9591a4",marginBottom:24}}>Every date logged</div>
+        {histWeeks.filter(wk=>isDone(detailHabit.id,wk)).length===0
+          ? <div style={{textAlign:"center",padding:"40px 0",color:"#b8b4c8",fontSize:14,fontWeight:600}}>Nothing logged yet</div>
+          : histWeeks.filter(wk=>isDone(detailHabit.id,wk)).map(wk=>(
+              <div key={wk} style={{display:"flex",gap:14,marginBottom:16}}>
+                <div style={{width:10,height:10,borderRadius:"50%",background:"#7b6fa0",flexShrink:0,marginTop:4}}/>
+                <div style={{flex:1,background:"#fff",borderRadius:14,padding:"12px 14px",boxShadow:"0 1px 4px rgba(0,0,0,.06)"}}>
+                  <div style={{fontSize:11,fontWeight:700,color:"#9591a4",letterSpacing:".06em",textTransform:"uppercase",marginBottom:4}}>{fmtRange(wk)}</div>
+                  {data[`${wk}:${detailHabit.id}`]?.note
+                    ? <div style={{fontSize:14,color:"#2d2840",lineHeight:1.5}}>"{data[`${wk}:${detailHabit.id}`].note}"</div>
+                    : <div style={{fontSize:13,color:"#c0bcd0",fontStyle:"italic"}}>No details logged</div>}
+                </div>
+              </div>
+            ))
+        }
+        <button className="btn-primary" style={{width:"100%",marginTop:8}} onClick={()=>{ setDetailHabit(null); openLog(detailHabit.id); }}>+ Log this week's date</button>
+      </div>
     </div>
-  );
+  )}
+
+  {/* ── SETTINGS ── */}
+  {showSettings&&(
+    <div className="overlay" onClick={e=>e.target===e.currentTarget&&setShowSettings(false)}>
+      <div className="sheet" style={{background:"#fff"}}>
+        <div className="sheet-handle"/>
+        <div style={{fontSize:18,fontWeight:700,color:"#2d2840",marginBottom:20}}>Settings</div>
+        {[
+          {lbl:"Your name", el:<input className="settings-input" value={userName} onChange={e=>saveAll({userName:e.target.value})}/>},
+        ].map(f=>(
+          <div key={f.lbl} style={{marginBottom:16}}>
+            <div className="field-label">{f.lbl}</div>
+            {f.el}
+          </div>
+        ))}
+        <div style={{marginBottom:16}}>
+          <div className="field-label">Weekly spending budget</div>
+          <div style={{display:"flex",alignItems:"center",background:"#f8f7fc",border:"1.5px solid #e8e4f0",borderRadius:12,overflow:"hidden"}}>
+            <span style={{padding:"12px 4px 12px 14px",fontSize:15,color:"#9591a4"}}>$</span>
+            <input style={{flex:1,background:"transparent",border:"none",padding:"12px 14px 12px 4px",fontSize:15,color:"#2d2840",outline:"none",fontFamily:"inherit"}}
+              type="number" value={budget} onChange={e=>saveAll({budget:parseFloat(e.target.value)||500})}/>
+          </div>
+        </div>
+        <div style={{marginBottom:20}}>
+          <div className="field-label">Up Bank token</div>
+          <input className="settings-input" type="password" value={upToken} placeholder="up:yeah:••••••••"
+            onChange={e=>saveAll({upToken:e.target.value.trim()})}/>
+          <div style={{fontSize:12,color:"#9591a4",marginTop:6,lineHeight:1.5}}>Up app → Settings → API → Create token</div>
+        </div>
+        <button className="btn-primary" style={{width:"100%"}} onClick={()=>setShowSettings(false)}>Done</button>
+      </div>
+    </div>
+  )}
+
+  {/* ── LOG MODAL ── */}
+  {logging&&(
+    <div className="overlay" onClick={e=>e.target===e.currentTarget&&setLogging(null)}>
+      <div className="sheet" style={{background:"#fff"}}>
+        <div className="sheet-handle"/>
+        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:4}}>
+          <span style={{fontSize:22}}>{habits.find(h=>h.id===logging)?.emoji}</span>
+          <div style={{fontSize:18,fontWeight:700,color:"#2d2840"}}>{habits.find(h=>h.id===logging)?.label}</div>
+        </div>
+        <div style={{fontSize:13,color:"#9591a4",marginBottom:16}}>{habits.find(h=>h.id===logging)?.prompt}</div>
+        <textarea ref={inputRef} className="modal-input" value={logText}
+          onChange={e=>setLogText(e.target.value)} placeholder="Add details…"
+          onKeyDown={e=>e.key==="Enter"&&e.metaKey&&saveLog()}/>
+        <div style={{display:"flex",gap:10,marginTop:14}}>
+          <button className="btn-ghost" onClick={()=>setLogging(null)}>Cancel</button>
+          <button className="btn-primary" style={{flex:1}} onClick={saveLog}>Save</button>
+        </div>
+      </div>
+    </div>
+  )}
+
+  {/* ── EDIT HABIT ── */}
+  {editingHabit&&(
+    <div className="overlay" onClick={e=>e.target===e.currentTarget&&setEditingHabit(null)}>
+      <div className="sheet" style={{background:"#fff"}}>
+        <div className="sheet-handle"/>
+        <div style={{fontSize:18,fontWeight:700,color:"#2d2840",marginBottom:4}}>Edit habit</div>
+        <div style={{fontSize:13,color:"#9591a4",marginBottom:16}}>Make it personal to you</div>
+        <input className="settings-input" style={{marginBottom:0}} value={editLabel}
+          onChange={e=>setEditLabel(e.target.value)}
+          onKeyDown={e=>e.key==="Enter"&&saveEditHabit()} autoFocus/>
+        <div className="field-label" style={{marginTop:14}}>Emoji</div>
+        <div className="emoji-grid">
+          {EMOJI_OPTIONS.map(em=>(
+            <button key={em} className={`emoji-btn${editEmoji===em?" sel":""}`} onClick={()=>setEditEmoji(em)}>{em}</button>
+          ))}
+        </div>
+        <div style={{display:"flex",gap:10,marginTop:14}}>
+          <button className="btn-ghost" onClick={()=>setEditingHabit(null)}>Cancel</button>
+          <button className="btn-primary" style={{flex:1}} onClick={saveEditHabit}>Save</button>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+```
+
+);
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
-  </script>
+ReactDOM.createRoot(document.getElementById(‘root’)).render(<App/>);
+</script>
 
   <style>
     @keyframes fall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
     @keyframes celebIn { from{opacity:0;transform:scale(.7)} to{opacity:1;transform:scale(1)} }
     @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
-    .app { max-width: 430px; margin: 0 auto; padding: 0 16px 80px; }
+    .app { max-width: 430px; margin: 0 auto; padding: 0 16px 80px; font-family: 'DM Sans', sans-serif; }
     .fade-up { animation: fadeUp .25s ease both; }
 
     .topbar { display:flex; align-items:center; justify-content:space-between; padding:20px 0 14px; }
@@ -740,5 +741,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
     .btn-primary:disabled { opacity:.4; cursor:default; }
     .btn-ghost { background:#f4f2f9; color:#9591a4; border:none; border-radius:14px; padding:15px 20px; font-size:15px; font-weight:600; cursor:pointer; font-family:inherit; }
   </style>
+
 </body>
 </html>
