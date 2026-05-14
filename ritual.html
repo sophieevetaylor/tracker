@@ -2,745 +2,1238 @@
 
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>Ritual</title>
-  <link rel="icon" type="image/png" href="icon.png"/>
-  <link rel="apple-touch-icon" href="icon.png"/>
-  <meta name="theme-color" content="#eeecf4"/>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
-  <meta name="apple-mobile-web-app-title" content="Ritual"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body { background: #eeecf4; font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Ritual</title>
+<link rel="icon" href="icon.png"/>
+<link rel="apple-touch-icon" href="icon.png"/>
+<meta name="theme-color" content="#f5f3f0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="Ritual"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{
+  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:#f5f3f0;color:#1a1a1a;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+button,input,textarea{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif}
+
+/* ── layout ── */
+#app{max-width:430px;margin:0 auto;padding:0 20px 100px;min-height:100vh}
+.screen{display:none}.screen.active{display:block}
+
+/* ── onboarding ── */
+#ob-wrap{
+min-height:100vh;background:#f5f3f0;
+display:flex;align-items:center;justify-content:center;padding:24px
+}
+.ob-card{
+background:#fff;border-radius:28px;padding:36px 28px;
+width:100%;max-width:360px;
+box-shadow:0 2px 40px rgba(0,0,0,.08)
+}
+.ob-eyebrow{font-size:11px;font-weight:700;color:#b0a898;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.ob-title{font-size:26px;font-weight:700;color:#1a1a1a;line-height:1.2;margin-bottom:8px}
+.ob-sub{font-size:15px;color:#8a8078;line-height:1.5;margin-bottom:28px}
+.ob-habit-row{
+display:flex;align-items:center;gap:14px;
+padding:14px 16px;background:#faf9f7;border-radius:16px;
+margin-bottom:8px;cursor:pointer;transition:background .15s;border:1.5px solid transparent
+}
+.ob-habit-row:hover,.ob-habit-row:active{background:#f0ede8;border-color:#e0d8d0}
+.ob-habit-emoji{font-size:24px;flex-shrink:0}
+.ob-habit-label{flex:1;font-size:15px;font-weight:600;color:#1a1a1a}
+.ob-habit-edit{font-size:11px;font-weight:700;color:#c0b8b0;letter-spacing:.06em;text-transform:uppercase}
+
+/* ── form elements ── */
+.field-wrap{margin-bottom:20px}
+.field-label{font-size:11px;font-weight:700;color:#8a8078;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.field-input{
+width:100%;background:#faf9f7;border:1.5px solid #e8e4de;
+border-radius:14px;padding:15px 16px;font-size:16px;color:#1a1a1a;
+outline:none;transition:border-color .15s
+}
+.field-input:focus{border-color:#9b7fa6}
+.field-input::placeholder{color:#c0b8b0}
+textarea.field-input{resize:none;min-height:90px;line-height:1.5}
+.prefix-row{
+display:flex;align-items:center;background:#faf9f7;
+border:1.5px solid #e8e4de;border-radius:14px;overflow:hidden;
+transition:border-color .15s
+}
+.prefix-row:focus-within{border-color:#9b7fa6}
+.prefix-sign{padding:15px 6px 15px 16px;font-size:16px;color:#8a8078;font-weight:600}
+.prefix-input{
+flex:1;background:transparent;border:none;
+padding:15px 16px 15px 4px;font-size:16px;color:#1a1a1a;outline:none
+}
+
+/* ── buttons ── */
+.btn{
+width:100%;padding:16px;border-radius:14px;border:none;
+font-size:16px;font-weight:700;cursor:pointer;transition:all .15s;
+letter-spacing:.01em
+}
+.btn-primary{background:#9b7fa6;color:#fff}
+.btn-primary:hover{background:#8a6f95}
+.btn-primary:disabled{background:#d0c8d8;cursor:default}
+.btn-ghost{background:#f0ede8;color:#8a8078;margin-top:10px}
+.btn-ghost:hover{background:#e8e4de}
+.btn-sm{
+padding:10px 20px;width:auto;border-radius:12px;
+border:none;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s
+}
+.btn-sm-primary{background:#9b7fa6;color:#fff}
+.btn-sm-ghost{background:#f0ede8;color:#8a8078}
+
+/* ── emoji picker ── */
+.emoji-grid{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 20px}
+.emoji-opt{
+width:42px;height:42px;border-radius:12px;border:2px solid transparent;
+background:#faf9f7;font-size:22px;cursor:pointer;
+display:flex;align-items:center;justify-content:center;transition:all .15s
+}
+.emoji-opt.sel{border-color:#9b7fa6;background:#f0eaf4}
+.emoji-opt:hover{background:#f0ede8}
+
+/* ── top nav ── */
+#topbar{
+display:flex;align-items:center;justify-content:space-between;
+padding:24px 0 16px;position:sticky;top:0;
+background:linear-gradient(#f5f3f0 90%,rgba(245,243,240,0));
+z-index:10
+}
+.greeting-name{font-size:22px;font-weight:700;color:#1a1a1a}
+.greeting-sub{font-size:13px;color:#8a8078;font-weight:500;margin-top:2px}
+.nav-right{display:flex;align-items:center;gap:8px}
+.tab-pills{display:flex;gap:6px}
+.tab-pill{
+padding:8px 16px;border-radius:20px;border:none;
+font-size:13px;font-weight:600;cursor:pointer;
+background:#fff;color:#8a8078;transition:all .15s;
+box-shadow:0 1px 3px rgba(0,0,0,.06)
+}
+.tab-pill.active{background:#9b7fa6;color:#fff;box-shadow:0 2px 8px rgba(155,127,166,.35)}
+.icon-btn{
+width:38px;height:38px;border-radius:50%;border:none;
+background:#fff;cursor:pointer;font-size:18px;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 1px 3px rgba(0,0,0,.06);transition:background .15s
+}
+.icon-btn:hover{background:#f0ede8}
+
+/* ── week nav ── */
+.week-nav{
+display:flex;align-items:center;justify-content:space-between;
+margin-bottom:20px
+}
+.week-nav-arrow{
+width:40px;height:40px;border-radius:13px;border:none;
+background:#fff;font-size:18px;color:#9b7fa6;cursor:pointer;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 1px 3px rgba(0,0,0,.06);transition:all .15s
+}
+.week-nav-arrow:hover{background:#f0eaf4}
+.week-nav-arrow:disabled{opacity:.25;cursor:default}
+.week-label-big{font-size:15px;font-weight:700;color:#1a1a1a;text-align:center}
+.week-label-small{font-size:11px;font-weight:600;color:#b0a898;text-align:center;margin-top:2px}
+
+/* ── progress card ── */
+.progress-card{
+background:linear-gradient(135deg,#9b7fa6 0%,#7d6289 100%);
+border-radius:24px;padding:24px 24px 20px;margin-bottom:16px;
+position:relative;overflow:hidden
+}
+.progress-card::after{
+content:’’;position:absolute;top:-40px;right:-40px;
+width:140px;height:140px;border-radius:50%;
+background:rgba(255,255,255,.08);pointer-events:none
+}
+.progress-card::before{
+content:’’;position:absolute;bottom:-30px;left:20px;
+width:100px;height:100px;border-radius:50%;
+background:rgba(255,255,255,.05);pointer-events:none
+}
+.progress-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.progress-score{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
+.progress-num{font-size:52px;font-weight:800;color:#fff;line-height:1}
+.progress-denom{font-size:24px;font-weight:600;color:rgba(255,255,255,.5)}
+.progress-status{font-size:14px;color:rgba(255,255,255,.8);font-weight:500;margin-bottom:18px}
+.progress-track{height:5px;background:rgba(255,255,255,.2);border-radius:5px;overflow:hidden}
+.progress-fill{height:100%;background:#fff;border-radius:5px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+
+/* ── nudge banner ── */
+.nudge{
+background:#fff3e8;border:1.5px solid #f0d8c0;border-radius:18px;
+padding:14px 18px;margin-bottom:16px;
+display:flex;align-items:center;justify-content:space-between
+}
+.nudge-text{font-size:14px;font-weight:700;color:#a06030}
+.nudge-sub{font-size:12px;color:#c08050;margin-top:2px}
+.nudge-badge{
+background:#e07030;border-radius:12px;padding:6px 12px;
+text-align:center;flex-shrink:0
+}
+.nudge-badge-num{font-size:20px;font-weight:800;color:#fff;line-height:1}
+.nudge-badge-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:.06em;text-transform:uppercase}
+
+/* ── day strip ── */
+.day-strip{display:flex;gap:6px;margin-bottom:24px}
+.day-cell{
+flex:1;background:#fff;border-radius:14px;padding:10px 4px 9px;
+display:flex;flex-direction:column;align-items:center;gap:5px;
+box-shadow:0 1px 3px rgba(0,0,0,.04);border:2px solid transparent;
+transition:all .15s
+}
+.day-cell.today{border-color:#9b7fa6;background:#faf7fc}
+.day-letter{font-size:10px;font-weight:700;color:#c0b8b0;letter-spacing:.04em}
+.day-cell.today .day-letter{color:#9b7fa6}
+.day-num{font-size:15px;font-weight:700;color:#1a1a1a}
+.day-dot{width:5px;height:5px;border-radius:50%;background:#9b7fa6;opacity:0;transition:opacity .2s}
+.day-dot.vis{opacity:1}
+
+/* ── section label ── */
+.section-label{
+font-size:11px;font-weight:700;color:#b0a898;
+letter-spacing:.1em;text-transform:uppercase;margin:4px 0 12px
+}
+
+/* ── habit cards ── */
+.habit-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.hcard{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06);transition:box-shadow .2s}
+.hcard.done{opacity:.85}
+.hcard-top{display:flex;align-items:center;padding:18px 18px 18px 20px;gap:14px}
+.hcard-emoji{font-size:26px;flex-shrink:0;line-height:1}
+.hcard-info{flex:1;min-width:0}
+.hcard-name{
+font-size:16px;font-weight:700;color:#1a1a1a;
+display:flex;align-items:center;gap:8px
+}
+.hcard.done .hcard-name-text{color:#c0b8b0;text-decoration:line-through;text-decoration-color:#d8d0c8}
+.hcard-sub{font-size:12px;color:#b0a898;font-weight:500;margin-top:3px}
+.hcard-sub .streak{color:#9b7fa6;font-weight:700}
+.edit-habit-btn{
+background:none;border:none;cursor:pointer;
+font-size:13px;color:#d8d0c8;padding:2px 4px;
+border-radius:6px;transition:color .15s;flex-shrink:0
+}
+.edit-habit-btn:hover{color:#9b7fa6}
+.check-btn{
+width:32px;height:32px;border-radius:50%;
+border:2.5px solid #e0d8d0;background:transparent;
+cursor:pointer;flex-shrink:0;
+display:flex;align-items:center;justify-content:center;
+transition:all .2s
+}
+.check-btn.checked{background:#9b7fa6;border-color:#9b7fa6}
+.check-icon{opacity:0;transform:scale(0);transition:all .18s}
+.check-btn.checked .check-icon{opacity:1;transform:scale(1)}
+.hcard-bottom{
+border-top:1px solid #f5f2ee;padding:12px 20px;
+display:flex;align-items:center;justify-content:space-between;
+gap:12px;cursor:pointer;min-height:46px
+}
+.hcard-bottom:hover .hcard-note-add{color:#9b7fa6}
+.hcard-note-text{font-size:13px;color:#6a6260;line-height:1.45;flex:1}
+.hcard-note-add{font-size:13px;color:#c8c0b8;font-weight:500;transition:color .15s}
+.hcard-note-action{font-size:11px;color:#c8c0b8;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+
+/* ── reading nights ── */
+.nights-wrap{border-top:1px solid #f5f2ee;padding:14px 20px 16px}
+.nights-grid{display:flex;gap:5px;margin-bottom:10px}
+.night-btn{
+flex:1;height:36px;border-radius:10px;
+border:2px solid #e8e4de;background:#faf9f7;
+cursor:pointer;font-size:11px;font-weight:700;color:#b8b0a8;
+transition:all .2s
+}
+.night-btn.on{border-color:#9b7fa6;background:#9b7fa6;color:#fff}
+.nights-count{font-size:13px;color:#8a8078;font-weight:600}
+.nights-count span{color:#9b7fa6;font-weight:700}
+
+/* ── spending ── */
+.spend-wrap{border-top:1px solid #f5f2ee;padding:14px 20px 16px}
+.spend-amt-row{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.spend-amt{font-size:30px;font-weight:700;line-height:1}
+.spend-amt.ok{color:#9b7fa6}
+.spend-amt.warn{color:#d08040}
+.spend-amt.over{color:#d05050}
+.spend-budget{font-size:14px;color:#b0a898;font-weight:600}
+.spend-via{font-size:11px;color:#c0b8b0;font-weight:600;margin-left:auto}
+.spend-bar-track{height:6px;background:#f0ede8;border-radius:6px;overflow:hidden;margin-bottom:8px}
+.spend-bar-fill{height:100%;border-radius:6px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.spend-bar-fill.ok{background:#9b7fa6}
+.spend-bar-fill.over{background:#d05050}
+.spend-status{font-size:13px;font-weight:600}
+.spend-status.ok{color:#9b7fa6}
+.spend-status.over{color:#d05050}
+.spend-status.warn{color:#d08040}
+.spend-manual{display:flex;gap:8px;margin-top:12px}
+.spend-manual input{
+flex:1;background:#faf9f7;border:1.5px solid #e8e4de;
+border-radius:12px;padding:10px 14px;font-size:14px;color:#1a1a1a;outline:none
+}
+.spend-manual input:focus{border-color:#9b7fa6}
+.spend-manual button{
+background:#9b7fa6;color:#fff;border:none;
+border-radius:12px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer
+}
+
+/* ── memory card ── */
+.memory-card{background:#f0eaf4;border-radius:20px;padding:18px 20px;margin-bottom:28px}
+.memory-item{display:flex;gap:12px;margin-bottom:10px}
+.memory-item:last-child{margin-bottom:0}
+.memory-emoji{font-size:18px;flex-shrink:0;margin-top:1px}
+.memory-text{font-size:13px;color:#6a6260;line-height:1.5;flex:1}
+.memory-habit{font-weight:700;color:#7d6289}
+
+/* ── history ── */
+.stat-strip{display:flex;gap:10px;margin-bottom:20px}
+.stat-card{
+flex:1;background:#fff;border-radius:18px;
+padding:16px 14px 14px;box-shadow:0 1px 4px rgba(0,0,0,.06)
+}
+.stat-val{font-size:30px;font-weight:800;color:#1a1a1a;line-height:1}
+.stat-lbl{font-size:10px;font-weight:700;color:#b0a898;letter-spacing:.08em;text-transform:uppercase;margin-top:5px}
+.hist-list{display:flex;flex-direction:column;gap:8px}
+.hist-row{
+background:#fff;border-radius:18px;
+padding:14px 16px;display:flex;align-items:center;gap:12px;
+box-shadow:0 1px 3px rgba(0,0,0,.05);cursor:pointer;
+border:2px solid transparent;transition:border-color .15s
+}
+.hist-row:hover{border-color:#e0d8d0}
+.hist-row.current{border-color:#9b7fa6}
+.hist-date{font-size:12px;font-weight:700;color:#8a8078;width:74px;flex-shrink:0}
+.hist-pips{display:flex;gap:5px;flex:1}
+.hist-pip{
+width:30px;height:30px;border-radius:10px;
+background:#f5f3f0;display:flex;align-items:center;justify-content:center;font-size:15px;
+transition:background .2s
+}
+.hist-pip.done{background:#f0eaf4}
+.hist-pip.perfect{background:#9b7fa6}
+.hist-score{font-size:13px;font-weight:700;color:#b0a898;width:28px;text-align:right}
+.hist-score.full{color:#9b7fa6}
+
+/* ── sheets / modals ── */
+.overlay{
+position:fixed;inset:0;background:rgba(0,0,0,.35);
+z-index:100;display:flex;align-items:flex-end;justify-content:center;
+opacity:0;transition:opacity .25s;pointer-events:none
+}
+.overlay.open{opacity:1;pointer-events:all}
+.sheet{
+background:#fff;border-radius:28px 28px 0 0;
+width:100%;max-width:430px;padding:0 24px 48px;
+max-height:88vh;overflow-y:auto;
+transform:translateY(100%);transition:transform .3s cubic-bezier(.32,0,.67,0)
+}
+.overlay.open .sheet{transform:translateY(0);transition:transform .35s cubic-bezier(.33,1,.68,1)}
+.sheet-bg{background:#f5f3f0}
+.sheet-handle{width:40px;height:4px;background:#ddd8d0;border-radius:2px;margin:16px auto 24px}
+.sheet-title{font-size:20px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.sheet-sub{font-size:14px;color:#8a8078;margin-bottom:24px}
+
+/* ── timeline ── */
+.tl-item{display:flex;gap:14px;margin-bottom:14px}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:#9b7fa6;flex-shrink:0;margin-top:4px}
+.tl-card{flex:1;background:#faf9f7;border-radius:16px;padding:13px 15px;border:1.5px solid #ede8e2}
+.tl-week{font-size:10px;font-weight:700;color:#b0a898;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.tl-note{font-size:14px;color:#1a1a1a;line-height:1.5}
+.tl-empty{font-size:13px;color:#c0b8b0;font-style:italic}
+
+/* ── confetti ── */
+.confetti-piece{position:fixed;top:-10px;border-radius:3px;pointer-events:none;z-index:200}
+@keyframes confetti-fall{
+0%{transform:translateY(0) rotate(0deg);opacity:1}
+100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+/* ── celebration ── */
+.celebrate-toast{
+position:fixed;left:50%;transform:translateX(-50%) scale(.8) translateY(20px);
+bottom:100px;z-index:201;
+background:#fff;border-radius:24px;padding:20px 28px;
+box-shadow:0 12px 48px rgba(0,0,0,.15);text-align:center;
+opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;
+white-space:nowrap
+}
+.celebrate-toast.show{opacity:1;transform:translateX(-50%) scale(1) translateY(0)}
+.celebrate-emoji{font-size:32px;margin-bottom:6px}
+.celebrate-title{font-size:17px;font-weight:700;color:#1a1a1a}
+.celebrate-sub{font-size:13px;color:#8a8078;margin-top:3px}
+
+/* ── fade in ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .3s ease both}
+</style>
+
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
 
-const { useState, useEffect, useRef } = React;
+<!-- ══ ONBOARDING ══════════════════════════════════════════════════════════ -->
 
+<div id="ob-wrap">
+  <div class="ob-card" id="ob-card">
+    <!-- steps injected by JS -->
+  </div>
+</div>
+
+<!-- ══ MAIN APP ════════════════════════════════════════════════════════════ -->
+
+<div id="app" style="display:none">
+  <div id="topbar">
+    <div>
+      <div class="greeting-name" id="greeting-name"></div>
+      <div class="greeting-sub" id="greeting-sub"></div>
+    </div>
+    <div class="nav-right">
+      <div class="tab-pills">
+        <button class="tab-pill active" id="tab-weekly" onclick="switchTab('weekly')">Weekly</button>
+        <button class="tab-pill" id="tab-history" onclick="switchTab('history')">History</button>
+      </div>
+      <button class="icon-btn" onclick="openSheet('settings-sheet')" title="Settings">⚙️</button>
+    </div>
+  </div>
+
+  <!-- Week nav (shared) -->
+
+  <div class="week-nav">
+    <button class="week-nav-arrow" id="wk-prev" onclick="changeWeek(-1)">←</button>
+    <div>
+      <div class="week-label-big" id="wk-label"></div>
+      <div class="week-label-small" id="wk-sub"></div>
+    </div>
+    <button class="week-nav-arrow" id="wk-next" onclick="changeWeek(1)">→</button>
+  </div>
+
+  <!-- Weekly screen -->
+
+  <div class="screen active" id="screen-weekly">
+    <div id="nudge-wrap"></div>
+    <div class="progress-card" id="progress-card">
+      <div class="progress-eyebrow">This week</div>
+      <div class="progress-score">
+        <div class="progress-num" id="prog-num">0</div>
+        <div class="progress-denom" id="prog-denom">/6</div>
+      </div>
+      <div class="progress-status" id="prog-status">Not started</div>
+      <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+    <div class="day-strip" id="day-strip"></div>
+    <div class="section-label">Habits</div>
+    <div class="habit-stack" id="habit-stack"></div>
+    <div id="memory-wrap"></div>
+  </div>
+
+  <!-- History screen -->
+
+  <div class="screen" id="screen-history">
+    <div class="stat-strip" id="stat-strip"></div>
+    <div class="section-label" style="margin-bottom:12px">Last 12 weeks</div>
+    <div class="hist-list" id="hist-list"></div>
+  </div>
+</div>
+
+<!-- ══ OVERLAYS ═══════════════════════════════════════════════════════════ -->
+
+<!-- Log note -->
+
+<div class="overlay" id="log-sheet" onclick="handleOverlayClick(event,'log-sheet')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+      <span style="font-size:26px" id="log-emoji"></span>
+      <div class="sheet-title" id="log-title"></div>
+    </div>
+    <div class="sheet-sub" id="log-prompt"></div>
+    <div class="field-wrap">
+      <textarea class="field-input" id="log-input" placeholder="Add details…" rows="3"></textarea>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn-sm btn-sm-ghost" onclick="closeSheet('log-sheet')">Cancel</button>
+      <button class="btn-sm btn-sm-primary" style="flex:1" onclick="saveLog()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Date timeline -->
+
+<div class="overlay" id="timeline-sheet" onclick="handleOverlayClick(event,'timeline-sheet')">
+  <div class="sheet sheet-bg">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title" id="tl-title"></div>
+    <div class="sheet-sub">Every date logged</div>
+    <div id="tl-list"></div>
+    <button class="btn btn-primary" style="margin-top:16px" onclick="openLogFromTimeline()">+ Log this week's date</button>
+  </div>
+</div>
+
+<!-- Edit habit -->
+
+<div class="overlay" id="edit-sheet" onclick="handleOverlayClick(event,'edit-sheet')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Edit habit</div>
+    <div class="sheet-sub">Make it personal to you</div>
+    <div class="field-wrap">
+      <div class="field-label">Name</div>
+      <input type="text" class="field-input" id="edit-label-input" placeholder="Habit name"/>
+    </div>
+    <div class="field-wrap">
+      <div class="field-label">Emoji</div>
+      <div class="emoji-grid" id="edit-emoji-grid"></div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn-sm btn-sm-ghost" onclick="closeSheet('edit-sheet')">Cancel</button>
+      <button class="btn-sm btn-sm-primary" style="flex:1" onclick="saveEditHabit()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings -->
+
+<div class="overlay" id="settings-sheet" onclick="handleOverlayClick(event,'settings-sheet')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Settings</div>
+    <div class="field-wrap" style="margin-top:8px">
+      <div class="field-label">Your name</div>
+      <input type="text" class="field-input" id="settings-name" placeholder="Your name"/>
+    </div>
+    <div class="field-wrap">
+      <div class="field-label">Weekly spending budget</div>
+      <div class="prefix-row">
+        <span class="prefix-sign">$</span>
+        <input type="number" class="prefix-input" id="settings-budget" placeholder="500"/>
+      </div>
+    </div>
+    <div class="field-wrap">
+      <div class="field-label">Up Bank token <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
+      <input type="password" class="field-input" id="settings-token" placeholder="up:yeah:••••••••"/>
+      <div style="font-size:12px;color:#8a8078;margin-top:6px;line-height:1.5">Up app → Settings → API → Create token. Read-only.</div>
+    </div>
+    <button class="btn btn-primary" onclick="saveSettings()">Save</button>
+  </div>
+</div>
+
+<!-- Confetti container -->
+
+<div id="confetti-wrap" style="position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden"></div>
+<div class="celebrate-toast" id="celebrate-toast">
+  <div class="celebrate-emoji">🎉</div>
+  <div class="celebrate-title" id="celebrate-title"></div>
+  <div class="celebrate-sub" id="celebrate-sub"></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+// CONSTANTS & STATE
+// ══════════════════════════════════════════════════════════════════════════════
+const STORAGE_KEY = 'ritual-v5';
+const EMOJIS = ['💼','🍷','🍳','🤝','📚','💳','✨','🌿','🎨','🏃','🧘','🎵','🌍','💪','🎯','🌱'];
+const DAY_LETTERS = ['M','T','W','T','F','S','S'];
 const DEFAULT_HABITS = [
-{ id: “career”,   label: “Career conversation”, prompt: “Who did you connect with?”, emoji: “💼”, isDate: false, type: “weekly” },
-{ id: “date”,     label: “Date”,                 prompt: “Who with & where?”,          emoji: “🍷”, isDate: true,  type: “weekly” },
-{ id: “recipe”,   label: “New recipe”,           prompt: “What did you make?”,         emoji: “🍳”, isDate: false, type: “weekly” },
-{ id: “friends”,  label: “Friends catch-up”,     prompt: “Who did you see?”,           emoji: “🤝”, isDate: false, type: “weekly” },
-{ id: “reading”,  label: “Reading”,              prompt: “What are you reading?”,      emoji: “📚”, isDate: false, type: “nights”, target: 3 },
-{ id: “spending”, label: “Under spending goal”,  prompt: “Weekly budget”,              emoji: “💳”, isDate: false, type: “spending” },
+  {id:'career',   label:'Career conversation', prompt:'Who did you connect with?', emoji:'💼', type:'weekly', isDate:false},
+  {id:'date',     label:'Date',                 prompt:'Who with & where?',          emoji:'🍷', type:'weekly', isDate:true},
+  {id:'recipe',   label:'New recipe',           prompt:'What did you make?',         emoji:'🍳', type:'weekly', isDate:false},
+  {id:'friends',  label:'Friends catch-up',     prompt:'Who did you see?',           emoji:'🤝', type:'weekly', isDate:false},
+  {id:'reading',  label:'Reading',              prompt:'What are you reading?',      emoji:'📚', type:'nights', target:3, isDate:false},
+  {id:'spending', label:'Under spending goal',  prompt:'Weekly budget',              emoji:'💳', type:'spending', isDate:false},
 ];
 
-const EMOJI_OPTIONS = [“💼”,“🍷”,“🍳”,“🤝”,“📚”,“💳”,“✨”,“🌿”,“🎨”,“🏃”,“🧘”,“🎵”,“🌍”,“💪”,“🎯”,“🌱”];
-const DAY_LABELS = [“M”,“T”,“W”,“T”,“F”,“S”,“S”];
+let state = null;
+let currentWeek = getWeekKey();
+let currentTab = 'weekly';
+let loggingId = null;
+let editingId = null;
+let upSpend = null;
 
+// ══════════════════════════════════════════════════════════════════════════════
+// DATE HELPERS
+// ══════════════════════════════════════════════════════════════════════════════
 function getWeekKey(d = new Date()) {
-const x = new Date(d); x.setHours(0,0,0,0);
-x.setDate(x.getDate() - ((x.getDay()+6)%7));
-return x.toISOString().slice(0,10);
+  const x = new Date(d); x.setHours(0,0,0,0);
+  x.setDate(x.getDate() - ((x.getDay()+6)%7));
+  return x.toISOString().slice(0,10);
 }
 function offsetWeek(wk, n) {
-const d = new Date(wk); d.setDate(d.getDate()+n*7); return d.toISOString().slice(0,10);
+  const d = new Date(wk); d.setDate(d.getDate() + n*7);
+  return d.toISOString().slice(0,10);
 }
 function weekDates(wk) {
-return Array.from({length:7},(*,i)=>{ const d=new Date(wk); d.setDate(d.getDate()+i); return d; });
+  return Array.from({length:7}, (_,i) => {
+    const d = new Date(wk); d.setDate(d.getDate()+i); return d;
+  });
 }
 function fmtRange(wk) {
-const [s,e] = [weekDates(wk)[0], weekDates(wk)[6]];
-const mo = d => d.toLocaleDateString(“en-AU”,{month:“short”});
-return s.getMonth()===e.getMonth() ? `${mo(s)} ${s.getDate()}–${e.getDate()}` : `${mo(s)} ${s.getDate()} – ${mo(e)} ${e.getDate()}`;
+  const dates = weekDates(wk);
+  const s = dates[0], e = dates[6];
+  const mo = d => d.toLocaleDateString('en-AU',{month:'short'});
+  return s.getMonth()===e.getMonth()
+    ? `${mo(s)} ${s.getDate()}–${e.getDate()}`
+    : `${mo(s)} ${s.getDate()} – ${mo(e)} ${e.getDate()}`;
 }
-function daysLeftInWeek() {
-const now = new Date(); now.setHours(0,0,0,0);
-const end = new Date(getWeekKey()); end.setDate(end.getDate()+6);
-return Math.max(0, Math.round((end-now)/86400000));
-}
-function isHabitDone(data, id, wk, habit) {
-if (!habit) return false;
-if (habit.type===“nights”) return (data[`${wk}:${id}:nights`]||[]).length >= (habit.target||3);
-if (habit.type===“spending”) return !!(data[`${wk}:${id}`]?.done);
-return !!(data[`${wk}:${id}`]?.done);
-}
-function getStreak(data, id, currentWk, habits) {
-const habit = habits.find(h=>h.id===id);
-let s=0, wk=currentWk;
-while (isHabitDone(data, id, wk, habit)) { s++; wk=offsetWeek(wk,-1); }
-return s;
-}
-function useConfetti(trigger) {
-const [particles, setParticles] = useState([]);
-useEffect(()=>{
-if(!trigger) return;
-const cols=[”#7b6fa0”,”#a89cc8”,”#c8b8e8”,”#e8d8f8”,”#f0e8ff”,”#9591a4”];
-setParticles(Array.from({length:48},(*,i)=>({
-id:i, x:Math.random()*100, delay:Math.random()*0.5,
-color:cols[Math.floor(Math.random()*cols.length)],
-size:Math.random()*7+4, dur:Math.random()*0.9+0.9
-})));
-setTimeout(()=>setParticles([]),2600);
-},[trigger]);
-return particles;
+function daysLeft() {
+  const now = new Date(); now.setHours(0,0,0,0);
+  const end = new Date(getWeekKey()); end.setDate(end.getDate()+6);
+  return Math.max(0, Math.round((end-now)/86400000));
 }
 
-// ── Onboarding ────────────────────────────────────────────────────────────────
-function Onboarding({ onDone }) {
-const [step, setStep]         = useState(0);
-const [name, setName]         = useState(””);
-const [habits, setHabits]     = useState(DEFAULT_HABITS.map(h=>({…h})));
-const [budget, setBudget]     = useState(””);
-const [upToken, setUpToken]   = useState(””);
-const [editIdx, setEditIdx]   = useState(null);
-const [editLabel, setEditLabel] = useState(””);
-const [editEmoji, setEditEmoji] = useState(””);
+// ══════════════════════════════════════════════════════════════════════════════
+// STORAGE
+// ══════════════════════════════════════════════════════════════════════════════
+function loadState() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null; }
+  catch { return null; }
+}
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+}
 
-const startEdit = i => { setEditIdx(i); setEditLabel(habits[i].label); setEditEmoji(habits[i].emoji); };
-const saveEdit  = () => {
-setHabits(habits.map((h,i)=>i===editIdx?{…h,label:editLabel||h.label,emoji:editEmoji}:h));
-setEditIdx(null);
-};
+// ══════════════════════════════════════════════════════════════════════════════
+// HABIT LOGIC
+// ══════════════════════════════════════════════════════════════════════════════
+function getEntry(id, wk) { return (state.data[`${wk||currentWeek}:${id}`] || {}); }
+function getNights(wk) { return state.data[`${wk||currentWeek}:reading:nights`] || []; }
+function isHabitDone(id, wk) {
+  wk = wk || currentWeek;
+  const h = state.habits.find(x=>x.id===id);
+  if (!h) return false;
+  if (h.type==='nights') return getNights(wk).length >= (h.target||3);
+  return !!(getEntry(id,wk).done);
+}
+function getStreak(id) {
+  let s=0, wk=currentWeek;
+  while (isHabitDone(id, wk)) { s++; wk=offsetWeek(wk,-1); }
+  return s;
+}
+function totalDone(wk) {
+  wk = wk || currentWeek;
+  return state.habits.filter(h => isHabitDone(h.id, wk)).length;
+}
 
-return (
-<div style={{minHeight:“100vh”,background:”#eeecf4”,display:“flex”,alignItems:“center”,justifyContent:“center”,padding:“20px 24px”}}>
-<div className="ob-card">
-{step===0 && (<>
-<div className="ob-step">Welcome</div>
-<div className="ob-title">What should we call you?</div>
-<div className="ob-sub">We’ll personalise your weekly check-ins.</div>
-<input className=“ob-input” placeholder=“Your name” value={name} autoFocus
-onChange={e=>setName(e.target.value)}
-onKeyDown={e=>e.key===“Enter”&&name.trim()&&setStep(1)}/>
-<button className=“btn-primary” disabled={!name.trim()} onClick={()=>setStep(1)} style={{width:“100%”,marginTop:12}}>Continue →</button>
-</>)}
+// ══════════════════════════════════════════════════════════════════════════════
+// ONBOARDING
+// ══════════════════════════════════════════════════════════════════════════════
+let obStep = 0;
+let obName = '';
+let obHabits = DEFAULT_HABITS.map(h=>({...h}));
+let obBudget = '';
+let obToken = '';
+let obEditIdx = null;
+let obEditLabel = '';
+let obEditEmoji = '';
 
-```
-    {step===1 && editIdx===null && (<>
-      <div className="ob-step">Step 2 of 3</div>
-      <div className="ob-title">Make it yours</div>
-      <div className="ob-sub">Tap any habit to rename it.</div>
-      {habits.map((h,i)=>(
-        <div key={h.id} className="ob-habit-row" onClick={()=>startEdit(i)}>
-          <span style={{fontSize:22}}>{h.emoji}</span>
-          <div style={{flex:1,fontSize:15,fontWeight:600,color:"#2d2840"}}>{h.label}</div>
-          <div style={{fontSize:11,color:"#b8b4c8",fontWeight:700,letterSpacing:".06em",textTransform:"uppercase"}}>Edit</div>
-        </div>
-      ))}
-      <button className="btn-primary" onClick={()=>setStep(2)} style={{width:"100%",marginTop:12}}>Continue →</button>
-    </>)}
-
-    {step===1 && editIdx!==null && (<>
-      <div className="ob-step">Customise</div>
-      <div className="ob-title">Rename it</div>
-      <input className="ob-input" value={editLabel} autoFocus
-        onChange={e=>setEditLabel(e.target.value)}
-        onKeyDown={e=>e.key==="Enter"&&saveEdit()}/>
-      <div className="field-label" style={{marginTop:14}}>Emoji</div>
-      <div className="emoji-grid">
-        {EMOJI_OPTIONS.map(em=>(
-          <button key={em} className={`emoji-btn${editEmoji===em?" sel":""}`} onClick={()=>setEditEmoji(em)}>{em}</button>
-        ))}
+function renderOb() {
+  const card = document.getElementById('ob-card');
+  if (obStep===0) {
+    card.innerHTML = `
+      <div class="ob-eyebrow">Welcome</div>
+      <div class="ob-title">What should we<br>call you?</div>
+      <div class="ob-sub">We'll personalise your weekly check-ins.</div>
+      <div class="field-wrap">
+        <input type="text" class="field-input" id="ob-name" placeholder="Your name" autocomplete="given-name"/>
       </div>
-      <button className="btn-primary" onClick={saveEdit} style={{width:"100%",marginTop:14}}>Save</button>
-    </>)}
-
-    {step===2 && (<>
-      <div className="ob-step">Step 3 of 3</div>
-      <div className="ob-title">Spending goal 💳</div>
-      <div className="ob-sub">Set your weekly budget. Connect Up Bank to sync spend automatically.</div>
-      <div className="field-label">Weekly budget</div>
-      <div className="input-prefix">
-        <span className="prefix-sign">$</span>
-        <input className="prefix-input" type="number" placeholder="500" value={budget}
-          onChange={e=>setBudget(e.target.value)} autoFocus/>
+      <button class="btn btn-primary" id="ob-next1" onclick="obNext1()" disabled>Continue →</button>
+    `;
+    const inp = document.getElementById('ob-name');
+    inp.focus();
+    inp.addEventListener('input', e => {
+      obName = e.target.value.trim();
+      document.getElementById('ob-next1').disabled = !obName;
+    });
+    inp.addEventListener('keydown', e => { if(e.key==='Enter'&&obName) obNext1(); });
+  } else if (obStep===1 && obEditIdx===null) {
+    card.innerHTML = `
+      <div class="ob-eyebrow">Step 2 of 3</div>
+      <div class="ob-title">Make it yours</div>
+      <div class="ob-sub">Tap any habit to rename it. Totally optional.</div>
+      ${obHabits.map((h,i)=>`
+        <div class="ob-habit-row" onclick="obStartEdit(${i})">
+          <span class="ob-habit-emoji">${h.emoji}</span>
+          <div class="ob-habit-label">${h.label}</div>
+          <div class="ob-habit-edit">Edit</div>
+        </div>`).join('')}
+      <button class="btn btn-primary" style="margin-top:8px" onclick="obStep=2;renderOb()">Continue →</button>
+    `;
+  } else if (obStep===1 && obEditIdx!==null) {
+    card.innerHTML = `
+      <div class="ob-eyebrow">Customise habit</div>
+      <div class="ob-title">Rename it</div>
+      <div class="field-wrap">
+        <input type="text" class="field-input" id="ob-edit-inp" value="${obEditLabel}" placeholder="Habit name"/>
       </div>
-      <div className="field-label" style={{marginTop:14}}>Up Bank personal token <span style={{color:"#c0bcd0",fontWeight:500,textTransform:"none",letterSpacing:0}}>(optional)</span></div>
-      <input className="ob-input" placeholder="up:yeah:••••••••" value={upToken}
-        onChange={e=>setUpToken(e.target.value)} type="password"/>
-      <div style={{fontSize:12,color:"#9591a4",marginTop:6,lineHeight:1.5,marginBottom:4}}>
-        Up app → Settings → API → Create token. Read-only.
+      <div class="field-wrap">
+        <div class="field-label">Emoji</div>
+        <div class="emoji-grid">${EMOJIS.map(em=>`<button class="emoji-opt${obEditEmoji===em?' sel':''}" onclick="obSetEmoji('${em}')">${em}</button>`).join('')}</div>
       </div>
-      <button className="btn-primary" disabled={!budget} onClick={()=>onDone(name,habits,parseFloat(budget),upToken.trim())} style={{width:"100%",marginTop:14}}>Let's go →</button>
-      <button className="btn-ghost" onClick={()=>onDone(name,habits,500,"")} style={{width:"100%",marginTop:8}}>Skip for now</button>
-    </>)}
-  </div>
-</div>
-```
-
-);
-}
-
-// ── Main App ──────────────────────────────────────────────────────────────────
-function App() {
-const thisWeek = getWeekKey();
-const [ready,          setReady]          = useState(false);
-const [userName,       setUserName]       = useState(””);
-const [habits,         setHabits]         = useState(DEFAULT_HABITS);
-const [weekKey,        setWeekKey]        = useState(thisWeek);
-const [data,           setData]           = useState({});
-const [tab,            setTab]            = useState(“home”);
-const [logging,        setLogging]        = useState(null);
-const [logText,        setLogText]        = useState(””);
-const [celebrated,     setCelebrated]     = useState({});
-const [showCelebration,setShowCelebration]= useState(false);
-const [editingHabit,   setEditingHabit]   = useState(null);
-const [editLabel,      setEditLabel]      = useState(””);
-const [editEmoji,      setEditEmoji]      = useState(””);
-const [detailHabit,    setDetailHabit]    = useState(null);
-const [budget,         setBudget]         = useState(500);
-const [upToken,        setUpToken]        = useState(””);
-const [upSpend,        setUpSpend]        = useState(null);
-const [upLoading,      setUpLoading]      = useState(false);
-const [upError,        setUpError]        = useState(null);
-const [showSettings,   setShowSettings]   = useState(false);
-const [manualDraft,    setManualDraft]    = useState(””);
-const inputRef = useRef(null);
-const confettiParticles = useConfetti(showCelebration);
-
-useEffect(()=>{
-try {
-const s = localStorage.getItem(“ritual-v4”);
-if (s) {
-const p = JSON.parse(s);
-setUserName(p.userName||””); setHabits(p.habits||DEFAULT_HABITS);
-setData(p.data||{}); setCelebrated(p.celebrated||{});
-setBudget(p.budget||500); setUpToken(p.upToken||””);
-setReady(true);
-}
-} catch { setReady(false); }
-},[]);
-
-const stateRef = useRef({});
-useEffect(() => {
-stateRef.current = { userName, habits, data, celebrated, budget, upToken };
-});
-
-const saveAll = (updates) => {
-const next = { …stateRef.current, …updates };
-try { localStorage.setItem(“ritual-v4”, JSON.stringify(next)); } catch {}
-if (updates.userName   !== undefined) setUserName(updates.userName);
-if (updates.habits     !== undefined) setHabits(updates.habits);
-if (updates.data       !== undefined) setData(updates.data);
-if (updates.celebrated !== undefined) setCelebrated(updates.celebrated);
-if (updates.budget     !== undefined) setBudget(updates.budget);
-if (updates.upToken    !== undefined) setUpToken(updates.upToken);
-};
-
-// Up Bank fetch — calls Netlify function if deployed, falls back gracefully
-useEffect(()=>{
-if (!upToken || !ready) return;
-setUpLoading(true); setUpError(null);
-fetch(`/.netlify/functions/up-spend?weekKey=${weekKey}`, {
-headers: { Authorization: `Bearer ${upToken}` }
-})
-.then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
-.then(j=>{ setUpSpend(j.total); setUpLoading(false); })
-.catch(e=>{ setUpError(e.message); setUpLoading(false); });
-},[upToken, weekKey, ready]);
-
-// auto-mark spending done/undone from Up data
-useEffect(()=>{
-if (upSpend===null) return;
-const { data: d, budget: b, userName: u, habits: h, celebrated: c, upToken: t } = stateRef.current;
-const k=`${weekKey}:spending`, cur=d[k]||{};
-const shouldBeDone = upSpend<=b;
-if (cur.done!==shouldBeDone) {
-const newData={…d,[k]:{…cur,done:shouldBeDone,autoAmount:upSpend}};
-setData(newData);
-try { localStorage.setItem(“ritual-v4”, JSON.stringify({userName:u,habits:h,data:newData,celebrated:c,budget:b,upToken:t})); } catch {}
-}
-},[upSpend, budget]);
-
-const onboardDone = (name, newHabits, bud, tok) => {
-const s={userName:name,habits:newHabits,data:{},celebrated:{},budget:bud,upToken:tok};
-try { localStorage.setItem(“ritual-v4”,JSON.stringify(s)); } catch {}
-setUserName(name); setHabits(newHabits); setBudget(bud); setUpToken(tok);
-setData({}); setCelebrated({}); setReady(true);
-};
-
-const habitDef   = id => habits.find(h=>h.id===id)||DEFAULT_HABITS.find(h=>h.id===id);
-const entry      = (id,wk=weekKey) => data[`${wk}:${id}`]||{};
-const isDone     = (id,wk=weekKey) => isHabitDone(data,id,wk,habitDef(id));
-const nightsDone = (wk=weekKey)    => data[`${wk}:reading:nights`]||[];
-
-const toggle = id => {
-const h=habitDef(id);
-if(h?.type===“nights”||h?.type===“spending”) return;
-const k=`${weekKey}:${id}`, cur=entry(id);
-const newData={…data,[k]:{…cur,done:!cur.done}};
-const newTotal=habits.filter(hb=>isHabitDone(newData,hb.id,weekKey,hb)).length;
-if(newTotal===habits.length&&!celebrated[weekKey]) {
-setShowCelebration(true);
-saveAll({data:newData,celebrated:{…celebrated,[weekKey]:true}});
-setTimeout(()=>setShowCelebration(false),2600);
-} else { saveAll({data:newData}); }
-};
-
-const toggleNight = dayIdx => {
-const k=`${weekKey}:reading:nights`, cur=data[k]||[];
-const next=cur.includes(dayIdx)?cur.filter(d=>d!==dayIdx):[…cur,dayIdx];
-saveAll({data:{…data,[k]:next}});
-};
-
-const openLog = id => { setLogText(entry(id).note||””); setLogging(id); setTimeout(()=>inputRef.current?.focus(),80); };
-const saveLog = () => {
-const k=`${weekKey}:${logging}`;
-saveAll({data:{…data,[k]:{…entry(logging),note:logText.trim()}}});
-setLogging(null);
-};
-
-const openEditHabit = h => { setEditLabel(h.label); setEditEmoji(h.emoji); setEditingHabit(h.id); };
-const saveEditHabit = () => {
-saveAll({habits:habits.map(h=>h.id===editingHabit?{…h,label:editLabel,emoji:editEmoji}:h)});
-setEditingHabit(null);
-};
-
-if (!ready) return <Onboarding onDone={onboardDone}/>;
-
-const isNow     = weekKey===thisWeek;
-const dates     = weekDates(weekKey);
-const today     = new Date(); today.setHours(0,0,0,0);
-const totalDone = habits.filter(h=>isDone(h.id)).length;
-const daysLeft  = daysLeftInWeek();
-const remaining = habits.length-totalDone;
-const histWeeks = Array.from({length:12},(_,i)=>offsetWeek(thisWeek,-i));
-const firstName = userName.split(” “)[0];
-const spendEntry= data[`${weekKey}:spending`]||{};
-const spendAmt  = upSpend!==null ? upSpend : (spendEntry.manualAmount??null);
-const spendPct  = spendAmt!==null ? Math.min((spendAmt/budget)*100,100) : 0;
-const spendOver = spendAmt!==null && spendAmt>budget;
-const lastMonthMemos = habits
-.filter(h=>h.type!==“spending”&&h.type!==“nights”)
-.map(h=>({…h,note:data[`${offsetWeek(thisWeek,-4)}:${h.id}`]?.note}))
-.filter(h=>h.note);
-
-return (
-<div style={{minHeight:“100vh”,background:”#eeecf4”}}>
-
-```
-  {/* confetti */}
-  {showCelebration && (
-    <div style={{position:"fixed",inset:0,zIndex:300,pointerEvents:"none",display:"flex",alignItems:"center",justifyContent:"center"}}>
-      {confettiParticles.map(p=>(
-        <div key={p.id} style={{position:"fixed",top:0,left:`${p.x}%`,width:p.size,height:p.size*1.4,background:p.color,borderRadius:2,animation:`fall ${p.dur}s linear ${p.delay}s both`}}/>
-      ))}
-      <div style={{fontSize:24,fontWeight:700,color:"#2d2840",background:"#fff",borderRadius:20,padding:"20px 28px",boxShadow:"0 8px 32px rgba(0,0,0,.12)",textAlign:"center",animation:"celebIn .4s cubic-bezier(.34,1.56,.64,1) both"}}>
-        🎉 Perfect week, {firstName}!<br/><span style={{fontSize:14,color:"#9591a4",fontWeight:500}}>All {habits.length} habits done.</span>
-      </div>
-    </div>
-  )}
-
-  <div className="app">
-    {/* topbar */}
-    <div className="topbar">
-      <div>
-        <div style={{fontSize:20,fontWeight:700,color:"#2d2840"}}>Hey, {firstName} 👋</div>
-        <div style={{fontSize:13,color:"#9591a4",fontWeight:500,marginTop:1}}>
-          {isNow ? (daysLeft===0?"Last day of the week":`${daysLeft} day${daysLeft!==1?"s":""} left`) : fmtRange(weekKey)}
+      <button class="btn btn-primary" onclick="obSaveEdit()">Save</button>
+    `;
+    document.getElementById('ob-edit-inp').focus();
+    document.getElementById('ob-edit-inp').addEventListener('input', e => { obEditLabel = e.target.value; });
+  } else if (obStep===2) {
+    card.innerHTML = `
+      <div class="ob-eyebrow">Step 3 of 3</div>
+      <div class="ob-title">Spending goal 💳</div>
+      <div class="ob-sub">Set your weekly budget. Connect Up Bank to sync your spend automatically.</div>
+      <div class="field-wrap">
+        <div class="field-label">Weekly budget</div>
+        <div class="prefix-row">
+          <span class="prefix-sign">$</span>
+          <input type="number" class="prefix-input" id="ob-budget" placeholder="500" value="${obBudget}"/>
         </div>
       </div>
-      <div style={{display:"flex",alignItems:"center",gap:8}}>
-        <div className="tab-pills">
-          <button className={`tab-pill${tab==="home"?" active":""}`} onClick={()=>setTab("home")}>Weekly</button>
-          <button className={`tab-pill${tab==="history"?" active":""}`} onClick={()=>setTab("history")}>History</button>
+      <div class="field-wrap">
+        <div class="field-label">Up Bank token <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
+        <input type="password" class="field-input" id="ob-token" placeholder="up:yeah:••••••••" value="${obToken}"/>
+        <div style="font-size:12px;color:#8a8078;margin-top:6px;line-height:1.5">Up app → Settings → API → Create token</div>
+      </div>
+      <button class="btn btn-primary" id="ob-finish" onclick="obFinish()" ${!obBudget?'disabled':''}>Let's go →</button>
+      <button class="btn btn-ghost" onclick="obSkip()">Skip for now</button>
+    `;
+    const bi = document.getElementById('ob-budget');
+    bi.addEventListener('input', e => {
+      obBudget = e.target.value;
+      document.getElementById('ob-finish').disabled = !obBudget;
+    });
+    document.getElementById('ob-token').addEventListener('input', e => { obToken = e.target.value; });
+  }
+}
+
+function obNext1() { obStep=1; renderOb(); }
+function obStartEdit(i) { obEditIdx=i; obEditLabel=obHabits[i].label; obEditEmoji=obHabits[i].emoji; renderOb(); }
+function obSetEmoji(em) { obEditEmoji=em; renderOb(); }
+function obSaveEdit() {
+  if (obEditIdx!==null) { obHabits[obEditIdx]={...obHabits[obEditIdx],label:obEditLabel||obHabits[obEditIdx].label,emoji:obEditEmoji}; }
+  obEditIdx=null; renderOb();
+}
+function obFinish() {
+  obBudget = document.getElementById('ob-budget').value || '500';
+  obToken  = document.getElementById('ob-token').value.trim();
+  initState(obName, obHabits, parseFloat(obBudget)||500, obToken);
+}
+function obSkip() { initState(obName, obHabits, 500, ''); }
+
+function initState(name, habits, budget, upToken) {
+  state = { userName:name, habits, data:{}, celebrated:{}, budget, upToken };
+  saveState();
+  document.getElementById('ob-wrap').style.display='none';
+  document.getElementById('app').style.display='block';
+  bootApp();
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// APP BOOT
+// ══════════════════════════════════════════════════════════════════════════════
+function bootApp() {
+  currentWeek = getWeekKey();
+  renderAll();
+  if (state.upToken) fetchUpSpend();
+}
+
+function renderAll() {
+  const firstName = state.userName.split(' ')[0];
+  const dl = daysLeft();
+  const isNow = currentWeek === getWeekKey();
+
+  // Greeting
+  document.getElementById('greeting-name').textContent = `Hey, ${firstName} 👋`;
+  document.getElementById('greeting-sub').textContent = isNow
+    ? (dl===0 ? 'Last day of the week' : `${dl} day${dl!==1?'s':''} left`)
+    : fmtRange(currentWeek);
+
+  // Week nav
+  document.getElementById('wk-label').textContent = fmtRange(currentWeek);
+  document.getElementById('wk-sub').textContent = isNow ? 'This week' : '';
+  document.getElementById('wk-next').disabled = isNow;
+
+  if (currentTab==='weekly') renderWeekly();
+  else renderHistory();
+}
+
+function renderWeekly() {
+  renderNudge();
+  renderProgress();
+  renderDayStrip();
+  renderHabits();
+  renderMemory();
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// RENDER WEEKLY
+// ══════════════════════════════════════════════════════════════════════════════
+function renderNudge() {
+  const isNow = currentWeek===getWeekKey();
+  const dl = daysLeft();
+  const rem = state.habits.length - totalDone();
+  const wrap = document.getElementById('nudge-wrap');
+  if (isNow && rem>0 && dl<=2) {
+    wrap.innerHTML = `
+      <div class="nudge fade-up">
+        <div>
+          <div class="nudge-text">Don't break your streak!</div>
+          <div class="nudge-sub">${rem} habit${rem!==1?'s':''} still to log</div>
         </div>
-        <button style={{background:"none",border:"none",cursor:"pointer",fontSize:20,color:"#9591a4"}} onClick={()=>setShowSettings(true)}>⚙️</button>
-      </div>
-    </div>
+        <div class="nudge-badge">
+          <div class="nudge-badge-num">${dl}</div>
+          <div class="nudge-badge-label">day${dl!==1?'s':''} left</div>
+        </div>
+      </div>`;
+  } else { wrap.innerHTML=''; }
+}
 
-    {/* week nav */}
-    <div className="week-nav">
-      <button className="wk-arrow" onClick={()=>setWeekKey(k=>offsetWeek(k,-1))}>←</button>
-      <div style={{textAlign:"center"}}>
-        <div style={{fontSize:14,fontWeight:700,color:"#2d2840"}}>{fmtRange(weekKey)}</div>
-        {isNow&&<div style={{fontSize:11,color:"#9591a4",fontWeight:600,marginTop:2}}>This week</div>}
-      </div>
-      <button className="wk-arrow" disabled={isNow} onClick={()=>setWeekKey(k=>offsetWeek(k,1))}>→</button>
-    </div>
+function renderProgress() {
+  const done = totalDone();
+  const total = state.habits.length;
+  const pct = (done/total)*100;
+  document.getElementById('prog-num').textContent = done;
+  document.getElementById('prog-denom').textContent = `/${total}`;
+  document.getElementById('prog-fill').style.width = pct+'%';
+  const statuses = ['Not started','Getting going','Halfway','Almost there','Almost there','Almost there','Complete ✦'];
+  document.getElementById('prog-status').textContent = done===total ? 'Complete ✦' : statuses[Math.min(done,3)];
+}
 
-    {/* ── HOME ── */}
-    {tab==="home" && (
-      <div className="fade-up">
-        {isNow&&remaining>0&&daysLeft<=2&&(
-          <div style={{background:"#7b6fa0",borderRadius:18,padding:"14px 18px",marginBottom:14,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-            <div>
-              <div style={{fontSize:14,fontWeight:700,color:"#fff"}}>Don't break your streak!</div>
-              <div style={{fontSize:12,color:"rgba(255,255,255,.7)",marginTop:2}}>{remaining} habit{remaining!==1?"s":""} still to log</div>
-            </div>
-            <div style={{textAlign:"center"}}>
-              <div style={{fontSize:32,fontWeight:700,color:"#fff",lineHeight:1}}>{daysLeft}</div>
-              <div style={{fontSize:10,color:"rgba(255,255,255,.7)",fontWeight:700,letterSpacing:".06em",textTransform:"uppercase"}}>day{daysLeft!==1?"s":""} left</div>
-            </div>
+function renderDayStrip() {
+  const dates = weekDates(currentWeek);
+  const today = new Date(); today.setHours(0,0,0,0);
+  const done = totalDone();
+  document.getElementById('day-strip').innerHTML = dates.map((d,i) => {
+    const isToday = d.getTime()===today.getTime();
+    return `<div class="day-cell${isToday?' today':''}">
+      <div class="day-letter">${DAY_LETTERS[i]}</div>
+      <div class="day-num">${d.getDate()}</div>
+      <div class="day-dot${isToday&&done>0?' vis':''}"></div>
+    </div>`;
+  }).join('');
+}
+
+function renderHabits() {
+  const stack = document.getElementById('habit-stack');
+  stack.innerHTML = state.habits.map(h => renderHabitCard(h)).join('');
+}
+
+function renderHabitCard(h) {
+  const done = isHabitDone(h.id);
+  const streak = getStreak(h.id);
+  const streakHtml = streak>0 ? `<span class="streak">🔥 ${streak}w</span> · ` : '';
+
+  if (h.type==='nights') {
+    const ns = getNights();
+    const target = h.target||3;
+    const hit = ns.length>=target;
+    const daysHtml = DAY_LETTERS.map((l,i) =>
+      `<button class="night-btn${ns.includes(i)?' on':''}" onclick="toggleNight(${i})">${l}</button>`
+    ).join('');
+    return `<div class="hcard${hit?' done':''}">
+      <div class="hcard-top">
+        <div class="hcard-emoji">${h.emoji}</div>
+        <div class="hcard-info">
+          <div class="hcard-name">
+            <span class="hcard-name-text">${h.label}</span>
+            <button class="edit-habit-btn" onclick="openEditHabit('${h.id}')">✎</button>
           </div>
-        )}
-
-        {/* progress card */}
-        <div className="card" style={{marginBottom:14}}>
-          <div className="section-label">This week</div>
-          <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:14}}>
-            <div style={{fontSize:42,fontWeight:700,color:"#2d2840",lineHeight:1}}>{totalDone}</div>
-            <div style={{fontSize:20,color:"#c4c0d0",fontWeight:600}}>/ {habits.length}</div>
-            <div style={{fontSize:13,color:"#9591a4",fontWeight:500,flex:1,textAlign:"right"}}>
-              {["Not started","Getting going","Halfway","Almost there","Almost there","Almost there","Complete ✦"][Math.min(totalDone,habits.length===totalDone?habits.length:totalDone)]}
-            </div>
-          </div>
-          <div style={{height:6,background:"#f0eef8",borderRadius:6,overflow:"hidden"}}>
-            <div style={{height:"100%",background:"#7b6fa0",borderRadius:6,width:`${(totalDone/habits.length)*100}%`,transition:"width .5s cubic-bezier(.4,0,.2,1)"}}/>
-          </div>
+          <div class="hcard-sub">${streakHtml}${target} nights/week</div>
         </div>
-
-        {/* day strip */}
-        <div style={{display:"flex",gap:6,marginBottom:20}}>
-          {dates.map((d,i)=>{
-            const isToday=d.getTime()===today.getTime();
-            return (
-              <div key={i} style={{flex:1,background:"#fff",borderRadius:14,padding:"10px 4px 8px",display:"flex",flexDirection:"column",alignItems:"center",gap:5,boxShadow:"0 1px 3px rgba(0,0,0,.05)",border:isToday?"2px solid #7b6fa0":"2px solid transparent"}}>
-                <div style={{fontSize:11,fontWeight:700,color:isToday?"#7b6fa0":"#b8b4c8",letterSpacing:".04em"}}>{DAY_LABELS[i]}</div>
-                <div style={{fontSize:15,fontWeight:700,color:"#2d2840"}}>{d.getDate()}</div>
-                <div style={{width:5,height:5,borderRadius:"50%",background:"#7b6fa0",opacity:isToday&&totalDone>0?1:0}}/>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* habits */}
-        <div className="section-label">Habits</div>
-        <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:22}}>
-          {habits.map(h=>{
-            const done=isDone(h.id), note=entry(h.id).note, streak=getStreak(data,h.id,weekKey,habits);
-
-            if(h.type==="nights") {
-              const n=nightsDone().length, hit=n>=(h.target||3);
-              return (
-                <div key={h.id} className={`hcard${hit?" done":""}`}>
-                  <div className="hcard-main">
-                    <div style={{fontSize:22}}>{h.emoji}</div>
-                    <div style={{flex:1}}>
-                      <div className="hcard-name"><span className="label">{h.label}</span><button className="edit-btn" onClick={()=>openEditHabit(h)}>✎</button></div>
-                      <div className="hcard-meta">{streak>0?<><span style={{color:"#7b6fa0",fontWeight:700}}>🔥 {streak}w</span> · </>:""}{h.target} nights/week</div>
-                    </div>
-                    <div className="check-circle" style={{pointerEvents:"none"}}><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5l3.5 3.5L11.5 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-                  </div>
-                  <div style={{borderTop:"1px solid #f4f2f9",padding:"12px 18px"}}>
-                    <div style={{fontSize:11,fontWeight:700,color:"#9591a4",letterSpacing:".08em",textTransform:"uppercase",marginBottom:10}}>Tap nights you read</div>
-                    <div style={{display:"flex",gap:6}}>
-                      {DAY_LABELS.map((lbl,i)=>(
-                        <button key={i} onClick={()=>toggleNight(i)}
-                          style={{flex:1,height:34,borderRadius:10,border:`2px solid ${nightsDone().includes(i)?"#7b6fa0":"#e8e4f0"}`,background:nightsDone().includes(i)?"#7b6fa0":"#f8f7fc",cursor:"pointer",fontSize:11,fontWeight:700,color:nightsDone().includes(i)?"#fff":"#b8b4c8",fontFamily:"inherit",transition:"all .2s"}}>
-                          {lbl}
-                        </button>
-                      ))}
-                    </div>
-                    <div style={{fontSize:12,color:"#9591a4",fontWeight:600,marginTop:8}}>
-                      <span style={{color:"#7b6fa0",fontWeight:700}}>{nightsDone().length}</span>/{h.target} nights{hit?" ✦ Done!":""}
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-
-            if(h.type==="spending") {
-              return (
-                <div key={h.id} className={`hcard${done?" done":""}`}>
-                  <div className="hcard-main">
-                    <div style={{fontSize:22}}>{h.emoji}</div>
-                    <div style={{flex:1}}>
-                      <div className="hcard-name"><span className="label">{h.label}</span><button className="edit-btn" onClick={()=>openEditHabit(h)}>✎</button></div>
-                      <div className="hcard-meta">{streak>0?<><span style={{color:"#7b6fa0",fontWeight:700}}>🔥 {streak}w</span> · </>:""}Goal: ${budget}/wk</div>
-                    </div>
-                    <div className="check-circle" style={{pointerEvents:"none"}}><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5l3.5 3.5L11.5 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-                  </div>
-                  <div style={{padding:"12px 18px 16px",borderTop:"1px solid #f4f2f9"}}>
-                    {upLoading&&<div style={{fontSize:13,color:"#b8b4c8",fontStyle:"italic"}}>Fetching from Up…</div>}
-                    {upError&&<div style={{fontSize:13,color:"#e07070"}}>Up error — enter manually</div>}
-                    {spendAmt!==null&&!upLoading&&(<>
-                      <div style={{display:"flex",alignItems:"baseline",gap:6,marginBottom:10}}>
-                        <div style={{fontSize:28,fontWeight:700,lineHeight:1,color:spendOver?"#e07070":spendAmt<budget*0.9?"#7b6fa0":"#2d2840"}}>${spendAmt.toFixed(0)}</div>
-                        <div style={{fontSize:13,color:"#b8b4c8",fontWeight:600}}>/ ${budget}</div>
-                        {upToken&&!upError&&<div style={{fontSize:11,color:"#b8b4c8",marginLeft:"auto",fontWeight:600}}>via Up ↗</div>}
-                      </div>
-                      <div style={{height:6,background:"#f0eef8",borderRadius:6,overflow:"hidden",marginBottom:8}}>
-                        <div style={{height:"100%",borderRadius:6,background:spendOver?"#e07070":"#7b6fa0",width:`${spendPct}%`,transition:"width .5s cubic-bezier(.4,0,.2,1)"}}/>
-                      </div>
-                      <div style={{fontSize:12,fontWeight:600,color:spendOver?"#e07070":done?"#7b6fa0":"#9591a4"}}>
-                        {spendOver?`$${(spendAmt-budget).toFixed(0)} over budget`:done?`$${(budget-spendAmt).toFixed(0)} under — on track ✦`:`$${(budget-spendAmt).toFixed(0)} remaining`}
-                      </div>
-                    </>)}
-                    {!upToken&&(
-                      <div style={{display:"flex",gap:8,marginTop:spendAmt!==null?10:0}}>
-                        <input style={{flex:1,background:"#f8f7fc",border:"1.5px solid #e8e4f0",borderRadius:10,padding:"10px 12px",fontSize:14,color:"#2d2840",outline:"none",fontFamily:"inherit"}}
-                          type="number" placeholder={spendAmt!==null?"Update amount":"Enter this week's spend"}
-                          value={manualDraft} onChange={e=>setManualDraft(e.target.value)}/>
-                        <button style={{background:"#7b6fa0",color:"#fff",border:"none",borderRadius:10,padding:"10px 16px",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"inherit"}}
-                          onClick={()=>{
-                            const amt=parseFloat(manualDraft); if(isNaN(amt)) return;
-                            saveAll({data:{...data,[`${weekKey}:spending`]:{done:amt<=budget,manualAmount:amt}}});
-                            setManualDraft("");
-                          }}>Save</button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            }
-
-            return (
-              <div key={h.id} className={`hcard${done?" done":""}`}>
-                <div className="hcard-main">
-                  <div style={{fontSize:22}}>{h.emoji}</div>
-                  <div style={{flex:1}}>
-                    <div className="hcard-name"><span className="label">{h.label}</span><button className="edit-btn" onClick={()=>openEditHabit(h)}>✎</button></div>
-                    <div className="hcard-meta">{streak>0?<><span style={{color:"#7b6fa0",fontWeight:700}}>🔥 {streak}w</span> · </>:""}{h.prompt}</div>
-                  </div>
-                  <div className="check-circle" onClick={()=>toggle(h.id)}><svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1.5 5l3.5 3.5L11.5 1" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-                </div>
-                <div style={{borderTop:"1px solid #f4f2f9",padding:"12px 18px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:10,cursor:"pointer"}}
-                  onClick={()=>{ if(h.isDate) setDetailHabit(h); else openLog(h.id); }}>
-                  {note
-                    ? <><div style={{fontSize:13,color:"#6e6880",flex:1,lineHeight:1.45}}>"{note}"</div><div style={{fontSize:11,color:"#c0bcd0",fontWeight:700,letterSpacing:".04em",textTransform:"uppercase",whiteSpace:"nowrap"}}>{h.isDate?"History →":"Edit"}</div></>
-                    : <div style={{fontSize:12,color:"#c0bcd0",fontWeight:600}}>+ {h.prompt}</div>
-                  }
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {lastMonthMemos.length>0&&(<>
-          <div className="section-label">This time last month</div>
-          <div style={{background:"#ede9f8",borderRadius:18,padding:"16px 18px",marginBottom:22}}>
-            {lastMonthMemos.map(h=>(
-              <div key={h.id} style={{display:"flex",alignItems:"flex-start",gap:10,marginBottom:8}}>
-                <span style={{fontSize:18}}>{h.emoji}</span>
-                <div style={{fontSize:13,color:"#6e6880",lineHeight:1.45,flex:1}}><span style={{fontWeight:700,color:"#7b6fa0"}}>{h.label}:</span> {h.note}</div>
-              </div>
-            ))}
-          </div>
-        </>)}
-      </div>
-    )}
-
-    {/* ── HISTORY ── */}
-    {tab==="history"&&(
-      <div className="fade-up">
-        <div style={{height:4}}/>
-        <div style={{display:"flex",gap:10,marginBottom:20}}>
-          {[
-            {val:histWeeks.filter(wk=>habits.every(h=>isDone(h.id,wk))).length, lbl:"Perfect weeks"},
-            {val:Math.max(...habits.map(h=>getStreak(data,h.id,thisWeek,habits)),0), lbl:"Best streak"},
-            {val:Object.keys(data).filter(k=>data[k]?.done).length, lbl:"Total done"},
-          ].map(s=>(
-            <div key={s.lbl} className="card" style={{flex:1}}>
-              <div style={{fontSize:28,fontWeight:700,color:"#2d2840",lineHeight:1}}>{s.val}</div>
-              <div style={{fontSize:10,fontWeight:700,color:"#b8b4c8",letterSpacing:".08em",textTransform:"uppercase",marginTop:4}}>{s.lbl}</div>
-            </div>
-          ))}
-        </div>
-        <div className="section-label" style={{marginBottom:10}}>Last 12 weeks</div>
-        <div style={{display:"flex",flexDirection:"column",gap:8}}>
-          {histWeeks.map(wk=>{
-            const score=habits.filter(h=>isDone(h.id,wk)).length, perfect=score===habits.length;
-            return (
-              <div key={wk} className="card" style={{display:"flex",alignItems:"center",gap:12,cursor:"pointer",border:wk===thisWeek?"2px solid #7b6fa0":"2px solid transparent",padding:"14px 16px"}}
-                onClick={()=>{ setWeekKey(wk); setTab("home"); }}>
-                <div style={{fontSize:12,fontWeight:700,color:"#9591a4",width:68,flexShrink:0}}>{fmtRange(wk)}</div>
-                <div style={{display:"flex",gap:5,flex:1}}>
-                  {habits.map(h=>(
-                    <div key={h.id} style={{width:28,height:28,borderRadius:9,background:isDone(h.id,wk)?(perfect?"#7b6fa0":"#ede9f8"):"#f4f2f9",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>
-                      {isDone(h.id,wk)?h.emoji:""}
-                    </div>
-                  ))}
-                </div>
-                <div style={{fontSize:13,fontWeight:700,color:perfect?"#7b6fa0":"#b8b4c8",width:28,textAlign:"right"}}>{score}/{habits.length}</div>
-              </div>
-            );
-          })}
+        <div class="check-btn${hit?' checked':''}" style="pointer-events:none">
+          <svg class="check-icon" width="14" height="11" viewBox="0 0 14 11" fill="none">
+            <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
       </div>
-    )}
-  </div>
+      <div class="nights-wrap">
+        <div class="nights-grid">${daysHtml}</div>
+        <div class="nights-count"><span>${ns.length}</span>/${target} nights${hit?' ✦ Done!':''}</div>
+      </div>
+    </div>`;
+  }
 
-  {/* ── DATE TIMELINE ── */}
-  {detailHabit&&(
-    <div className="overlay" onClick={e=>e.target===e.currentTarget&&setDetailHabit(null)}>
-      <div className="sheet">
-        <div className="sheet-handle"/>
-        <div style={{fontSize:22,fontWeight:700,color:"#2d2840",marginBottom:4}}>{detailHabit.emoji} {detailHabit.label}</div>
-        <div style={{fontSize:13,color:"#9591a4",marginBottom:24}}>Every date logged</div>
-        {histWeeks.filter(wk=>isDone(detailHabit.id,wk)).length===0
-          ? <div style={{textAlign:"center",padding:"40px 0",color:"#b8b4c8",fontSize:14,fontWeight:600}}>Nothing logged yet</div>
-          : histWeeks.filter(wk=>isDone(detailHabit.id,wk)).map(wk=>(
-              <div key={wk} style={{display:"flex",gap:14,marginBottom:16}}>
-                <div style={{width:10,height:10,borderRadius:"50%",background:"#7b6fa0",flexShrink:0,marginTop:4}}/>
-                <div style={{flex:1,background:"#fff",borderRadius:14,padding:"12px 14px",boxShadow:"0 1px 4px rgba(0,0,0,.06)"}}>
-                  <div style={{fontSize:11,fontWeight:700,color:"#9591a4",letterSpacing:".06em",textTransform:"uppercase",marginBottom:4}}>{fmtRange(wk)}</div>
-                  {data[`${wk}:${detailHabit.id}`]?.note
-                    ? <div style={{fontSize:14,color:"#2d2840",lineHeight:1.5}}>"{data[`${wk}:${detailHabit.id}`].note}"</div>
-                    : <div style={{fontSize:13,color:"#c0bcd0",fontStyle:"italic"}}>No details logged</div>}
-                </div>
-              </div>
-            ))
-        }
-        <button className="btn-primary" style={{width:"100%",marginTop:8}} onClick={()=>{ setDetailHabit(null); openLog(detailHabit.id); }}>+ Log this week's date</button>
+  if (h.type==='spending') {
+    const spendData = getEntry(h.id);
+    const amt = upSpend!==null ? upSpend : (spendData.manualAmount ?? null);
+    const over = amt!==null && amt>state.budget;
+    const warn = amt!==null && !over && amt>=state.budget*0.85;
+    const cls = over?'over':warn?'warn':'ok';
+    const pct = amt!==null ? Math.min((amt/state.budget)*100,100) : 0;
+    const spendHtml = amt!==null ? `
+      <div class="spend-amt-row">
+        <div class="spend-amt ${cls}">$${amt.toFixed(0)}</div>
+        <div class="spend-budget">/ $${state.budget}</div>
+        ${state.upToken?'<div class="spend-via">via Up ↗</div>':''}
+      </div>
+      <div class="spend-bar-track"><div class="spend-bar-fill ${over?'over':'ok'}" style="width:${pct}%"></div></div>
+      <div class="spend-status ${cls}">${over?`$${(amt-state.budget).toFixed(0)} over budget`:done?`$${(state.budget-amt).toFixed(0)} under — on track ✦`:`$${(state.budget-amt).toFixed(0)} remaining`}</div>
+    ` : '';
+    const manualHtml = !state.upToken ? `
+      <div class="spend-manual">
+        <input type="number" id="spend-manual-inp" placeholder="${amt!==null?'Update amount':'Enter this week\'s spend'}"/>
+        <button onclick="saveManualSpend()">Save</button>
+      </div>` : '';
+    return `<div class="hcard${done?' done':''}">
+      <div class="hcard-top">
+        <div class="hcard-emoji">${h.emoji}</div>
+        <div class="hcard-info">
+          <div class="hcard-name">
+            <span class="hcard-name-text">${h.label}</span>
+            <button class="edit-habit-btn" onclick="openEditHabit('${h.id}')">✎</button>
+          </div>
+          <div class="hcard-sub">${streakHtml}Goal: $${state.budget}/wk</div>
+        </div>
+        <div class="check-btn${done?' checked':''}" style="pointer-events:none">
+          <svg class="check-icon" width="14" height="11" viewBox="0 0 14 11" fill="none">
+            <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="spend-wrap">${spendHtml}${manualHtml}</div>
+    </div>`;
+  }
+
+  // Standard
+  const entry = getEntry(h.id);
+  const note = entry.note;
+  const bottomHtml = note
+    ? `<div class="hcard-note-text">"${note}"</div><div class="hcard-note-action">${h.isDate?'History →':'Edit'}</div>`
+    : `<div class="hcard-note-add">+ ${h.prompt}</div>`;
+
+  return `<div class="hcard${done?' done':''}">
+    <div class="hcard-top">
+      <div class="hcard-emoji">${h.emoji}</div>
+      <div class="hcard-info">
+        <div class="hcard-name">
+          <span class="hcard-name-text">${h.label}</span>
+          <button class="edit-habit-btn" onclick="openEditHabit('${h.id}')">✎</button>
+        </div>
+        <div class="hcard-sub">${streakHtml}${h.prompt}</div>
+      </div>
+      <div class="check-btn${done?' checked':''}" onclick="toggleHabit('${h.id}')">
+        <svg class="check-icon" width="14" height="11" viewBox="0 0 14 11" fill="none">
+          <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
     </div>
-  )}
-
-  {/* ── SETTINGS ── */}
-  {showSettings&&(
-    <div className="overlay" onClick={e=>e.target===e.currentTarget&&setShowSettings(false)}>
-      <div className="sheet" style={{background:"#fff"}}>
-        <div className="sheet-handle"/>
-        <div style={{fontSize:18,fontWeight:700,color:"#2d2840",marginBottom:20}}>Settings</div>
-        {[
-          {lbl:"Your name", el:<input className="settings-input" value={userName} onChange={e=>saveAll({userName:e.target.value})}/>},
-        ].map(f=>(
-          <div key={f.lbl} style={{marginBottom:16}}>
-            <div className="field-label">{f.lbl}</div>
-            {f.el}
-          </div>
-        ))}
-        <div style={{marginBottom:16}}>
-          <div className="field-label">Weekly spending budget</div>
-          <div style={{display:"flex",alignItems:"center",background:"#f8f7fc",border:"1.5px solid #e8e4f0",borderRadius:12,overflow:"hidden"}}>
-            <span style={{padding:"12px 4px 12px 14px",fontSize:15,color:"#9591a4"}}>$</span>
-            <input style={{flex:1,background:"transparent",border:"none",padding:"12px 14px 12px 4px",fontSize:15,color:"#2d2840",outline:"none",fontFamily:"inherit"}}
-              type="number" value={budget} onChange={e=>saveAll({budget:parseFloat(e.target.value)||500})}/>
-          </div>
-        </div>
-        <div style={{marginBottom:20}}>
-          <div className="field-label">Up Bank token</div>
-          <input className="settings-input" type="password" value={upToken} placeholder="up:yeah:••••••••"
-            onChange={e=>saveAll({upToken:e.target.value.trim()})}/>
-          <div style={{fontSize:12,color:"#9591a4",marginTop:6,lineHeight:1.5}}>Up app → Settings → API → Create token</div>
-        </div>
-        <button className="btn-primary" style={{width:"100%"}} onClick={()=>setShowSettings(false)}>Done</button>
-      </div>
+    <div class="hcard-bottom" onclick="${h.isDate?`openTimeline('${h.id}')`:`openLog('${h.id}')`}">
+      ${bottomHtml}
     </div>
-  )}
-
-  {/* ── LOG MODAL ── */}
-  {logging&&(
-    <div className="overlay" onClick={e=>e.target===e.currentTarget&&setLogging(null)}>
-      <div className="sheet" style={{background:"#fff"}}>
-        <div className="sheet-handle"/>
-        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:4}}>
-          <span style={{fontSize:22}}>{habits.find(h=>h.id===logging)?.emoji}</span>
-          <div style={{fontSize:18,fontWeight:700,color:"#2d2840"}}>{habits.find(h=>h.id===logging)?.label}</div>
-        </div>
-        <div style={{fontSize:13,color:"#9591a4",marginBottom:16}}>{habits.find(h=>h.id===logging)?.prompt}</div>
-        <textarea ref={inputRef} className="modal-input" value={logText}
-          onChange={e=>setLogText(e.target.value)} placeholder="Add details…"
-          onKeyDown={e=>e.key==="Enter"&&e.metaKey&&saveLog()}/>
-        <div style={{display:"flex",gap:10,marginTop:14}}>
-          <button className="btn-ghost" onClick={()=>setLogging(null)}>Cancel</button>
-          <button className="btn-primary" style={{flex:1}} onClick={saveLog}>Save</button>
-        </div>
-      </div>
-    </div>
-  )}
-
-  {/* ── EDIT HABIT ── */}
-  {editingHabit&&(
-    <div className="overlay" onClick={e=>e.target===e.currentTarget&&setEditingHabit(null)}>
-      <div className="sheet" style={{background:"#fff"}}>
-        <div className="sheet-handle"/>
-        <div style={{fontSize:18,fontWeight:700,color:"#2d2840",marginBottom:4}}>Edit habit</div>
-        <div style={{fontSize:13,color:"#9591a4",marginBottom:16}}>Make it personal to you</div>
-        <input className="settings-input" style={{marginBottom:0}} value={editLabel}
-          onChange={e=>setEditLabel(e.target.value)}
-          onKeyDown={e=>e.key==="Enter"&&saveEditHabit()} autoFocus/>
-        <div className="field-label" style={{marginTop:14}}>Emoji</div>
-        <div className="emoji-grid">
-          {EMOJI_OPTIONS.map(em=>(
-            <button key={em} className={`emoji-btn${editEmoji===em?" sel":""}`} onClick={()=>setEditEmoji(em)}>{em}</button>
-          ))}
-        </div>
-        <div style={{display:"flex",gap:10,marginTop:14}}>
-          <button className="btn-ghost" onClick={()=>setEditingHabit(null)}>Cancel</button>
-          <button className="btn-primary" style={{flex:1}} onClick={saveEditHabit}>Save</button>
-        </div>
-      </div>
-    </div>
-  )}
-</div>
-```
-
-);
+  </div>`;
 }
 
-ReactDOM.createRoot(document.getElementById(‘root’)).render(<App/>);
+function renderMemory() {
+  const lastMonth = offsetWeek(getWeekKey(), -4);
+  const memos = state.habits
+    .filter(h => h.type!=='spending'&&h.type!=='nights')
+    .map(h => ({...h, note: (state.data[`${lastMonth}:${h.id}`]||{}).note}))
+    .filter(h => h.note);
+  const wrap = document.getElementById('memory-wrap');
+  if (!memos.length) { wrap.innerHTML=''; return; }
+  wrap.innerHTML = `
+    <div class="section-label">This time last month</div>
+    <div class="memory-card fade-up">
+      ${memos.map(h=>`
+        <div class="memory-item">
+          <span class="memory-emoji">${h.emoji}</span>
+          <div class="memory-text"><span class="memory-habit">${h.label}:</span> ${h.note}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// RENDER HISTORY
+// ══════════════════════════════════════════════════════════════════════════════
+function renderHistory() {
+  const thisWeek = getWeekKey();
+  const histWeeks = Array.from({length:12}, (_,i)=>offsetWeek(thisWeek,-i));
+  const perfectCount = histWeeks.filter(wk=>totalDone(wk)===state.habits.length).length;
+  const bestStreak = Math.max(...state.habits.map(h=>getStreak(h.id)), 0);
+  const totalCount = Object.keys(state.data).filter(k=>state.data[k]?.done).length;
+
+  document.getElementById('stat-strip').innerHTML = [
+    {val:perfectCount, lbl:'Perfect weeks'},
+    {val:bestStreak,   lbl:'Best streak'},
+    {val:totalCount,   lbl:'Total done'},
+  ].map(s=>`<div class="stat-card">
+    <div class="stat-val">${s.val}</div>
+    <div class="stat-lbl">${s.lbl}</div>
+  </div>`).join('');
+
+  document.getElementById('hist-list').innerHTML = histWeeks.map(wk => {
+    const score = totalDone(wk);
+    const perfect = score===state.habits.length;
+    const pips = state.habits.map(h => {
+      const done = isHabitDone(h.id,wk);
+      return `<div class="hist-pip${done?(perfect?' perfect':' done'):''}">${done?h.emoji:''}</div>`;
+    }).join('');
+    return `<div class="hist-row${wk===currentWeek?' current':''}" onclick="jumpToWeek('${wk}')">
+      <div class="hist-date">${fmtRange(wk)}</div>
+      <div class="hist-pips">${pips}</div>
+      <div class="hist-score${perfect?' full':''}">${score}/${state.habits.length}</div>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ACTIONS
+// ══════════════════════════════════════════════════════════════════════════════
+function toggleHabit(id) {
+  const k = `${currentWeek}:${id}`;
+  const cur = state.data[k] || {};
+  state.data[k] = {...cur, done: !cur.done};
+  saveState();
+  const done = totalDone();
+  if (done===state.habits.length && !state.celebrated[currentWeek]) {
+    state.celebrated[currentWeek] = true;
+    saveState();
+    celebrate();
+  }
+  renderWeekly();
+}
+
+function toggleNight(i) {
+  const k = `${currentWeek}:reading:nights`;
+  const cur = state.data[k] || [];
+  state.data[k] = cur.includes(i) ? cur.filter(d=>d!==i) : [...cur,i];
+  saveState();
+  const ns = state.data[k];
+  const target = (state.habits.find(h=>h.id==='reading')||{}).target||3;
+  const done = totalDone();
+  if (ns.length>=target && done===state.habits.length && !state.celebrated[currentWeek]) {
+    state.celebrated[currentWeek]=true; saveState(); celebrate();
+  }
+  renderWeekly();
+}
+
+function saveManualSpend() {
+  const inp = document.getElementById('spend-manual-inp');
+  const amt = parseFloat(inp.value);
+  if (isNaN(amt)) return;
+  const k = `${currentWeek}:spending`;
+  state.data[k] = {done: amt<=state.budget, manualAmount: amt};
+  saveState(); inp.value='';
+  const done = totalDone();
+  if (done===state.habits.length && !state.celebrated[currentWeek]) {
+    state.celebrated[currentWeek]=true; saveState(); celebrate();
+  }
+  renderWeekly();
+}
+
+function changeWeek(dir) {
+  currentWeek = offsetWeek(currentWeek, dir);
+  upSpend = null;
+  if (currentWeek!==getWeekKey() || !state.upToken) {}
+  else if (state.upToken) fetchUpSpend();
+  renderAll();
+}
+
+function jumpToWeek(wk) {
+  currentWeek = wk;
+  switchTab('weekly');
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('screen-weekly').classList.toggle('active', tab==='weekly');
+  document.getElementById('screen-history').classList.toggle('active', tab==='history');
+  document.getElementById('tab-weekly').classList.toggle('active', tab==='weekly');
+  document.getElementById('tab-history').classList.toggle('active', tab==='history');
+  renderAll();
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// LOG SHEET
+// ══════════════════════════════════════════════════════════════════════════════
+function openLog(id) {
+  loggingId = id;
+  const h = state.habits.find(x=>x.id===id);
+  document.getElementById('log-emoji').textContent = h.emoji;
+  document.getElementById('log-title').textContent = h.label;
+  document.getElementById('log-prompt').textContent = h.prompt;
+  document.getElementById('log-input').value = getEntry(id).note || '';
+  openSheet('log-sheet');
+  setTimeout(()=>document.getElementById('log-input').focus(), 350);
+}
+
+function saveLog() {
+  if (!loggingId) return;
+  const k = `${currentWeek}:${loggingId}`;
+  const note = document.getElementById('log-input').value.trim();
+  state.data[k] = {...(state.data[k]||{}), note};
+  saveState();
+  loggingId = null;
+  closeSheet('log-sheet');
+  renderWeekly();
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// TIMELINE SHEET
+// ══════════════════════════════════════════════════════════════════════════════
+let timelineId = null;
+function openTimeline(id) {
+  timelineId = id;
+  const h = state.habits.find(x=>x.id===id);
+  document.getElementById('tl-title').textContent = `${h.emoji} ${h.label}`;
+  const thisWeek = getWeekKey();
+  const histWeeks = Array.from({length:12},(_,i)=>offsetWeek(thisWeek,-i));
+  const doneWeeks = histWeeks.filter(wk=>isHabitDone(id,wk));
+  document.getElementById('tl-list').innerHTML = doneWeeks.length===0
+    ? '<div style="text-align:center;padding:40px 0;color:#c0b8b0;font-size:14px;font-weight:600">Nothing logged yet</div>'
+    : doneWeeks.map(wk=>{
+        const note = (state.data[`${wk}:${id}`]||{}).note;
+        return `<div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <div class="tl-week">${fmtRange(wk)}</div>
+            ${note?`<div class="tl-note">"${note}"</div>`:`<div class="tl-empty">No details logged</div>`}
+          </div>
+        </div>`;
+      }).join('');
+  openSheet('timeline-sheet');
+}
+
+function openLogFromTimeline() {
+  closeSheet('timeline-sheet');
+  setTimeout(()=>openLog(timelineId), 300);
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// EDIT HABIT SHEET
+// ══════════════════════════════════════════════════════════════════════════════
+function openEditHabit(id) {
+  editingId = id;
+  const h = state.habits.find(x=>x.id===id);
+  document.getElementById('edit-label-input').value = h.label;
+  document.getElementById('edit-emoji-grid').innerHTML = EMOJIS.map(em=>
+    `<button class="emoji-opt${h.emoji===em?' sel':''}" onclick="selectEditEmoji('${em}')">${em}</button>`
+  ).join('');
+  openSheet('edit-sheet');
+  setTimeout(()=>document.getElementById('edit-label-input').focus(), 350);
+}
+
+function selectEditEmoji(em) {
+  document.querySelectorAll('#edit-emoji-grid .emoji-opt').forEach(b => b.classList.remove('sel'));
+  event.target.classList.add('sel');
+}
+
+function saveEditHabit() {
+  if (!editingId) return;
+  const label = document.getElementById('edit-label-input').value.trim();
+  const sel = document.querySelector('#edit-emoji-grid .emoji-opt.sel');
+  const emoji = sel ? sel.textContent : state.habits.find(h=>h.id===editingId).emoji;
+  state.habits = state.habits.map(h => h.id===editingId ? {...h,label:label||h.label,emoji} : h);
+  saveState();
+  editingId = null;
+  closeSheet('edit-sheet');
+  renderWeekly();
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// SETTINGS SHEET
+// ══════════════════════════════════════════════════════════════════════════════
+function openSheet(id) {
+  // Populate settings when opening
+  if (id==='settings-sheet') {
+    document.getElementById('settings-name').value = state.userName;
+    document.getElementById('settings-budget').value = state.budget;
+    document.getElementById('settings-token').value = state.upToken||'';
+  }
+  const el = document.getElementById(id);
+  el.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeSheet(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function handleOverlayClick(e, id) {
+  if (e.target===document.getElementById(id)) closeSheet(id);
+}
+
+function saveSettings() {
+  const name = document.getElementById('settings-name').value.trim();
+  const budget = parseFloat(document.getElementById('settings-budget').value)||500;
+  const token = document.getElementById('settings-token').value.trim();
+  if (name) state.userName = name;
+  state.budget = budget;
+  state.upToken = token;
+  saveState();
+  closeSheet('settings-sheet');
+  if (token) fetchUpSpend();
+  renderAll();
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// UP BANK
+// ══════════════════════════════════════════════════════════════════════════════
+function fetchUpSpend() {
+  if (!state.upToken) return;
+  fetch(`/.netlify/functions/up-spend?weekKey=${currentWeek}`, {
+    headers: {Authorization:`Bearer ${state.upToken}`}
+  })
+  .then(r => { if(!r.ok) throw new Error(r.status); return r.json(); })
+  .then(j => {
+    upSpend = j.total;
+    const k = `${currentWeek}:spending`;
+    state.data[k] = {...(state.data[k]||{}), done: upSpend<=state.budget, autoAmount:upSpend};
+    saveState();
+    if (currentTab==='weekly') renderHabits();
+  })
+  .catch(() => { upSpend = null; });
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// CELEBRATION
+// ══════════════════════════════════════════════════════════════════════════════
+function celebrate() {
+  const firstName = state.userName.split(' ')[0];
+  const toast = document.getElementById('celebrate-toast');
+  document.getElementById('celebrate-title').textContent = `Perfect week, ${firstName}!`;
+  document.getElementById('celebrate-sub').textContent = `All ${state.habits.length} habits done.`;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'), 3000);
+  launchConfetti();
+}
+
+function launchConfetti() {
+  const wrap = document.getElementById('confetti-wrap');
+  wrap.innerHTML = '';
+  const colours = ['#9b7fa6','#b89cc8','#d4b8e8','#e8d0f0','#7d6289','#c4a0d4'];
+  for (let i=0;i<60;i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    const size = Math.random()*8+4;
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      width:${size}px;height:${size*1.5}px;
+      background:${colours[i%colours.length]};
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+      animation:confetti-fall ${0.8+Math.random()*1}s linear ${Math.random()*0.6}s both;
+    `;
+    wrap.appendChild(el);
+  }
+  setTimeout(()=>{ wrap.innerHTML=''; }, 3000);
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════════════════
+(function init() {
+  state = loadState();
+  if (state && state.userName) {
+    document.getElementById('ob-wrap').style.display='none';
+    document.getElementById('app').style.display='block';
+    bootApp();
+  } else {
+    renderOb();
+  }
+})();
 </script>
-
-  <style>
-    @keyframes fall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
-    @keyframes celebIn { from{opacity:0;transform:scale(.7)} to{opacity:1;transform:scale(1)} }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-
-    .app { max-width: 430px; margin: 0 auto; padding: 0 16px 80px; font-family: 'DM Sans', sans-serif; }
-    .fade-up { animation: fadeUp .25s ease both; }
-
-    .topbar { display:flex; align-items:center; justify-content:space-between; padding:20px 0 14px; }
-    .week-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
-    .wk-arrow { width:38px; height:38px; border-radius:12px; border:none; background:#fff; cursor:pointer; font-size:18px; color:#7b6fa0; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,.06); transition:all .15s; }
-    .wk-arrow:hover { background:#f0eef8; }
-    .wk-arrow:disabled { opacity:.3; cursor:default; }
-
-    .tab-pills { display:flex; gap:6px; }
-    .tab-pill { padding:7px 14px; border-radius:20px; border:none; cursor:pointer; font-size:13px; font-weight:600; font-family:inherit; background:#fff; color:#9591a4; transition:all .15s; }
-    .tab-pill.active { background:#7b6fa0; color:#fff; }
-
-    .card { background:#fff; border-radius:18px; padding:18px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
-    .section-label { font-size:11px; font-weight:700; color:#9591a4; letter-spacing:.1em; text-transform:uppercase; margin:0 0 10px; }
-
-    .hcard { background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.06); }
-    .hcard-main { display:flex; align-items:center; padding:16px 16px 16px 18px; gap:12px; }
-    .hcard-name { font-size:15px; font-weight:700; color:#2d2840; display:flex; align-items:center; gap:6px; }
-    .hcard.done .hcard-name .label { color:#b8b4c8; text-decoration:line-through; text-decoration-color:#d4d0e0; }
-    .hcard-meta { font-size:12px; color:#b8b4c8; font-weight:500; margin-top:2px; }
-    .edit-btn { background:none; border:none; cursor:pointer; font-size:12px; color:#d0cce0; padding:0; font-family:inherit; transition:color .15s; }
-    .edit-btn:hover { color:#7b6fa0; }
-    .check-circle { width:30px; height:30px; border-radius:50%; border:2.5px solid #e0dcea; background:transparent; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:all .2s; }
-    .hcard.done .check-circle { background:#7b6fa0; border-color:#7b6fa0; }
-    .hcard.done .check-circle svg { opacity:1; transform:scale(1); }
-    .check-circle svg { opacity:0; transform:scale(0); transition:all .18s; }
-
-    .overlay { position:fixed; inset:0; background:rgba(30,24,50,.4); z-index:150; display:flex; align-items:flex-end; justify-content:center; }
-    .sheet { background:#eeecf4; border-radius:24px 24px 0 0; width:100%; max-width:430px; max-height:85vh; overflow-y:auto; padding:16px 20px 48px; }
-    .sheet-handle { width:40px; height:4px; background:#d8d4e4; border-radius:2px; margin:0 auto 20px; }
-
-    .ob-card { background:#fff; border-radius:24px; padding:32px 24px; width:100%; max-width:380px; box-shadow:0 4px 24px rgba(0,0,0,.08); }
-    .ob-step { font-size:11px; font-weight:700; color:#b8b4c8; letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px; }
-    .ob-title { font-size:24px; font-weight:700; color:#2d2840; line-height:1.2; margin-bottom:8px; }
-    .ob-sub { font-size:14px; color:#9591a4; margin-bottom:24px; line-height:1.5; }
-    .ob-input { width:100%; background:#f8f7fc; border:1.5px solid #e8e4f0; border-radius:14px; padding:14px 16px; font-size:17px; color:#2d2840; outline:none; font-family:inherit; transition:border-color .15s; margin-bottom:4px; }
-    .ob-input:focus { border-color:#7b6fa0; }
-    .ob-habit-row { display:flex; align-items:center; gap:12px; padding:12px 14px; background:#f8f7fc; border-radius:14px; margin-bottom:8px; cursor:pointer; transition:background .15s; }
-    .ob-habit-row:hover { background:#f0eef8; }
-    .input-prefix { display:flex; align-items:center; background:#f8f7fc; border:1.5px solid #e8e4f0; border-radius:14px; overflow:hidden; }
-    .input-prefix:focus-within { border-color:#7b6fa0; }
-    .prefix-sign { padding:14px 4px 14px 16px; font-size:17px; color:#9591a4; font-weight:600; }
-    .prefix-input { flex:1; background:transparent; border:none; padding:14px 16px 14px 4px; font-size:17px; color:#2d2840; outline:none; font-family:inherit; }
-
-    .field-label { font-size:11px; font-weight:700; color:#9591a4; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; }
-    .emoji-grid { display:flex; flex-wrap:wrap; gap:8px; margin:4px 0; }
-    .emoji-btn { width:40px; height:40px; border-radius:10px; border:2px solid transparent; background:#f8f7fc; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .15s; }
-    .emoji-btn.sel { border-color:#7b6fa0; background:#ede9f8; }
-
-    .settings-input { width:100%; background:#f8f7fc; border:1.5px solid #e8e4f0; border-radius:12px; padding:12px 14px; font-size:15px; color:#2d2840; outline:none; font-family:inherit; transition:border-color .15s; }
-    .settings-input:focus { border-color:#7b6fa0; }
-    .modal-input { width:100%; background:#f8f7fc; border:1.5px solid #e8e4f0; border-radius:14px; padding:14px 16px; font-size:15px; color:#2d2840; resize:none; outline:none; min-height:88px; font-family:inherit; transition:border-color .15s; }
-    .modal-input::placeholder { color:#c8c4d8; }
-    .modal-input:focus { border-color:#7b6fa0; }
-
-    .btn-primary { background:#7b6fa0; color:#fff; border:none; border-radius:14px; padding:15px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit; transition:opacity .15s; }
-    .btn-primary:hover { opacity:.88; }
-    .btn-primary:disabled { opacity:.4; cursor:default; }
-    .btn-ghost { background:#f4f2f9; color:#9591a4; border:none; border-radius:14px; padding:15px 20px; font-size:15px; font-weight:600; cursor:pointer; font-family:inherit; }
-  </style>
 
 </body>
 </html>
