@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -29,21 +28,21 @@ button,input,textarea{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,san
 
 /* ── onboarding ── */
 #ob-wrap{
-min-height:100vh;background:#f5f3f0;
-display:flex;align-items:center;justify-content:center;padding:24px
+  min-height:100vh;background:#f5f3f0;
+  display:flex;align-items:center;justify-content:center;padding:24px
 }
 .ob-card{
-background:#fff;border-radius:28px;padding:36px 28px;
-width:100%;max-width:360px;
-box-shadow:0 2px 40px rgba(0,0,0,.08)
+  background:#fff;border-radius:28px;padding:36px 28px;
+  width:100%;max-width:360px;
+  box-shadow:0 2px 40px rgba(0,0,0,.08)
 }
 .ob-eyebrow{font-size:11px;font-weight:700;color:#b0a898;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
 .ob-title{font-size:26px;font-weight:700;color:#1a1a1a;line-height:1.2;margin-bottom:8px}
 .ob-sub{font-size:15px;color:#8a8078;line-height:1.5;margin-bottom:28px}
 .ob-habit-row{
-display:flex;align-items:center;gap:14px;
-padding:14px 16px;background:#faf9f7;border-radius:16px;
-margin-bottom:8px;cursor:pointer;transition:background .15s;border:1.5px solid transparent
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;background:#faf9f7;border-radius:16px;
+  margin-bottom:8px;cursor:pointer;transition:background .15s;border:1.5px solid transparent
 }
 .ob-habit-row:hover,.ob-habit-row:active{background:#f0ede8;border-color:#e0d8d0}
 .ob-habit-emoji{font-size:24px;flex-shrink:0}
@@ -54,30 +53,30 @@ margin-bottom:8px;cursor:pointer;transition:background .15s;border:1.5px solid t
 .field-wrap{margin-bottom:20px}
 .field-label{font-size:11px;font-weight:700;color:#8a8078;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
 .field-input{
-width:100%;background:#faf9f7;border:1.5px solid #e8e4de;
-border-radius:14px;padding:15px 16px;font-size:16px;color:#1a1a1a;
-outline:none;transition:border-color .15s
+  width:100%;background:#faf9f7;border:1.5px solid #e8e4de;
+  border-radius:14px;padding:15px 16px;font-size:16px;color:#1a1a1a;
+  outline:none;transition:border-color .15s
 }
 .field-input:focus{border-color:#9b7fa6}
 .field-input::placeholder{color:#c0b8b0}
 textarea.field-input{resize:none;min-height:90px;line-height:1.5}
 .prefix-row{
-display:flex;align-items:center;background:#faf9f7;
-border:1.5px solid #e8e4de;border-radius:14px;overflow:hidden;
-transition:border-color .15s
+  display:flex;align-items:center;background:#faf9f7;
+  border:1.5px solid #e8e4de;border-radius:14px;overflow:hidden;
+  transition:border-color .15s
 }
 .prefix-row:focus-within{border-color:#9b7fa6}
 .prefix-sign{padding:15px 6px 15px 16px;font-size:16px;color:#8a8078;font-weight:600}
 .prefix-input{
-flex:1;background:transparent;border:none;
-padding:15px 16px 15px 4px;font-size:16px;color:#1a1a1a;outline:none
+  flex:1;background:transparent;border:none;
+  padding:15px 16px 15px 4px;font-size:16px;color:#1a1a1a;outline:none
 }
 
 /* ── buttons ── */
 .btn{
-width:100%;padding:16px;border-radius:14px;border:none;
-font-size:16px;font-weight:700;cursor:pointer;transition:all .15s;
-letter-spacing:.01em
+  width:100%;padding:16px;border-radius:14px;border:none;
+  font-size:16px;font-weight:700;cursor:pointer;transition:all .15s;
+  letter-spacing:.01em
 }
 .btn-primary{background:#9b7fa6;color:#fff}
 .btn-primary:hover{background:#8a6f95}
@@ -85,8 +84,8 @@ letter-spacing:.01em
 .btn-ghost{background:#f0ede8;color:#8a8078;margin-top:10px}
 .btn-ghost:hover{background:#e8e4de}
 .btn-sm{
-padding:10px 20px;width:auto;border-radius:12px;
-border:none;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s
+  padding:10px 20px;width:auto;border-radius:12px;
+  border:none;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s
 }
 .btn-sm-primary{background:#9b7fa6;color:#fff}
 .btn-sm-ghost{background:#f0ede8;color:#8a8078}
@@ -94,49 +93,49 @@ border:none;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s
 /* ── emoji picker ── */
 .emoji-grid{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 20px}
 .emoji-opt{
-width:42px;height:42px;border-radius:12px;border:2px solid transparent;
-background:#faf9f7;font-size:22px;cursor:pointer;
-display:flex;align-items:center;justify-content:center;transition:all .15s
+  width:42px;height:42px;border-radius:12px;border:2px solid transparent;
+  background:#faf9f7;font-size:22px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .15s
 }
 .emoji-opt.sel{border-color:#9b7fa6;background:#f0eaf4}
 .emoji-opt:hover{background:#f0ede8}
 
 /* ── top nav ── */
 #topbar{
-display:flex;align-items:center;justify-content:space-between;
-padding:24px 0 16px;position:sticky;top:0;
-background:linear-gradient(#f5f3f0 90%,rgba(245,243,240,0));
-z-index:10
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 0 16px;position:sticky;top:0;
+  background:linear-gradient(#f5f3f0 90%,rgba(245,243,240,0));
+  z-index:10
 }
 .greeting-name{font-size:22px;font-weight:700;color:#1a1a1a}
 .greeting-sub{font-size:13px;color:#8a8078;font-weight:500;margin-top:2px}
 .nav-right{display:flex;align-items:center;gap:8px}
 .tab-pills{display:flex;gap:6px}
 .tab-pill{
-padding:8px 16px;border-radius:20px;border:none;
-font-size:13px;font-weight:600;cursor:pointer;
-background:#fff;color:#8a8078;transition:all .15s;
-box-shadow:0 1px 3px rgba(0,0,0,.06)
+  padding:8px 16px;border-radius:20px;border:none;
+  font-size:13px;font-weight:600;cursor:pointer;
+  background:#fff;color:#8a8078;transition:all .15s;
+  box-shadow:0 1px 3px rgba(0,0,0,.06)
 }
 .tab-pill.active{background:#9b7fa6;color:#fff;box-shadow:0 2px 8px rgba(155,127,166,.35)}
 .icon-btn{
-width:38px;height:38px;border-radius:50%;border:none;
-background:#fff;cursor:pointer;font-size:18px;
-display:flex;align-items:center;justify-content:center;
-box-shadow:0 1px 3px rgba(0,0,0,.06);transition:background .15s
+  width:38px;height:38px;border-radius:50%;border:none;
+  background:#fff;cursor:pointer;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);transition:background .15s
 }
 .icon-btn:hover{background:#f0ede8}
 
 /* ── week nav ── */
 .week-nav{
-display:flex;align-items:center;justify-content:space-between;
-margin-bottom:20px
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px
 }
 .week-nav-arrow{
-width:40px;height:40px;border-radius:13px;border:none;
-background:#fff;font-size:18px;color:#9b7fa6;cursor:pointer;
-display:flex;align-items:center;justify-content:center;
-box-shadow:0 1px 3px rgba(0,0,0,.06);transition:all .15s
+  width:40px;height:40px;border-radius:13px;border:none;
+  background:#fff;font-size:18px;color:#9b7fa6;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);transition:all .15s
 }
 .week-nav-arrow:hover{background:#f0eaf4}
 .week-nav-arrow:disabled{opacity:.25;cursor:default}
@@ -145,19 +144,19 @@ box-shadow:0 1px 3px rgba(0,0,0,.06);transition:all .15s
 
 /* ── progress card ── */
 .progress-card{
-background:linear-gradient(135deg,#9b7fa6 0%,#7d6289 100%);
-border-radius:24px;padding:24px 24px 20px;margin-bottom:16px;
-position:relative;overflow:hidden
+  background:linear-gradient(135deg,#9b7fa6 0%,#7d6289 100%);
+  border-radius:24px;padding:24px 24px 20px;margin-bottom:16px;
+  position:relative;overflow:hidden
 }
 .progress-card::after{
-content:’’;position:absolute;top:-40px;right:-40px;
-width:140px;height:140px;border-radius:50%;
-background:rgba(255,255,255,.08);pointer-events:none
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:140px;height:140px;border-radius:50%;
+  background:rgba(255,255,255,.08);pointer-events:none
 }
 .progress-card::before{
-content:’’;position:absolute;bottom:-30px;left:20px;
-width:100px;height:100px;border-radius:50%;
-background:rgba(255,255,255,.05);pointer-events:none
+  content:'';position:absolute;bottom:-30px;left:20px;
+  width:100px;height:100px;border-radius:50%;
+  background:rgba(255,255,255,.05);pointer-events:none
 }
 .progress-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
 .progress-score{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
@@ -169,15 +168,15 @@ background:rgba(255,255,255,.05);pointer-events:none
 
 /* ── nudge banner ── */
 .nudge{
-background:#fff3e8;border:1.5px solid #f0d8c0;border-radius:18px;
-padding:14px 18px;margin-bottom:16px;
-display:flex;align-items:center;justify-content:space-between
+  background:#fff3e8;border:1.5px solid #f0d8c0;border-radius:18px;
+  padding:14px 18px;margin-bottom:16px;
+  display:flex;align-items:center;justify-content:space-between
 }
 .nudge-text{font-size:14px;font-weight:700;color:#a06030}
 .nudge-sub{font-size:12px;color:#c08050;margin-top:2px}
 .nudge-badge{
-background:#e07030;border-radius:12px;padding:6px 12px;
-text-align:center;flex-shrink:0
+  background:#e07030;border-radius:12px;padding:6px 12px;
+  text-align:center;flex-shrink:0
 }
 .nudge-badge-num{font-size:20px;font-weight:800;color:#fff;line-height:1}
 .nudge-badge-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:.06em;text-transform:uppercase}
@@ -185,10 +184,10 @@ text-align:center;flex-shrink:0
 /* ── day strip ── */
 .day-strip{display:flex;gap:6px;margin-bottom:24px}
 .day-cell{
-flex:1;background:#fff;border-radius:14px;padding:10px 4px 9px;
-display:flex;flex-direction:column;align-items:center;gap:5px;
-box-shadow:0 1px 3px rgba(0,0,0,.04);border:2px solid transparent;
-transition:all .15s
+  flex:1;background:#fff;border-radius:14px;padding:10px 4px 9px;
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  box-shadow:0 1px 3px rgba(0,0,0,.04);border:2px solid transparent;
+  transition:all .15s
 }
 .day-cell.today{border-color:#9b7fa6;background:#faf7fc}
 .day-letter{font-size:10px;font-weight:700;color:#c0b8b0;letter-spacing:.04em}
@@ -199,8 +198,8 @@ transition:all .15s
 
 /* ── section label ── */
 .section-label{
-font-size:11px;font-weight:700;color:#b0a898;
-letter-spacing:.1em;text-transform:uppercase;margin:4px 0 12px
+  font-size:11px;font-weight:700;color:#b0a898;
+  letter-spacing:.1em;text-transform:uppercase;margin:4px 0 12px
 }
 
 /* ── habit cards ── */
@@ -211,32 +210,32 @@ letter-spacing:.1em;text-transform:uppercase;margin:4px 0 12px
 .hcard-emoji{font-size:26px;flex-shrink:0;line-height:1}
 .hcard-info{flex:1;min-width:0}
 .hcard-name{
-font-size:16px;font-weight:700;color:#1a1a1a;
-display:flex;align-items:center;gap:8px
+  font-size:16px;font-weight:700;color:#1a1a1a;
+  display:flex;align-items:center;gap:8px
 }
 .hcard.done .hcard-name-text{color:#c0b8b0;text-decoration:line-through;text-decoration-color:#d8d0c8}
 .hcard-sub{font-size:12px;color:#b0a898;font-weight:500;margin-top:3px}
 .hcard-sub .streak{color:#9b7fa6;font-weight:700}
 .edit-habit-btn{
-background:none;border:none;cursor:pointer;
-font-size:13px;color:#d8d0c8;padding:2px 4px;
-border-radius:6px;transition:color .15s;flex-shrink:0
+  background:none;border:none;cursor:pointer;
+  font-size:13px;color:#d8d0c8;padding:2px 4px;
+  border-radius:6px;transition:color .15s;flex-shrink:0
 }
 .edit-habit-btn:hover{color:#9b7fa6}
 .check-btn{
-width:32px;height:32px;border-radius:50%;
-border:2.5px solid #e0d8d0;background:transparent;
-cursor:pointer;flex-shrink:0;
-display:flex;align-items:center;justify-content:center;
-transition:all .2s
+  width:32px;height:32px;border-radius:50%;
+  border:2.5px solid #e0d8d0;background:transparent;
+  cursor:pointer;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s
 }
 .check-btn.checked{background:#9b7fa6;border-color:#9b7fa6}
 .check-icon{opacity:0;transform:scale(0);transition:all .18s}
 .check-btn.checked .check-icon{opacity:1;transform:scale(1)}
 .hcard-bottom{
-border-top:1px solid #f5f2ee;padding:12px 20px;
-display:flex;align-items:center;justify-content:space-between;
-gap:12px;cursor:pointer;min-height:46px
+  border-top:1px solid #f5f2ee;padding:12px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;cursor:pointer;min-height:46px
 }
 .hcard-bottom:hover .hcard-note-add{color:#9b7fa6}
 .hcard-note-text{font-size:13px;color:#6a6260;line-height:1.45;flex:1}
@@ -247,10 +246,10 @@ gap:12px;cursor:pointer;min-height:46px
 .nights-wrap{border-top:1px solid #f5f2ee;padding:14px 20px 16px}
 .nights-grid{display:flex;gap:5px;margin-bottom:10px}
 .night-btn{
-flex:1;height:36px;border-radius:10px;
-border:2px solid #e8e4de;background:#faf9f7;
-cursor:pointer;font-size:11px;font-weight:700;color:#b8b0a8;
-transition:all .2s
+  flex:1;height:36px;border-radius:10px;
+  border:2px solid #e8e4de;background:#faf9f7;
+  cursor:pointer;font-size:11px;font-weight:700;color:#b8b0a8;
+  transition:all .2s
 }
 .night-btn.on{border-color:#9b7fa6;background:#9b7fa6;color:#fff}
 .nights-count{font-size:13px;color:#8a8078;font-weight:600}
@@ -275,13 +274,13 @@ transition:all .2s
 .spend-status.warn{color:#d08040}
 .spend-manual{display:flex;gap:8px;margin-top:12px}
 .spend-manual input{
-flex:1;background:#faf9f7;border:1.5px solid #e8e4de;
-border-radius:12px;padding:10px 14px;font-size:14px;color:#1a1a1a;outline:none
+  flex:1;background:#faf9f7;border:1.5px solid #e8e4de;
+  border-radius:12px;padding:10px 14px;font-size:14px;color:#1a1a1a;outline:none
 }
 .spend-manual input:focus{border-color:#9b7fa6}
 .spend-manual button{
-background:#9b7fa6;color:#fff;border:none;
-border-radius:12px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer
+  background:#9b7fa6;color:#fff;border:none;
+  border-radius:12px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer
 }
 
 /* ── memory card ── */
@@ -295,26 +294,26 @@ border-radius:12px;padding:10px 18px;font-size:14px;font-weight:700;cursor:point
 /* ── history ── */
 .stat-strip{display:flex;gap:10px;margin-bottom:20px}
 .stat-card{
-flex:1;background:#fff;border-radius:18px;
-padding:16px 14px 14px;box-shadow:0 1px 4px rgba(0,0,0,.06)
+  flex:1;background:#fff;border-radius:18px;
+  padding:16px 14px 14px;box-shadow:0 1px 4px rgba(0,0,0,.06)
 }
 .stat-val{font-size:30px;font-weight:800;color:#1a1a1a;line-height:1}
 .stat-lbl{font-size:10px;font-weight:700;color:#b0a898;letter-spacing:.08em;text-transform:uppercase;margin-top:5px}
 .hist-list{display:flex;flex-direction:column;gap:8px}
 .hist-row{
-background:#fff;border-radius:18px;
-padding:14px 16px;display:flex;align-items:center;gap:12px;
-box-shadow:0 1px 3px rgba(0,0,0,.05);cursor:pointer;
-border:2px solid transparent;transition:border-color .15s
+  background:#fff;border-radius:18px;
+  padding:14px 16px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 1px 3px rgba(0,0,0,.05);cursor:pointer;
+  border:2px solid transparent;transition:border-color .15s
 }
 .hist-row:hover{border-color:#e0d8d0}
 .hist-row.current{border-color:#9b7fa6}
 .hist-date{font-size:12px;font-weight:700;color:#8a8078;width:74px;flex-shrink:0}
 .hist-pips{display:flex;gap:5px;flex:1}
 .hist-pip{
-width:30px;height:30px;border-radius:10px;
-background:#f5f3f0;display:flex;align-items:center;justify-content:center;font-size:15px;
-transition:background .2s
+  width:30px;height:30px;border-radius:10px;
+  background:#f5f3f0;display:flex;align-items:center;justify-content:center;font-size:15px;
+  transition:background .2s
 }
 .hist-pip.done{background:#f0eaf4}
 .hist-pip.perfect{background:#9b7fa6}
@@ -323,16 +322,16 @@ transition:background .2s
 
 /* ── sheets / modals ── */
 .overlay{
-position:fixed;inset:0;background:rgba(0,0,0,.35);
-z-index:100;display:flex;align-items:flex-end;justify-content:center;
-opacity:0;transition:opacity .25s;pointer-events:none
+  position:fixed;inset:0;background:rgba(0,0,0,.35);
+  z-index:100;display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;transition:opacity .25s;pointer-events:none
 }
 .overlay.open{opacity:1;pointer-events:all}
 .sheet{
-background:#fff;border-radius:28px 28px 0 0;
-width:100%;max-width:430px;padding:0 24px 48px;
-max-height:88vh;overflow-y:auto;
-transform:translateY(100%);transition:transform .3s cubic-bezier(.32,0,.67,0)
+  background:#fff;border-radius:28px 28px 0 0;
+  width:100%;max-width:430px;padding:0 24px 48px;
+  max-height:88vh;overflow-y:auto;
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.32,0,.67,0)
 }
 .overlay.open .sheet{transform:translateY(0);transition:transform .35s cubic-bezier(.33,1,.68,1)}
 .sheet-bg{background:#f5f3f0}
@@ -351,18 +350,18 @@ transform:translateY(100%);transition:transform .3s cubic-bezier(.32,0,.67,0)
 /* ── confetti ── */
 .confetti-piece{position:fixed;top:-10px;border-radius:3px;pointer-events:none;z-index:200}
 @keyframes confetti-fall{
-0%{transform:translateY(0) rotate(0deg);opacity:1}
-100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+  0%{transform:translateY(0) rotate(0deg);opacity:1}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
 }
 
 /* ── celebration ── */
 .celebrate-toast{
-position:fixed;left:50%;transform:translateX(-50%) scale(.8) translateY(20px);
-bottom:100px;z-index:201;
-background:#fff;border-radius:24px;padding:20px 28px;
-box-shadow:0 12px 48px rgba(0,0,0,.15);text-align:center;
-opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;
-white-space:nowrap
+  position:fixed;left:50%;transform:translateX(-50%) scale(.8) translateY(20px);
+  bottom:100px;z-index:201;
+  background:#fff;border-radius:24px;padding:20px 28px;
+  box-shadow:0 12px 48px rgba(0,0,0,.15);text-align:center;
+  opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;
+  white-space:nowrap
 }
 .celebrate-toast.show{opacity:1;transform:translateX(-50%) scale(1) translateY(0)}
 .celebrate-emoji{font-size:32px;margin-bottom:6px}
@@ -373,12 +372,10 @@ white-space:nowrap
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .fade-up{animation:fadeUp .3s ease both}
 </style>
-
 </head>
 <body>
 
 <!-- ══ ONBOARDING ══════════════════════════════════════════════════════════ -->
-
 <div id="ob-wrap">
   <div class="ob-card" id="ob-card">
     <!-- steps injected by JS -->
@@ -386,7 +383,6 @@ white-space:nowrap
 </div>
 
 <!-- ══ MAIN APP ════════════════════════════════════════════════════════════ -->
-
 <div id="app" style="display:none">
   <div id="topbar">
     <div>
@@ -403,7 +399,6 @@ white-space:nowrap
   </div>
 
   <!-- Week nav (shared) -->
-
   <div class="week-nav">
     <button class="week-nav-arrow" id="wk-prev" onclick="changeWeek(-1)">←</button>
     <div>
@@ -414,7 +409,6 @@ white-space:nowrap
   </div>
 
   <!-- Weekly screen -->
-
   <div class="screen active" id="screen-weekly">
     <div id="nudge-wrap"></div>
     <div class="progress-card" id="progress-card">
@@ -433,7 +427,6 @@ white-space:nowrap
   </div>
 
   <!-- History screen -->
-
   <div class="screen" id="screen-history">
     <div class="stat-strip" id="stat-strip"></div>
     <div class="section-label" style="margin-bottom:12px">Last 12 weeks</div>
@@ -444,7 +437,6 @@ white-space:nowrap
 <!-- ══ OVERLAYS ═══════════════════════════════════════════════════════════ -->
 
 <!-- Log note -->
-
 <div class="overlay" id="log-sheet" onclick="handleOverlayClick(event,'log-sheet')">
   <div class="sheet">
     <div class="sheet-handle"></div>
@@ -464,7 +456,6 @@ white-space:nowrap
 </div>
 
 <!-- Date timeline -->
-
 <div class="overlay" id="timeline-sheet" onclick="handleOverlayClick(event,'timeline-sheet')">
   <div class="sheet sheet-bg">
     <div class="sheet-handle"></div>
@@ -476,7 +467,6 @@ white-space:nowrap
 </div>
 
 <!-- Edit habit -->
-
 <div class="overlay" id="edit-sheet" onclick="handleOverlayClick(event,'edit-sheet')">
   <div class="sheet">
     <div class="sheet-handle"></div>
@@ -498,7 +488,6 @@ white-space:nowrap
 </div>
 
 <!-- Settings -->
-
 <div class="overlay" id="settings-sheet" onclick="handleOverlayClick(event,'settings-sheet')">
   <div class="sheet">
     <div class="sheet-handle"></div>
@@ -524,7 +513,6 @@ white-space:nowrap
 </div>
 
 <!-- Confetti container -->
-
 <div id="confetti-wrap" style="position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden"></div>
 <div class="celebrate-toast" id="celebrate-toast">
   <div class="celebrate-emoji">🎉</div>
@@ -1274,6 +1262,5 @@ function launchConfetti() {
   }
 })();
 </script>
-
 </body>
 </html>
