@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -662,12 +661,10 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
 @keyframes popIn{0%{transform:scale(.9);opacity:0}60%{transform:scale(1.02)}100%{transform:scale(1);opacity:1}}
 .pop-in{animation:popIn .3s cubic-bezier(.34,1.56,.64,1) both}
 </style>
-
 </head>
 <body>
 
 <!-- ══ ONBOARDING ══════════════════════════════════════════════════════════ -->
-
 <div id="ob-wrap">
   <div class="ob-card" id="ob-card">
     <!-- steps injected by JS -->
@@ -675,7 +672,6 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
 </div>
 
 <!-- ══ MAIN APP ════════════════════════════════════════════════════════════ -->
-
 <div id="app" style="display:none">
   <div id="topbar">
     <div>
@@ -692,7 +688,6 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
   </div>
 
   <!-- Week nav (shared) -->
-
   <div class="week-nav">
     <button class="week-nav-arrow" id="wk-prev" onclick="changeWeek(-1)">←</button>
     <div>
@@ -703,7 +698,6 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
   </div>
 
   <!-- Weekly screen -->
-
   <div class="screen active" id="screen-weekly">
     <div id="nudge-wrap"></div>
     <div class="progress-card" id="progress-card">
@@ -722,7 +716,6 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
   </div>
 
   <!-- History screen -->
-
   <div class="screen" id="screen-history">
     <div class="stat-strip" id="stat-strip"></div>
     <div class="section-label" style="margin-bottom:12px">Last 12 weeks</div>
@@ -733,7 +726,6 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
 <!-- ══ OVERLAYS ═══════════════════════════════════════════════════════════ -->
 
 <!-- Log note -->
-
 <div class="overlay" id="log-sheet" onclick="handleOverlayClick(event,'log-sheet')">
   <div class="sheet">
     <div class="sheet-handle"></div>
@@ -742,7 +734,6 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
 </div>
 
 <!-- Date timeline -->
-
 <div class="overlay" id="timeline-sheet" onclick="handleOverlayClick(event,'timeline-sheet')">
   <div class="sheet sheet-bg">
     <div class="sheet-handle"></div>
@@ -754,7 +745,6 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
 </div>
 
 <!-- Edit habit -->
-
 <div class="overlay" id="edit-sheet" onclick="handleOverlayClick(event,'edit-sheet')">
   <div class="sheet">
     <div class="sheet-handle"></div>
@@ -776,7 +766,6 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
 </div>
 
 <!-- Settings -->
-
 <div class="overlay" id="settings-sheet" onclick="handleOverlayClick(event,'settings-sheet')">
   <div class="sheet">
     <div class="sheet-handle"></div>
@@ -802,7 +791,6 @@ textarea.field-input{resize:none;min-height:88px;line-height:1.6}
 </div>
 
 <!-- Confetti container -->
-
 <div id="confetti-wrap" style="position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden"></div>
 <div class="celebrate-toast" id="celebrate-toast">
   <div class="celebrate-emoji">🎉</div>
@@ -1399,54 +1387,71 @@ function openLog(id) {
       <div class="field-wrap">
         <div class="field-label">Notes <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
         <textarea class="field-input" id="log-note" placeholder="How was it?" rows="2">${e.note||''}</textarea>
+      </div>`;
+  } else if (id === 'career') {
+    body = `
+      <div class="sheet-sub" style="margin-bottom:20px">Log your conversation</div>
+      <div class="field-wrap">
+        <div class="field-label">Who</div>
+        <input type="text" class="field-input" id="log-who" placeholder="e.g. Sarah Chen, Google" value="${e.who||''}"/>
+      </div>
+      <div class="field-wrap">
+        <div class="field-label">What did you discuss</div>
+        <input type="text" class="field-input" id="log-topic" placeholder="e.g. Product strategy, new role" value="${e.topic||''}"/>
+      </div>
+      <div class="field-wrap">
+        <div class="field-label">Notes <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
+        <textarea class="field-input" id="log-note" placeholder="Key takeaways…" rows="2">${e.note||''}</textarea>
+      </div>`;
+  } else {
+    body = `
+      <div class="sheet-sub" style="margin-bottom:20px">${h.prompt}</div>
+      <div class="field-wrap">
+        <textarea class="field-input" id="log-note" placeholder="Add details…" rows="3">${e.note||''}</textarea>
+      </div>`;
+  }
 
-```
-  </div>`;
-```
+  document.getElementById('log-sheet-content').innerHTML = header + body + `
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn-sm btn-sm-ghost" onclick="closeSheet('log-sheet')">Cancel</button>
+      <button class="btn-sm btn-sm-primary" style="flex:1" onclick="saveLog()">Save</button>
+    </div>`;
 
-} else if (id === ‘career’) {
-body = ` <div class="sheet-sub" style="margin-bottom:20px">Log your conversation</div> <div class="field-wrap"> <div class="field-label">Who</div> <input type="text" class="field-input" id="log-who" placeholder="e.g. Sarah Chen, Google" value="${e.who||''}"/> </div> <div class="field-wrap"> <div class="field-label">What did you discuss</div> <input type="text" class="field-input" id="log-topic" placeholder="e.g. Product strategy, new role" value="${e.topic||''}"/> </div> <div class="field-wrap"> <div class="field-label">Notes <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div> <textarea class="field-input" id="log-note" placeholder="Key takeaways…" rows="2">${e.note||''}</textarea> </div>`;
-} else {
-body = ` <div class="sheet-sub" style="margin-bottom:20px">${h.prompt}</div> <div class="field-wrap"> <textarea class="field-input" id="log-note" placeholder="Add details…" rows="3">${e.note||''}</textarea> </div>`;
-}
-
-document.getElementById(‘log-sheet-content’).innerHTML = header + body + ` <div style="display:flex;gap:10px;margin-top:4px"> <button class="btn-sm btn-sm-ghost" onclick="closeSheet('log-sheet')">Cancel</button> <button class="btn-sm btn-sm-primary" style="flex:1" onclick="saveLog()">Save</button> </div>`;
-
-openSheet(‘log-sheet’);
-setTimeout(() => {
-const first = document.querySelector(’#log-sheet-content input, #log-sheet-content textarea’);
-if (first) first.focus();
-}, 350);
+  openSheet('log-sheet');
+  setTimeout(() => {
+    const first = document.querySelector('#log-sheet-content input, #log-sheet-content textarea');
+    if (first) first.focus();
+  }, 350);
 }
 
 function saveLog() {
-if (!loggingId) return;
-const k = `${currentWeek}:${loggingId}`;
-const cur = state.data[k] || {};
-if (loggingId === ‘date’) {
-const who   = (document.getElementById(‘log-who’)||{}).value||’’;
-const where = (document.getElementById(‘log-where’)||{}).value||’’;
-const note  = (document.getElementById(‘log-note’)||{}).value||’’;
-state.data[k] = {…cur, who: who.trim(), where: where.trim(), note: note.trim()};
-} else if (loggingId === ‘career’) {
-const who   = (document.getElementById(‘log-who’)||{}).value||’’;
-const topic = (document.getElementById(‘log-topic’)||{}).value||’’;
-const note  = (document.getElementById(‘log-note’)||{}).value||’’;
-state.data[k] = {…cur, who: who.trim(), topic: topic.trim(), note: note.trim()};
-} else if (loggingId === ‘reading’) {
-const book = (document.getElementById(‘log-book’)||{}).value||’’;
-const note = (document.getElementById(‘log-note’)||{}).value||’’;
-const rating = _logRating || cur.rating || 0;
-state.data[k] = {…cur, book: book.trim(), note: note.trim(), rating};
-_logRating = 0;
-} else {
-const note = (document.getElementById(‘log-note’)||{}).value||’’;
-state.data[k] = {…cur, note: note.trim()};
-}
-saveState();
-loggingId = null;
-closeSheet(‘log-sheet’);
-renderWeekly();
+  if (!loggingId) return;
+  const k = `${currentWeek}:${loggingId}`;
+  const cur = state.data[k] || {};
+  if (loggingId === 'date') {
+    const who   = (document.getElementById('log-who')||{}).value||'';
+    const where = (document.getElementById('log-where')||{}).value||'';
+    const note  = (document.getElementById('log-note')||{}).value||'';
+    state.data[k] = {...cur, who: who.trim(), where: where.trim(), note: note.trim()};
+  } else if (loggingId === 'career') {
+    const who   = (document.getElementById('log-who')||{}).value||'';
+    const topic = (document.getElementById('log-topic')||{}).value||'';
+    const note  = (document.getElementById('log-note')||{}).value||'';
+    state.data[k] = {...cur, who: who.trim(), topic: topic.trim(), note: note.trim()};
+  } else if (loggingId === 'reading') {
+    const book = (document.getElementById('log-book')||{}).value||'';
+    const note = (document.getElementById('log-note')||{}).value||'';
+    const rating = _logRating || cur.rating || 0;
+    state.data[k] = {...cur, book: book.trim(), note: note.trim(), rating};
+    _logRating = 0;
+  } else {
+    const note = (document.getElementById('log-note')||{}).value||'';
+    state.data[k] = {...cur, note: note.trim()};
+  }
+  saveState();
+  loggingId = null;
+  closeSheet('log-sheet');
+  renderWeekly();
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1454,118 +1459,124 @@ renderWeekly();
 // ══════════════════════════════════════════════════════════════════════════════
 let timelineId = null;
 function openTimeline(id) {
-timelineId = id;
-const h = state.habits.find(x=>x.id===id);
-document.getElementById(‘tl-title’).textContent = `${h.emoji} ${h.label}`;
-const thisWeek = getWeekKey();
-const histWeeks = Array.from({length:12},(_,i)=>offsetWeek(thisWeek,-i));
-const doneWeeks = histWeeks.filter(wk=>isHabitDone(id,wk));
-document.getElementById(‘tl-list’).innerHTML = doneWeeks.length===0
-? ‘<div style="text-align:center;padding:40px 0;color:#c0b8b0;font-size:14px;font-weight:600">Nothing logged yet</div>’
-: doneWeeks.map(wk=>{
-const e = state.data[`${wk}:${id}`]||{};
-let inner = ‘’;
-if (id===‘date’) {
-inner = [
-e.who   ? `<div class="tl-field"><span class="tl-flabel">With</span> ${e.who}</div>` : ‘’,
-e.where ? `<div class="tl-field"><span class="tl-flabel">Where</span> ${e.where}</div>` : ‘’,
-e.note  ? `<div class="tl-field"><span class="tl-flabel">Notes</span> ${e.note}</div>` : ‘’,
-].filter(Boolean).join(’’) || ‘<div class="tl-empty">No details logged</div>’;
-} else if (id===‘career’) {
-inner = [
-e.who   ? `<div class="tl-field"><span class="tl-flabel">Who</span> ${e.who}</div>` : ‘’,
-e.topic ? `<div class="tl-field"><span class="tl-flabel">Topic</span> ${e.topic}</div>` : ‘’,
-e.note  ? `<div class="tl-field"><span class="tl-flabel">Notes</span> ${e.note}</div>` : ‘’,
-].filter(Boolean).join(’’) || ‘<div class="tl-empty">No details logged</div>’;
-} else if (id===‘reading’) {
-const stars = e.rating ? ‘★’.repeat(e.rating)+‘☆’.repeat(5-e.rating) : ‘’;
-inner = [
-e.book   ? `<div class="tl-field"><span class="tl-flabel">Book</span> ${e.book}</div>` : ‘’,
-e.rating ? `<div class="tl-field"><span class="tl-flabel">Rating</span> <span style="color:#f0a030">${stars}</span></div>` : ‘’,
-e.note   ? `<div class="tl-field"><span class="tl-flabel">Thoughts</span> ${e.note}</div>` : ‘’,
-].filter(Boolean).join(’’) || ‘<div class="tl-empty">No details logged</div>’;
-} else {
-inner = e.note ? `<div class="tl-note">"${e.note}"</div>` : ‘<div class="tl-empty">No details logged</div>’;
-}
-return `<div class="tl-item"> <div class="tl-dot"></div> <div class="tl-card"> <div class="tl-week">${fmtRange(wk)}</div> ${inner} </div> </div>`;
-}).join(’’);
-openSheet(‘timeline-sheet’);
+  timelineId = id;
+  const h = state.habits.find(x=>x.id===id);
+  document.getElementById('tl-title').textContent = `${h.emoji} ${h.label}`;
+  const thisWeek = getWeekKey();
+  const histWeeks = Array.from({length:12},(_,i)=>offsetWeek(thisWeek,-i));
+  const doneWeeks = histWeeks.filter(wk=>isHabitDone(id,wk));
+  document.getElementById('tl-list').innerHTML = doneWeeks.length===0
+    ? '<div style="text-align:center;padding:40px 0;color:#c0b8b0;font-size:14px;font-weight:600">Nothing logged yet</div>'
+    : doneWeeks.map(wk=>{
+        const e = state.data[`${wk}:${id}`]||{};
+        let inner = '';
+        if (id==='date') {
+          inner = [
+            e.who   ? `<div class="tl-field"><span class="tl-flabel">With</span> ${e.who}</div>` : '',
+            e.where ? `<div class="tl-field"><span class="tl-flabel">Where</span> ${e.where}</div>` : '',
+            e.note  ? `<div class="tl-field"><span class="tl-flabel">Notes</span> ${e.note}</div>` : '',
+          ].filter(Boolean).join('') || '<div class="tl-empty">No details logged</div>';
+        } else if (id==='career') {
+          inner = [
+            e.who   ? `<div class="tl-field"><span class="tl-flabel">Who</span> ${e.who}</div>` : '',
+            e.topic ? `<div class="tl-field"><span class="tl-flabel">Topic</span> ${e.topic}</div>` : '',
+            e.note  ? `<div class="tl-field"><span class="tl-flabel">Notes</span> ${e.note}</div>` : '',
+          ].filter(Boolean).join('') || '<div class="tl-empty">No details logged</div>';
+        } else if (id==='reading') {
+          const stars = e.rating ? '★'.repeat(e.rating)+'☆'.repeat(5-e.rating) : '';
+          inner = [
+            e.book   ? `<div class="tl-field"><span class="tl-flabel">Book</span> ${e.book}</div>` : '',
+            e.rating ? `<div class="tl-field"><span class="tl-flabel">Rating</span> <span style="color:#f0a030">${stars}</span></div>` : '',
+            e.note   ? `<div class="tl-field"><span class="tl-flabel">Thoughts</span> ${e.note}</div>` : '',
+          ].filter(Boolean).join('') || '<div class="tl-empty">No details logged</div>';
+        } else {
+          inner = e.note ? `<div class="tl-note">"${e.note}"</div>` : '<div class="tl-empty">No details logged</div>';
+        }
+        return `<div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <div class="tl-week">${fmtRange(wk)}</div>
+            ${inner}
+          </div>
+        </div>`;
+      }).join('');
+  openSheet('timeline-sheet');
 }
 
 function openLogFromTimeline() {
-closeSheet(‘timeline-sheet’);
-setTimeout(()=>{
-if (timelineId===‘reading’) openReadingLog();
-else openLog(timelineId);
-}, 300);
+  closeSheet('timeline-sheet');
+  setTimeout(()=>{
+    if (timelineId==='reading') openReadingLog();
+    else openLog(timelineId);
+  }, 300);
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
 // EDIT HABIT SHEET
 // ══════════════════════════════════════════════════════════════════════════════
 function openEditHabit(id) {
-editingId = id;
-const h = state.habits.find(x=>x.id===id);
-document.getElementById(‘edit-label-input’).value = h.label;
-document.getElementById(‘edit-emoji-grid’).innerHTML = EMOJIS.map(em=>
-`<button class="emoji-opt${h.emoji===em?' sel':''}" onclick="selectEditEmoji('${em}')">${em}</button>`
-).join(’’);
-openSheet(‘edit-sheet’);
-setTimeout(()=>document.getElementById(‘edit-label-input’).focus(), 350);
+  editingId = id;
+  const h = state.habits.find(x=>x.id===id);
+  document.getElementById('edit-label-input').value = h.label;
+  document.getElementById('edit-emoji-grid').innerHTML = EMOJIS.map(em=>
+    `<button class="emoji-opt${h.emoji===em?' sel':''}" onclick="selectEditEmoji('${em}')">${em}</button>`
+  ).join('');
+  openSheet('edit-sheet');
+  setTimeout(()=>document.getElementById('edit-label-input').focus(), 350);
 }
 
 function selectEditEmoji(em) {
-document.querySelectorAll(’#edit-emoji-grid .emoji-opt’).forEach(b => b.classList.remove(‘sel’));
-event.target.classList.add(‘sel’);
+  document.querySelectorAll('#edit-emoji-grid .emoji-opt').forEach(b => b.classList.remove('sel'));
+  event.target.classList.add('sel');
 }
 
 function saveEditHabit() {
-if (!editingId) return;
-const label = document.getElementById(‘edit-label-input’).value.trim();
-const sel = document.querySelector(’#edit-emoji-grid .emoji-opt.sel’);
-const emoji = sel ? sel.textContent : state.habits.find(h=>h.id===editingId).emoji;
-state.habits = state.habits.map(h => h.id===editingId ? {…h,label:label||h.label,emoji} : h);
-saveState();
-editingId = null;
-closeSheet(‘edit-sheet’);
-renderWeekly();
+  if (!editingId) return;
+  const label = document.getElementById('edit-label-input').value.trim();
+  const sel = document.querySelector('#edit-emoji-grid .emoji-opt.sel');
+  const emoji = sel ? sel.textContent : state.habits.find(h=>h.id===editingId).emoji;
+  state.habits = state.habits.map(h => h.id===editingId ? {...h,label:label||h.label,emoji} : h);
+  saveState();
+  editingId = null;
+  closeSheet('edit-sheet');
+  renderWeekly();
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
 // SETTINGS SHEET
 // ══════════════════════════════════════════════════════════════════════════════
 function openSheet(id) {
-// Populate settings when opening
-if (id===‘settings-sheet’) {
-document.getElementById(‘settings-name’).value = state.userName;
-document.getElementById(‘settings-budget’).value = state.budget;
-document.getElementById(‘settings-token’).value = state.upToken||’’;
-}
-const el = document.getElementById(id);
-el.classList.add(‘open’);
-document.body.style.overflow=‘hidden’;
+  // Populate settings when opening
+  if (id==='settings-sheet') {
+    document.getElementById('settings-name').value = state.userName;
+    document.getElementById('settings-budget').value = state.budget;
+    document.getElementById('settings-token').value = state.upToken||'';
+  }
+  const el = document.getElementById(id);
+  el.classList.add('open');
+  document.body.style.overflow='hidden';
 }
 
 function closeSheet(id) {
-document.getElementById(id).classList.remove(‘open’);
-document.body.style.overflow=’’;
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
 }
 
 function handleOverlayClick(e, id) {
-if (e.target===document.getElementById(id)) closeSheet(id);
+  if (e.target===document.getElementById(id)) closeSheet(id);
 }
 
 function saveSettings() {
-const name = document.getElementById(‘settings-name’).value.trim();
-const budget = parseFloat(document.getElementById(‘settings-budget’).value)||500;
-const token = document.getElementById(‘settings-token’).value.trim();
-if (name) state.userName = name;
-state.budget = budget;
-state.upToken = token;
-saveState();
-closeSheet(‘settings-sheet’);
-if (token) fetchUpSpend();
-renderAll();
+  const name = document.getElementById('settings-name').value.trim();
+  const budget = parseFloat(document.getElementById('settings-budget').value)||500;
+  const token = document.getElementById('settings-token').value.trim();
+  if (name) state.userName = name;
+  state.budget = budget;
+  state.upToken = token;
+  saveState();
+  closeSheet('settings-sheet');
+  if (token) fetchUpSpend();
+  renderAll();
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1575,100 +1586,127 @@ let upLoading = false;
 let upError = null;
 
 function fetchUpSpend() {
-if (!state.upToken) return;
-upLoading = true; upError = null;
-if (currentTab===‘weekly’) renderHabits();
-fetch(`/.netlify/functions/up-spend?weekKey=${currentWeek}`, {
-headers: {Authorization:`Bearer ${state.upToken}`}
-})
-.then(r => { if(!r.ok) throw new Error(’Up API error ’ + r.status); return r.json(); })
-.then(j => {
-upSpend = j.total; upLoading = false; upError = null;
-const k = `${currentWeek}:spending`;
-state.data[k] = {…(state.data[k]||{}), done: upSpend<=state.budget, autoAmount:upSpend};
-saveState();
-if (currentTab===‘weekly’) renderHabits();
-})
-.catch(e => {
-upLoading = false;
-upError = e.message || ‘Could not connect to Up’;
-upSpend = null;
-if (currentTab===‘weekly’) renderHabits();
-});
+  if (!state.upToken) return;
+  upLoading = true; upError = null;
+  if (currentTab==='weekly') renderHabits();
+  fetch(`/.netlify/functions/up-spend?weekKey=${currentWeek}`, {
+    headers: {Authorization:`Bearer ${state.upToken}`}
+  })
+  .then(r => { if(!r.ok) throw new Error('Up API error ' + r.status); return r.json(); })
+  .then(j => {
+    upSpend = j.total; upLoading = false; upError = null;
+    const k = `${currentWeek}:spending`;
+    state.data[k] = {...(state.data[k]||{}), done: upSpend<=state.budget, autoAmount:upSpend};
+    saveState();
+    if (currentTab==='weekly') renderHabits();
+  })
+  .catch(e => {
+    upLoading = false;
+    upError = e.message || 'Could not connect to Up';
+    upSpend = null;
+    if (currentTab==='weekly') renderHabits();
+  });
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
 // CELEBRATION
 // ══════════════════════════════════════════════════════════════════════════════
 function celebrate() {
-const firstName = state.userName.split(’ ’)[0];
-const toast = document.getElementById(‘celebrate-toast’);
-document.getElementById(‘celebrate-title’).textContent = `Perfect week, ${firstName}!`;
-document.getElementById(‘celebrate-sub’).textContent = `All ${state.habits.length} habits done.`;
-toast.classList.add(‘show’);
-setTimeout(()=>toast.classList.remove(‘show’), 3000);
-launchConfetti();
+  const firstName = state.userName.split(' ')[0];
+  const toast = document.getElementById('celebrate-toast');
+  document.getElementById('celebrate-title').textContent = `Perfect week, ${firstName}!`;
+  document.getElementById('celebrate-sub').textContent = `All ${state.habits.length} habits done.`;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'), 3000);
+  launchConfetti();
 }
 
 function launchConfetti() {
-const wrap = document.getElementById(‘confetti-wrap’);
-wrap.innerHTML = ‘’;
-const colours = [’#9b7fa6’,’#b89cc8’,’#d4b8e8’,’#e8d0f0’,’#7d6289’,’#c4a0d4’];
-for (let i=0;i<60;i++) {
-const el = document.createElement(‘div’);
-el.className = ‘confetti-piece’;
-const size = Math.random()*8+4;
-el.style.cssText = `left:${Math.random()*100}%; width:${size}px;height:${size*1.5}px; background:${colours[i%colours.length]}; border-radius:${Math.random()>0.5?'50%':'2px'}; animation:confetti-fall ${0.8+Math.random()*1}s linear ${Math.random()*0.6}s both;`;
-wrap.appendChild(el);
+  const wrap = document.getElementById('confetti-wrap');
+  wrap.innerHTML = '';
+  const colours = ['#9b7fa6','#b89cc8','#d4b8e8','#e8d0f0','#7d6289','#c4a0d4'];
+  for (let i=0;i<60;i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    const size = Math.random()*8+4;
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      width:${size}px;height:${size*1.5}px;
+      background:${colours[i%colours.length]};
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+      animation:confetti-fall ${0.8+Math.random()*1}s linear ${Math.random()*0.6}s both;
+    `;
+    wrap.appendChild(el);
+  }
+  setTimeout(()=>{ wrap.innerHTML=''; }, 3000);
 }
-setTimeout(()=>{ wrap.innerHTML=’’; }, 3000);
-}
+
 
 // ══════════════════════════════════════════════════════════════════════════════
 // READING LOG
 // ══════════════════════════════════════════════════════════════════════════════
 function openReadingLog() {
-loggingId = ‘reading’;
-const e = getEntry(‘reading’);
-const rating = e.rating || 0;
-const starsHtml = [1,2,3,4,5].map(n =>
-`<button class="star-btn${rating>=n?' lit':''}" id="rlog-star-${n}" onclick="setLogRating(${n})"style="font-size:28px;padding:4px">★</button>`
-).join(’’);
-document.getElementById(‘log-sheet-content’).innerHTML = ` <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px"> <span style="font-size:26px">📚</span> <div class="sheet-title">Reading</div> </div> <div class="sheet-sub" style="margin-bottom:20px">Log this week's reading</div> <div class="field-wrap"> <div class="field-label">Book</div> <input type="text" class="field-input" id="log-book" placeholder="e.g. Atomic Habits" value="${e.book||''}"/> </div> <div class="field-wrap"> <div class="field-label">Rating <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div> <div style="display:flex;gap:4px;margin-bottom:4px">${starsHtml}</div> </div> <div class="field-wrap"> <div class="field-label">Thoughts <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div> <textarea class="field-input" id="log-note" placeholder="What did you think?" rows="2">${e.note||''}</textarea> </div> <div style="display:flex;gap:10px;margin-top:4px"> <button class="btn-sm btn-sm-ghost" onclick="closeSheet('log-sheet')">Cancel</button> <button class="btn-sm btn-sm-primary" style="flex:1" onclick="saveLog()">Save</button> </div>`;
-openSheet(‘log-sheet’);
-setTimeout(() => document.getElementById(‘log-book’)?.focus(), 350);
+  loggingId = 'reading';
+  const e = getEntry('reading');
+  const rating = e.rating || 0;
+  const starsHtml = [1,2,3,4,5].map(n =>
+    `<button class="star-btn${rating>=n?' lit':''}" id="rlog-star-${n}" onclick="setLogRating(${n})"style="font-size:28px;padding:4px">★</button>`
+  ).join('');
+  document.getElementById('log-sheet-content').innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+      <span style="font-size:26px">📚</span>
+      <div class="sheet-title">Reading</div>
+    </div>
+    <div class="sheet-sub" style="margin-bottom:20px">Log this week's reading</div>
+    <div class="field-wrap">
+      <div class="field-label">Book</div>
+      <input type="text" class="field-input" id="log-book" placeholder="e.g. Atomic Habits" value="${e.book||''}"/>
+    </div>
+    <div class="field-wrap">
+      <div class="field-label">Rating <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
+      <div style="display:flex;gap:4px;margin-bottom:4px">${starsHtml}</div>
+    </div>
+    <div class="field-wrap">
+      <div class="field-label">Thoughts <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
+      <textarea class="field-input" id="log-note" placeholder="What did you think?" rows="2">${e.note||''}</textarea>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn-sm btn-sm-ghost" onclick="closeSheet('log-sheet')">Cancel</button>
+      <button class="btn-sm btn-sm-primary" style="flex:1" onclick="saveLog()">Save</button>
+    </div>`;
+  openSheet('log-sheet');
+  setTimeout(() => document.getElementById('log-book')?.focus(), 350);
 }
 
 let _logRating = 0;
 function setLogRating(n) {
-_logRating = n;
-[1,2,3,4,5].forEach(i => {
-const b = document.getElementById(‘rlog-star-’+i);
-if (b) b.classList.toggle(‘lit’, i<=n);
-});
+  _logRating = n;
+  [1,2,3,4,5].forEach(i => {
+    const b = document.getElementById('rlog-star-'+i);
+    if (b) b.classList.toggle('lit', i<=n);
+  });
 }
 
 function rateReading(n) {
-const k = `${currentWeek}:reading`;
-state.data[k] = {…(state.data[k]||{}), rating: n};
-saveState();
-renderHabits();
+  const k = `${currentWeek}:reading`;
+  state.data[k] = {...(state.data[k]||{}), rating: n};
+  saveState();
+  renderHabits();
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════════════════════════
 (function init() {
-state = loadState();
-if (state && state.userName) {
-document.getElementById(‘ob-wrap’).style.display=‘none’;
-document.getElementById(‘app’).style.display=‘block’;
-bootApp();
-} else {
-renderOb();
-}
+  state = loadState();
+  if (state && state.userName) {
+    document.getElementById('ob-wrap').style.display='none';
+    document.getElementById('app').style.display='block';
+    bootApp();
+  } else {
+    renderOb();
+  }
 })();
 </script>
-
 </body>
 </html>
