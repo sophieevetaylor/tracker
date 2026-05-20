@@ -6,1705 +6,1344 @@
 <title>Ritual</title>
 <link rel="icon" href="icon.png"/>
 <link rel="apple-touch-icon" href="icon.png"/>
-<meta name="theme-color" content="#f7f3ed"/>
+<meta name="theme-color" content="#f8f4ef"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 <meta name="apple-mobile-web-app-title" content="Ritual"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap');
 
+:root {
+  --bg: #f8f4ef;
+  --card: #ffffff;
+  --card2: #fdf9f5;
+  --terra: #c4714a;
+  --terra-l: #d4836a;
+  --terra-ll: #f0ddd5;
+  --terra-pale: #fdf5f0;
+  --rose: #d4836a;
+  --ink: #1c1510;
+  --ink2: #5a4a3a;
+  --ink3: #9a8a7a;
+  --ink4: #c4b4a4;
+  --line: rgba(196,113,74,.12);
+  --sh: rgba(100,60,30,.07);
+  --sh2: rgba(100,60,30,.04);
+}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-
-:root{
-  --cream:#f7f3ed;
-  --cream2:#f2ece3;
-  --cream3:#ede5d8;
-  --card:#fffdf9;
-  --terra:#c4714a;
-  --terra2:#b5633d;
-  --terra3:#a05535;
-  --rose:#d4836a;
-  --rose-light:#f0d0c4;
-  --rose-pale:#faf0eb;
-  --text:#1c1510;
-  --text2:#5a4a3a;
-  --text3:#9a8a7a;
-  --text4:#c4b4a4;
-  --border:rgba(196,113,74,.15);
-  --border2:rgba(196,113,74,.08);
-  --shadow:rgba(100,60,30,.08);
-  --shadow2:rgba(100,60,30,.04)
-}
-
 html,body{
-  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
-  background:var(--cream);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -webkit-text-size-adjust:100%;
-  min-height:100vh;
+  font-family:'DM Sans',-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+  overscroll-behavior:none;
 }
-button,input,textarea{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif}
-
-/* ── serifs ── */
+button,input,textarea,select{font-family:'DM Sans',-apple-system,sans-serif}
 .serif{font-family:'Cormorant Garamond',Georgia,serif}
 
-/* ── layout ── */
-#app{max-width:430px;margin:0 auto;padding:0 22px 110px;min-height:100vh}
-.screen{display:none}.screen.active{display:block}
+/* ─── screens ─────────────────────────────────────────── */
+.page{display:none;max-width:430px;margin:0 auto;padding:0 20px 100px;min-height:100vh}
+.page.active{display:block}
 
-/* ── onboarding ── */
-#ob-wrap{
-  min-height:100vh;
-  background:linear-gradient(160deg,#f9f5ef 0%,#f2ece0 60%,#ede4d4 100%);
-  display:flex;align-items:center;justify-content:center;padding:24px
-}
-.ob-card{
-  background:var(--card);
-  border-radius:28px;padding:40px 30px;
-  width:100%;max-width:360px;
-  border:1px solid rgba(196,113,74,.12);
-  box-shadow:0 8px 48px var(--shadow),0 2px 8px var(--shadow2)
-}
-.ob-eyebrow{
-  font-family:'DM Sans',sans-serif;
-  font-size:10px;font-weight:700;color:var(--terra);
-  letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px
-}
-.ob-title{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:34px;font-weight:400;color:var(--text);
-  line-height:1.15;margin-bottom:10px;font-style:italic
-}
-.ob-sub{font-size:15px;color:var(--text3);line-height:1.6;margin-bottom:30px}
-.ob-habit-row{
-  display:flex;align-items:center;gap:14px;
-  padding:14px 16px;
-  background:linear-gradient(135deg,#fdf9f4,#f9f3eb);
-  border-radius:16px;margin-bottom:8px;cursor:pointer;
-  transition:all .2s;
-  border:1.5px solid var(--border2);
-  box-shadow:0 1px 4px var(--shadow2)
-}
-.ob-habit-row:hover{
-  background:linear-gradient(135deg,#faf2e8,#f5ebe0);
-  border-color:var(--border);transform:translateY(-1px);
-  box-shadow:0 4px 14px var(--shadow)
-}
-.ob-habit-emoji{font-size:24px;flex-shrink:0}
-.ob-habit-label{flex:1;font-size:15px;font-weight:600;color:var(--text)}
-.ob-habit-edit{font-size:10px;font-weight:700;color:var(--text4);letter-spacing:.08em;text-transform:uppercase}
+/* onboarding removed */
 
-/* ── form elements ── */
-.field-wrap{margin-bottom:20px}
-.field-label{
-  font-size:10px;font-weight:700;color:var(--terra);
-  letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px
-}
-.field-input{
-  width:100%;
-  background:linear-gradient(135deg,#fdf9f4,#faf5ee);
-  border:1.5px solid rgba(196,113,74,.18);
-  border-radius:14px;padding:14px 17px;
-  font-size:16px;color:var(--text);
+/* ─── inputs ──────────────────────────────────────────── */
+.inp{
+  width:100%;background:linear-gradient(135deg,#fdf9f4,#faf5ee);
+  border:1.5px solid rgba(196,113,74,.2);border-radius:14px;
+  padding:14px 16px;font-size:16px;color:var(--ink);
   outline:none;transition:all .2s;
-  box-shadow:inset 0 1px 3px rgba(100,60,30,.05)
+  box-shadow:inset 0 1px 3px rgba(100,60,30,.04)
 }
-.field-input:focus{
-  border-color:var(--terra);
-  box-shadow:0 0 0 4px rgba(196,113,74,.1),inset 0 1px 3px rgba(100,60,30,.05)
-}
-.field-input::placeholder{color:var(--text4)}
-textarea.field-input{resize:none;min-height:88px;line-height:1.6}
-.prefix-row{
-  display:flex;align-items:center;
-  background:linear-gradient(135deg,#fdf9f4,#faf5ee);
-  border:1.5px solid rgba(196,113,74,.18);
-  border-radius:14px;overflow:hidden;
-  box-shadow:inset 0 1px 3px rgba(100,60,30,.05);transition:all .2s
-}
-.prefix-row:focus-within{
-  border-color:var(--terra);
-  box-shadow:0 0 0 4px rgba(196,113,74,.1),inset 0 1px 3px rgba(100,60,30,.05)
-}
-.prefix-sign{padding:14px 6px 14px 17px;font-size:16px;color:var(--terra);font-weight:700}
-.prefix-input{flex:1;background:transparent;border:none;padding:14px 17px 14px 4px;font-size:16px;color:var(--text);outline:none}
+.inp:focus{border-color:var(--terra);box-shadow:0 0 0 4px rgba(196,113,74,.1),inset 0 1px 3px rgba(100,60,30,.04)}
+.inp::placeholder{color:var(--ink4)}
+textarea.inp{resize:none;line-height:1.6}
+.inp-label{font-size:10px;font-weight:700;color:var(--terra);letter-spacing:.15em;text-transform:uppercase;margin-bottom:7px}
+.inp-wrap{margin-bottom:18px}
+.inp-row{display:flex;gap:10px}
+.inp-row .inp-wrap{flex:1}
 
-/* ── buttons ── */
+/* ─── buttons ─────────────────────────────────────────── */
 .btn{
   width:100%;padding:16px;border-radius:14px;border:none;
-  font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.01em
+  font-size:16px;font-weight:700;cursor:pointer;transition:all .2s
 }
-.btn-primary{
-  background:linear-gradient(145deg,#d4836a,#c4714a,#b0613c);
-  color:#fff;
-  box-shadow:0 4px 18px rgba(196,113,74,.35),0 1px 3px rgba(0,0,0,.08)
-}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(196,113,74,.4)}
-.btn-primary:active{transform:translateY(0)}
-.btn-primary:disabled{background:linear-gradient(145deg,#d4c4b4,#c4b4a4);box-shadow:none;cursor:default;transform:none}
-.btn-ghost{
-  background:rgba(196,113,74,.08);color:var(--text3);margin-top:10px;
-  border:1.5px solid rgba(196,113,74,.15)
-}
-.btn-ghost:hover{background:rgba(196,113,74,.14)}
+.btn-p{background:linear-gradient(145deg,#d4836a,#c4714a,#b0613c);color:#fff;box-shadow:0 4px 18px rgba(196,113,74,.35)}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 7px 24px rgba(196,113,74,.4)}
+.btn-p:disabled{background:linear-gradient(145deg,#d4c4b4,#c4b4a4);box-shadow:none;cursor:default;transform:none}
+.btn-g{background:rgba(196,113,74,.09);color:var(--ink3);border:1.5px solid rgba(196,113,74,.15)}
+.btn-g:hover{background:rgba(196,113,74,.16)}
 .btn-sm{padding:11px 22px;width:auto;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s}
-.btn-sm-primary{
-  background:linear-gradient(145deg,#d4836a,#c4714a);color:#fff;
-  box-shadow:0 3px 12px rgba(196,113,74,.3)
-}
-.btn-sm-primary:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(196,113,74,.35)}
-.btn-sm-ghost{background:rgba(196,113,74,.08);color:var(--text3);border:1.5px solid rgba(196,113,74,.15)}
-.btn-sm-ghost:hover{background:rgba(196,113,74,.14)}
+.btn-sm-p{background:linear-gradient(145deg,#d4836a,#c4714a);color:#fff;box-shadow:0 3px 12px rgba(196,113,74,.28)}
+.btn-sm-p:hover{transform:translateY(-1px)}
+.btn-sm-g{background:rgba(196,113,74,.09);color:var(--ink3);border:1.5px solid rgba(196,113,74,.15)}
+.btn-row{display:flex;gap:10px;margin-top:4px}
 
-/* ── emoji picker ── */
-.emoji-grid{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 20px}
-.emoji-opt{
+/* ─── emoji picker ────────────────────────────────────── */
+.emoji-grid{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 20px}
+.em-btn{
   width:44px;height:44px;border-radius:12px;border:2px solid transparent;
   background:linear-gradient(135deg,#fdf9f4,#f9f3eb);
-  font-size:22px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;box-shadow:0 1px 3px var(--shadow2)
+  font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;box-shadow:0 1px 3px var(--sh2)
 }
-.emoji-opt.sel{border-color:var(--terra);background:var(--rose-pale);box-shadow:0 2px 8px rgba(196,113,74,.2)}
-.emoji-opt:hover{transform:scale(1.1)}
+.em-btn.sel{border-color:var(--terra);background:var(--terra-pale);box-shadow:0 2px 8px rgba(196,113,74,.2)}
+.em-btn:hover{transform:scale(1.12)}
 
-/* ── top nav ── */
+/* ─── template picker ─────────────────────────────────── */
+.tmpl-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.tmpl-row{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;background:linear-gradient(135deg,#fdf9f4,#f9f3eb);
+  border-radius:16px;cursor:pointer;border:2px solid transparent;
+  transition:all .2s;box-shadow:0 1px 4px var(--sh2)
+}
+.tmpl-row:hover{border-color:rgba(196,113,74,.25);transform:translateY(-1px);box-shadow:0 4px 14px var(--sh)}
+.tmpl-row.sel{border-color:var(--terra);background:var(--terra-pale)}
+.tmpl-icon{font-size:24px;flex-shrink:0}
+.tmpl-info{flex:1}
+.tmpl-name{font-size:15px;font-weight:700;color:var(--ink)}
+.tmpl-desc{font-size:12px;color:var(--ink3);margin-top:2px}
+.tmpl-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(196,113,74,.25);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.tmpl-row.sel .tmpl-check{background:var(--terra);border-color:var(--terra)}
+
+/* ─── topbar ──────────────────────────────────────────── */
 #topbar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:28px 0 16px;position:sticky;top:0;
-  background:linear-gradient(var(--cream) 85%,rgba(247,243,237,0));
-  z-index:10
+  display:flex;align-items:flex-start;justify-content:space-between;
+  padding:28px 0 18px;position:sticky;top:0;
+  background:linear-gradient(var(--bg) 88%,transparent);z-index:20
 }
-.greeting-name{
+.tb-left .tb-name{
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:30px;font-weight:400;color:var(--text);
-  letter-spacing:-.3px;line-height:1.1;font-style:italic
+  font-size:32px;font-weight:400;font-style:italic;color:var(--ink);line-height:1
 }
-.greeting-sub{font-size:13px;color:var(--text3);font-weight:500;margin-top:3px}
-.nav-right{display:flex;align-items:center;gap:8px}
-.tab-pills{
-  display:flex;gap:3px;
-  background:rgba(255,255,255,.8);
-  border-radius:22px;padding:4px;
-  border:1px solid rgba(196,113,74,.12);
-  box-shadow:0 2px 8px var(--shadow)
-}
-.tab-pill{
-  padding:7px 16px;border-radius:18px;border:none;
-  font-size:13px;font-weight:600;cursor:pointer;
-  background:transparent;color:var(--text3);transition:all .2s
-}
-.tab-pill.active{
-  background:linear-gradient(145deg,#d4836a,#c4714a);color:#fff;
-  box-shadow:0 2px 8px rgba(196,113,74,.3)
-}
+.tb-left .tb-sub{font-size:13px;color:var(--ink3);font-weight:500;margin-top:4px}
+.tb-right{display:flex;gap:8px;align-items:center;padding-top:4px}
 .icon-btn{
-  width:40px;height:40px;border-radius:50%;border:none;
-  background:rgba(255,255,255,.85);cursor:pointer;font-size:18px;
+  width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.9);
+  border:1px solid rgba(196,113,74,.14);box-shadow:0 2px 8px var(--sh);
   display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(196,113,74,.12);
-  box-shadow:0 2px 8px var(--shadow);transition:all .2s
+  font-size:18px;cursor:pointer;transition:all .2s
 }
-.icon-btn:hover{background:#fff;box-shadow:0 4px 14px var(--shadow)}
+.icon-btn:hover{background:#fff;box-shadow:0 4px 14px var(--sh)}
+.pill-tabs{
+  display:flex;gap:3px;background:rgba(255,255,255,.85);
+  border-radius:22px;padding:4px;border:1px solid rgba(196,113,74,.12);
+  box-shadow:0 2px 8px var(--sh)
+}
+.pill{
+  padding:7px 15px;border-radius:18px;border:none;
+  font-size:13px;font-weight:600;cursor:pointer;
+  background:transparent;color:var(--ink3);transition:all .2s
+}
+.pill.active{background:linear-gradient(145deg,#d4836a,#c4714a);color:#fff;box-shadow:0 2px 8px rgba(196,113,74,.3)}
 
-/* ── week nav ── */
-.week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.week-nav-arrow{
-  width:42px;height:42px;border-radius:14px;border:none;
-  background:rgba(255,255,255,.85);font-size:18px;color:var(--terra);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(196,113,74,.15);
-  box-shadow:0 2px 8px var(--shadow);transition:all .2s
+/* ─── week nav ────────────────────────────────────────── */
+.wk-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.wk-arr{
+  width:40px;height:40px;border-radius:13px;border:none;
+  background:rgba(255,255,255,.85);color:var(--terra);font-size:18px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  border:1px solid rgba(196,113,74,.15);box-shadow:0 2px 8px var(--sh);transition:all .2s
 }
-.week-nav-arrow:hover{background:#fff;transform:scale(1.05);box-shadow:0 4px 14px var(--shadow)}
-.week-nav-arrow:disabled{opacity:.25;cursor:default;transform:none}
-.week-label-big{
+.wk-arr:hover{background:#fff;transform:scale(1.05)}
+.wk-arr:disabled{opacity:.25;cursor:default;transform:none}
+.wk-mid{text-align:center}
+.wk-range{
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:20px;font-weight:400;color:var(--text);text-align:center;font-style:italic
+  font-size:20px;font-weight:400;font-style:italic;color:var(--ink)
 }
-.week-label-small{font-size:11px;font-weight:600;color:var(--text4);text-align:center;margin-top:3px;letter-spacing:.06em;text-transform:uppercase}
+.wk-now{font-size:10px;font-weight:700;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
 
-/* ── progress card ── */
-.progress-card{
-  background:linear-gradient(145deg,#c97a58 0%,#b86845 40%,#9e5535 75%,#8c4428 100%);
-  border-radius:28px;padding:28px 26px 24px;margin-bottom:20px;
+/* ─── progress hero ───────────────────────────────────── */
+.hero{
+  background:linear-gradient(145deg,#c97a58,#b86845,#9e5535,#8c4428);
+  border-radius:28px;padding:26px 24px 22px;margin-bottom:20px;
   position:relative;overflow:hidden;
-  box-shadow:0 10px 36px rgba(140,68,40,.3),0 3px 8px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.15)
+  box-shadow:0 10px 36px rgba(140,68,40,.28),inset 0 1px 0 rgba(255,255,255,.15)
 }
-.progress-card::before{
-  content:'';position:absolute;top:-50px;right:-30px;
-  width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.1) 0%,rgba(255,255,255,.03) 50%,transparent 70%);
-  pointer-events:none
+.hero::before{
+  content:'';position:absolute;top:-50px;right:-30px;width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.1),transparent 65%);pointer-events:none
 }
-.progress-card::after{
-  content:'';position:absolute;bottom:-40px;left:-10px;
-  width:150px;height:150px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,220,180,.08) 0%,transparent 70%);
-  pointer-events:none
-}
-.progress-eyebrow{
-  font-family:'DM Sans',sans-serif;
-  font-size:10px;font-weight:700;color:rgba(255,255,255,.55);
-  letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px;
-  display:flex;align-items:center;gap:8px
-}
-.progress-eyebrow::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.15)}
-.progress-score{display:flex;align-items:flex-end;gap:6px;margin-bottom:8px}
-.progress-num{
+.hero-ey{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
+.hero-score{display:flex;align-items:flex-end;gap:6px;margin-bottom:6px}
+.hero-n{
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:80px;font-weight:300;color:#fff;line-height:.9;
-  text-shadow:0 2px 16px rgba(0,0,0,.2)
+  font-size:76px;font-weight:300;color:#fff;line-height:.9;
+  text-shadow:0 2px 16px rgba(0,0,0,.18)
 }
-.progress-denom{
+.hero-d{
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:34px;font-weight:300;color:rgba(255,255,255,.45);
-  padding-bottom:10px
+  font-size:32px;font-weight:300;color:rgba(255,255,255,.4);padding-bottom:10px
 }
-.progress-status{
-  font-size:15px;color:rgba(255,255,255,.8);font-weight:400;
-  margin-bottom:22px;font-style:italic;
-  font-family:'Cormorant Garamond',Georgia,serif;font-size:18px
+.hero-status{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:18px;font-style:italic;color:rgba(255,255,255,.8);margin-bottom:20px
 }
-.progress-track{height:4px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
-.progress-fill{
-  height:100%;background:rgba(255,255,255,.75);border-radius:4px;
-  transition:width .8s cubic-bezier(.4,0,.2,1)
+.hero-track{height:4px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
+.hero-fill{height:100%;background:rgba(255,255,255,.75);border-radius:4px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+
+/* ─── day strip ───────────────────────────────────────── */
+.day-strip{display:flex;gap:6px;margin-bottom:24px}
+.day-cell{
+  flex:1;background:rgba(255,255,255,.8);border-radius:16px;
+  padding:10px 3px 9px;display:flex;flex-direction:column;align-items:center;gap:5px;
+  border:1.5px solid rgba(255,255,255,.95);box-shadow:0 2px 8px var(--sh);transition:all .2s
+}
+.day-cell.today{background:linear-gradient(145deg,#fdf0e8,#f8e4d4);border-color:rgba(196,113,74,.3);box-shadow:0 4px 16px rgba(196,113,74,.15)}
+.day-l{font-size:10px;font-weight:700;color:var(--ink4);letter-spacing:.06em}
+.day-cell.today .day-l{color:var(--terra)}
+.day-n{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:400;color:var(--ink);line-height:1}
+.day-cell.today .day-n{color:var(--terra)}
+.day-dot{width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg,#d4836a,#c4714a);opacity:0;transition:opacity .3s}
+.day-dot.on{opacity:1}
+
+/* ─── section label ───────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:700;color:var(--ink4);letter-spacing:.16em;text-transform:uppercase;
+  margin:4px 0 14px;display:flex;align-items:center;gap:10px
+}
+.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(196,113,74,.15),transparent)}
+
+/* ─── dashboard grid ──────────────────────────────────── */
+.dash-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:28px
+}
+/* wide card spans both columns */
+.dash-grid .hcard.wide{grid-column:1/-1}
+
+/* ─── habit card ──────────────────────────────────────── */
+.hcard{
+  background:var(--card);border-radius:22px;
+  border:1px solid rgba(196,113,74,.1);
+  box-shadow:0 4px 18px var(--sh),0 1px 4px var(--sh2);
+  cursor:pointer;transition:all .25s;
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+  min-height:130px;padding:18px 16px 14px
+}
+.hcard:hover{box-shadow:0 8px 30px rgba(100,60,30,.12);transform:translateY(-2px)}
+.hcard:active{transform:translateY(0);box-shadow:0 3px 12px var(--sh)}
+.hcard.done{background:linear-gradient(145deg,#fdf5ef,#f9ede2)}
+
+/* done shimmer line */
+.hcard.done::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--terra-l),var(--terra))
 }
 
-/* ── nudge banner ── */
+.hcard-emoji{font-size:30px;line-height:1;margin-bottom:10px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1))}
+.hcard-name{
+  font-size:14px;font-weight:700;color:var(--ink);
+  line-height:1.2;margin-bottom:4px;flex:1
+}
+.hcard.done .hcard-name{color:var(--ink3)}
+.hcard-meta{font-size:11px;color:var(--ink4);font-weight:500;margin-bottom:10px}
+.hcard-meta .streak{color:var(--terra);font-weight:700;background:rgba(196,113,74,.1);padding:1px 6px;border-radius:5px;font-size:10px}
+
+/* check ring at bottom right */
+.hcard-check{
+  position:absolute;bottom:14px;right:14px;
+  width:30px;height:30px;border-radius:50%;
+  border:2px solid rgba(196,113,74,.25);background:transparent;
+  display:flex;align-items:center;justify-content:center;transition:all .25s
+}
+.hcard.done .hcard-check{background:linear-gradient(145deg,#d4836a,#c4714a);border-color:transparent;box-shadow:0 3px 10px rgba(196,113,74,.38)}
+.hcard-tick{opacity:0;transform:scale(0);transition:all .22s cubic-bezier(.34,1.56,.64,1)}
+.hcard.done .hcard-tick{opacity:1;transform:scale(1)}
+
+/* logged preview */
+.hcard-preview{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:13px;font-style:italic;color:var(--ink2);
+  line-height:1.4;
+  border-top:1px solid rgba(196,113,74,.08);
+  padding-top:8px;margin-top:4px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  max-width:calc(100% - 36px)
+}
+
+/* ─── add habit card ──────────────────────────────────── */
+.add-card{
+  background:rgba(255,255,255,.5);border-radius:22px;
+  border:2px dashed rgba(196,113,74,.22);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;cursor:pointer;min-height:130px;transition:all .2s
+}
+.add-card:hover{background:rgba(255,255,255,.8);border-color:rgba(196,113,74,.45)}
+.add-card-icon{font-size:28px;color:rgba(196,113,74,.4)}
+.add-card-label{font-size:13px;font-weight:600;color:var(--ink4)}
+
+/* ─── nudge ───────────────────────────────────────────── */
 .nudge{
   background:linear-gradient(135deg,#fdf5f0,#f9ede4);
-  border:1.5px solid rgba(196,113,74,.2);
-  border-radius:22px;padding:16px 20px;margin-bottom:18px;
+  border:1.5px solid rgba(196,113,74,.2);border-radius:20px;
+  padding:14px 18px;margin-bottom:18px;
   display:flex;align-items:center;justify-content:space-between;
-  box-shadow:0 4px 16px rgba(196,113,74,.1)
+  box-shadow:0 4px 14px rgba(196,113,74,.1)
 }
-.nudge-text{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:18px;font-weight:500;color:var(--terra2);font-style:italic
-}
-.nudge-sub{font-size:12px;color:var(--rose);margin-top:3px}
-.nudge-badge{
-  background:linear-gradient(145deg,#d4836a,#c4714a);
-  border-radius:14px;padding:8px 14px;text-align:center;flex-shrink:0;
-  box-shadow:0 3px 10px rgba(196,113,74,.3)
-}
-.nudge-badge-num{font-size:22px;font-weight:800;color:#fff;line-height:1}
-.nudge-badge-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:.06em;text-transform:uppercase}
+.nudge-txt{font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;font-style:italic;color:var(--terra)}
+.nudge-sub{font-size:12px;color:var(--rose);margin-top:2px}
+.nudge-badge{background:linear-gradient(145deg,#d4836a,#c4714a);border-radius:12px;padding:7px 13px;text-align:center;flex-shrink:0;box-shadow:0 3px 10px rgba(196,113,74,.3)}
+.nudge-n{font-size:20px;font-weight:800;color:#fff;line-height:1}
+.nudge-lbl{font-size:9px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:.06em;text-transform:uppercase}
 
-/* ── day strip ── */
-.day-strip{display:flex;gap:7px;margin-bottom:26px}
-.day-cell{
-  flex:1;
-  background:rgba(255,255,255,.8);
-  border-radius:18px;padding:11px 4px 10px;
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  border:1.5px solid rgba(255,255,255,.95);
-  box-shadow:0 2px 8px var(--shadow),0 1px 2px var(--shadow2);
-  transition:all .2s
-}
-.day-cell.today{
-  background:linear-gradient(145deg,#fdf0e8,#f8e4d4);
-  border-color:rgba(196,113,74,.3);
-  box-shadow:0 4px 16px rgba(196,113,74,.15)
-}
-.day-letter{font-size:10px;font-weight:700;color:var(--text4);letter-spacing:.06em}
-.day-cell.today .day-letter{color:var(--terra)}
-.day-num{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:20px;font-weight:400;color:var(--text);line-height:1
-}
-.day-cell.today .day-num{color:var(--terra2);font-weight:500}
-.day-dot{
-  width:5px;height:5px;border-radius:50%;
-  background:linear-gradient(135deg,#d4836a,#c4714a);
-  opacity:0;transition:opacity .3s;
-  box-shadow:0 1px 3px rgba(196,113,74,.4)
-}
-.day-dot.vis{opacity:1}
-
-/* ── section label ── */
-.section-label{
-  font-size:10px;font-weight:700;color:var(--text4);
-  letter-spacing:.16em;text-transform:uppercase;
-  margin:4px 0 14px;
-  display:flex;align-items:center;gap:10px
-}
-.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(196,113,74,.15),transparent)}
-
-/* ── habit cards ── */
-.habit-stack{display:flex;flex-direction:column;gap:12px;margin-bottom:30px}
-.hcard{
-  background:var(--card);
-  border-radius:24px;overflow:hidden;
-  border:1px solid rgba(196,113,74,.1);
-  box-shadow:0 4px 20px var(--shadow),0 1px 4px var(--shadow2);
-  transition:all .25s
-}
-.hcard:hover{box-shadow:0 8px 32px rgba(100,60,30,.1),0 2px 6px var(--shadow2);transform:translateY(-1px)}
-.hcard.done{opacity:.8}
-.hcard-top{display:flex;align-items:center;padding:20px 20px 18px 22px;gap:15px}
-.hcard-emoji{font-size:28px;flex-shrink:0;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1))}
-.hcard-info{flex:1;min-width:0}
-.hcard-name{
-  font-size:16px;font-weight:700;color:var(--text);
-  display:flex;align-items:center;gap:8px
-}
-.hcard.done .hcard-name-text{color:var(--text4);text-decoration:line-through;text-decoration-color:var(--text4)}
-.hcard-sub{font-size:12px;color:var(--text3);font-weight:500;margin-top:4px}
-.hcard-sub .streak{
-  color:var(--terra);font-weight:700;
-  background:rgba(196,113,74,.1);
-  padding:1px 7px;border-radius:6px;font-size:11px
-}
-.edit-habit-btn{
-  background:none;border:none;cursor:pointer;
-  font-size:13px;color:var(--text4);padding:3px 5px;
-  border-radius:8px;transition:all .15s;flex-shrink:0
-}
-.edit-habit-btn:hover{color:var(--terra);background:rgba(196,113,74,.1)}
-.check-btn{
-  width:34px;height:34px;border-radius:50%;
-  border:2px solid rgba(196,113,74,.25);background:transparent;
-  cursor:pointer;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .25s;
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.04)
-}
-.check-btn:hover:not(.checked){border-color:var(--terra);background:rgba(196,113,74,.08)}
-.check-btn.checked{
-  background:linear-gradient(145deg,#d4836a,#c4714a);
-  border-color:transparent;
-  box-shadow:0 3px 10px rgba(196,113,74,.4)
-}
-.check-icon{opacity:0;transform:scale(0);transition:all .22s cubic-bezier(.34,1.56,.64,1)}
-.check-btn.checked .check-icon{opacity:1;transform:scale(1)}
-
-.hcard-bottom{
-  border-top:1px solid rgba(196,113,74,.07);
-  padding:13px 22px;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;cursor:pointer;min-height:48px;
-  background:linear-gradient(135deg,#fdf9f4,#faf4ec);
-  transition:background .15s
-}
-.hcard-bottom:hover{background:linear-gradient(135deg,#faf4ec,#f6ede0)}
-.hcard-note-text{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:15px;color:var(--text2);line-height:1.45;flex:1;font-style:italic
-}
-.hcard-note-add{font-size:13px;color:var(--text4);font-weight:500;transition:color .15s}
-.hcard-bottom:hover .hcard-note-add{color:var(--terra)}
-.hcard-note-action{
-  font-size:10px;color:var(--text4);font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;
-  white-space:nowrap;flex-shrink:0;
-  background:rgba(196,113,74,.1);padding:4px 10px;border-radius:8px
-}
-
-/* ── reading nights ── */
-.nights-wrap{
-  border-top:1px solid rgba(196,113,74,.07);
-  padding:16px 22px 18px;
-  background:linear-gradient(135deg,#fdf9f4,#faf4ec)
-}
-.nights-grid{display:flex;gap:6px}
-.night-btn{
-  flex:1;height:38px;border-radius:12px;
-  border:2px solid rgba(196,113,74,.15);
-  background:rgba(255,255,255,.7);
-  cursor:pointer;font-size:11px;font-weight:700;color:var(--text4);
-  transition:all .2s;letter-spacing:.04em
-}
-.night-btn:hover:not(.on){border-color:rgba(196,113,74,.3);color:var(--terra)}
-.night-btn.on{
-  border-color:transparent;
-  background:linear-gradient(145deg,#d4836a,#c4714a);
-  color:#fff;box-shadow:0 2px 8px rgba(196,113,74,.3)
-}
-.nights-count{font-size:13px;color:var(--text3);font-weight:600}
-.nights-count span{color:var(--terra);font-weight:800}
-
-/* ── reading book row ── */
-.reading-book{
-  display:flex;align-items:center;gap:12px;
-  background:rgba(255,255,255,.8);
-  border-radius:14px;padding:11px 16px;
-  cursor:pointer;
-  border:1.5px solid rgba(196,113,74,.12);
-  box-shadow:0 1px 4px var(--shadow2);
-  transition:all .2s
-}
-.reading-book:hover{border-color:rgba(196,113,74,.3);box-shadow:0 3px 10px var(--shadow);transform:translateY(-1px)}
-.reading-book-emoji{font-size:20px;flex-shrink:0}
-.reading-book-title{
-  flex:1;font-size:14px;font-weight:600;color:var(--text);
-  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:15px
-}
-.reading-book-edit{font-size:10px;font-weight:700;color:var(--text4);letter-spacing:.08em;text-transform:uppercase}
-
-/* ── star rating ── */
-.stars-row{display:flex;gap:2px}
-.star-btn{
-  background:none;border:none;cursor:pointer;
-  font-size:24px;color:rgba(196,113,74,.2);transition:all .15s;padding:0;line-height:1
-}
-.star-btn.lit{color:#d4943a;filter:drop-shadow(0 1px 3px rgba(212,148,58,.4))}
-.star-btn:hover{color:#d4943a;transform:scale(1.15)}
-
-/* ── spending ── */
-.spend-wrap{
-  border-top:1px solid rgba(196,113,74,.07);
-  padding:16px 22px 18px;
-  background:linear-gradient(135deg,#fdf9f4,#faf4ec)
-}
-.spend-amt-row{display:flex;align-items:baseline;gap:8px;margin-bottom:12px}
-.spend-amt{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:38px;font-weight:400;line-height:1;letter-spacing:-1px
-}
-.spend-amt.ok{color:var(--terra)}
-.spend-amt.warn{color:#c48838}
-.spend-amt.over{color:#c04040}
-.spend-budget{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:20px;color:var(--text4);font-weight:400
-}
-.spend-via{
-  font-size:10px;color:var(--text4);font-weight:700;margin-left:auto;
-  background:rgba(196,113,74,.1);padding:3px 9px;border-radius:8px;
-  letter-spacing:.08em;text-transform:uppercase
-}
-.spend-bar-track{
-  height:6px;background:rgba(196,113,74,.1);
-  border-radius:6px;overflow:hidden;margin-bottom:10px
-}
-.spend-bar-fill{height:100%;border-radius:6px;transition:width .8s cubic-bezier(.4,0,.2,1)}
-.spend-bar-fill.ok{background:linear-gradient(90deg,#d4836a,#c4714a)}
-.spend-bar-fill.over{background:linear-gradient(90deg,#e07070,#c04040)}
-.spend-status{font-size:13px;font-weight:700}
-.spend-status.ok{color:var(--terra)}
-.spend-status.over{color:#c04040}
-.spend-status.warn{color:#c48838}
-.spend-manual{display:flex;gap:8px;margin-top:14px}
-.spend-manual input{
-  flex:1;background:rgba(255,255,255,.8);
-  border:1.5px solid rgba(196,113,74,.18);
-  border-radius:12px;padding:11px 15px;font-size:14px;color:var(--text);outline:none;transition:all .2s
-}
-.spend-manual input:focus{border-color:var(--terra);box-shadow:0 0 0 3px rgba(196,113,74,.1)}
-.spend-manual button{
-  background:linear-gradient(145deg,#d4836a,#c4714a);color:#fff;border:none;
-  border-radius:12px;padding:11px 18px;font-size:14px;font-weight:700;cursor:pointer;
-  box-shadow:0 2px 8px rgba(196,113,74,.3);transition:all .2s
-}
-.spend-manual button:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(196,113,74,.35)}
-
-/* ── memory card ── */
-.memory-card{
-  background:linear-gradient(145deg,#fdf0e6,#f9e8d8);
-  border-radius:24px;padding:20px 22px;margin-bottom:30px;
-  border:1px solid rgba(196,113,74,.15);
-  box-shadow:0 4px 16px rgba(196,113,74,.1)
-}
-.memory-item{display:flex;gap:13px;margin-bottom:12px}
-.memory-item:last-child{margin-bottom:0}
-.memory-emoji{font-size:20px;flex-shrink:0;margin-top:1px}
-.memory-text{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:16px;color:var(--text2);line-height:1.55;flex:1;font-style:italic
-}
-.memory-habit{font-weight:600;color:var(--terra2);font-style:normal}
-
-/* ── history stats ── */
-.stat-strip{display:flex;gap:10px;margin-bottom:22px}
+/* ─── history ─────────────────────────────────────────── */
+.stat-row{display:flex;gap:10px;margin-bottom:22px}
 .stat-card{
-  flex:1;background:var(--card);
-  border-radius:22px;padding:18px 16px 16px;
-  border:1px solid rgba(196,113,74,.1);
-  box-shadow:0 4px 16px var(--shadow)
+  flex:1;background:var(--card);border-radius:20px;
+  padding:16px 14px 14px;border:1px solid rgba(196,113,74,.1);
+  box-shadow:0 4px 14px var(--sh)
 }
-.stat-val{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:40px;font-weight:300;color:var(--text);line-height:1
-}
-.stat-lbl{font-size:10px;font-weight:700;color:var(--text4);letter-spacing:.1em;text-transform:uppercase;margin-top:5px}
-
-/* ── history list ── */
+.stat-v{font-family:'Cormorant Garamond',Georgia,serif;font-size:38px;font-weight:300;color:var(--ink);line-height:1}
+.stat-l{font-size:10px;font-weight:700;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase;margin-top:5px}
 .hist-list{display:flex;flex-direction:column;gap:8px}
 .hist-row{
-  background:var(--card);
-  border-radius:20px;
-  padding:14px 18px;display:flex;align-items:center;gap:12px;
+  background:var(--card);border-radius:18px;padding:13px 16px;
+  display:flex;align-items:center;gap:12px;
   border:1.5px solid rgba(196,113,74,.08);
-  box-shadow:0 2px 10px var(--shadow2);cursor:pointer;transition:all .2s
+  box-shadow:0 2px 8px var(--sh2);cursor:pointer;transition:all .2s
 }
-.hist-row:hover{transform:translateY(-1px);box-shadow:0 6px 20px var(--shadow);border-color:rgba(196,113,74,.2)}
-.hist-row.current{border-color:rgba(196,113,74,.4);background:linear-gradient(135deg,#fdf5ef,#faf0e6)}
-.hist-date{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:15px;font-weight:400;color:var(--text3);
-  width:76px;flex-shrink:0;font-style:italic
-}
-.hist-pips{display:flex;gap:5px;flex:1}
-.hist-pip{
-  width:32px;height:32px;border-radius:11px;
-  background:rgba(196,113,74,.06);
-  display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s
-}
-.hist-pip.done{background:rgba(196,113,74,.12)}
+.hist-row:hover{transform:translateY(-1px);box-shadow:0 5px 16px var(--sh);border-color:rgba(196,113,74,.2)}
+.hist-row.cur{border-color:rgba(196,113,74,.38);background:linear-gradient(135deg,#fdf5ef,#faf0e6)}
+.hist-date{font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;font-style:italic;color:var(--ink3);width:72px;flex-shrink:0}
+.hist-pips{display:flex;gap:5px;flex:1;flex-wrap:wrap}
+.hist-pip{width:28px;height:28px;border-radius:9px;background:rgba(196,113,74,.07);display:flex;align-items:center;justify-content:center;font-size:14px;transition:background .2s}
+.hist-pip.done{background:rgba(196,113,74,.14)}
 .hist-pip.perfect{background:linear-gradient(145deg,#d4836a,#c4714a);box-shadow:0 2px 6px rgba(196,113,74,.3)}
-.hist-score{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:16px;font-weight:400;color:var(--text4);width:32px;text-align:right
-}
-.hist-score.full{color:var(--terra)}
+.hist-sc{font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;font-weight:400;color:var(--ink4);width:28px;text-align:right}
+.hist-sc.full{color:var(--terra)}
 
-/* ── sheets / modals ── */
+/* ─── overlays / sheets ───────────────────────────────── */
 .overlay{
-  position:fixed;inset:0;
-  background:rgba(20,10,5,.4);
-  backdrop-filter:blur(6px);
-  z-index:100;display:flex;align-items:flex-end;justify-content:center;
-  opacity:0;transition:opacity .25s;pointer-events:none
+  position:fixed;inset:0;background:rgba(20,10,5,.42);
+  backdrop-filter:blur(5px);z-index:100;
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s
 }
 .overlay.open{opacity:1;pointer-events:all}
 .sheet{
-  background:var(--card);
-  border-radius:32px 32px 0 0;
-  width:100%;max-width:430px;padding:0 26px 52px;
-  max-height:90vh;overflow-y:auto;
+  background:var(--card);border-radius:30px 30px 0 0;
+  width:100%;max-width:430px;padding:0 24px 52px;
+  max-height:92vh;overflow-y:auto;
   transform:translateY(100%);
-  transition:transform .3s cubic-bezier(.32,0,.67,0);
-  box-shadow:0 -8px 40px rgba(100,60,30,.12)
+  box-shadow:0 -8px 40px rgba(100,60,30,.12);
+  transition:transform .3s cubic-bezier(.32,0,.67,0)
 }
 .overlay.open .sheet{transform:translateY(0);transition:transform .38s cubic-bezier(.33,1,.68,1)}
-.sheet-bg{background:linear-gradient(160deg,#fdf8f2,#f8f0e4)}
-.sheet-handle{
-  width:44px;height:4px;
-  background:linear-gradient(90deg,rgba(196,113,74,.3),rgba(196,113,74,.1));
-  border-radius:3px;margin:18px auto 26px
+.sheet.sheet-warm{background:linear-gradient(160deg,#fdf8f2,#f8f0e4)}
+.sh-handle{width:44px;height:4px;background:linear-gradient(90deg,rgba(196,113,74,.3),rgba(196,113,74,.1));border-radius:3px;margin:16px auto 24px}
+.sh-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:4px}
+.sh-sub{font-size:14px;color:var(--ink3);margin-bottom:24px;line-height:1.5}
+.sh-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.sh-emoji{font-size:30px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1))}
+
+/* ─── field chips (multi-select) ──────────────────────── */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{
+  padding:9px 16px;border-radius:20px;border:1.5px solid rgba(196,113,74,.2);
+  background:#fdf9f4;font-size:14px;font-weight:600;color:var(--ink3);
+  cursor:pointer;transition:all .2s
 }
-.sheet-title{
+.chip.sel{background:var(--terra-pale);border-color:var(--terra);color:var(--terra)}
+.chip:hover:not(.sel){border-color:rgba(196,113,74,.35)}
+
+/* ─── star rating ─────────────────────────────────────── */
+.stars{display:flex;gap:4px;margin-bottom:4px}
+.star{font-size:28px;cursor:pointer;color:rgba(196,113,74,.18);transition:all .15s;line-height:1}
+.star.on{color:#d4943a;filter:drop-shadow(0 1px 3px rgba(212,148,58,.4))}
+.star:hover{transform:scale(1.18)}
+
+/* ─── toggle switch ───────────────────────────────────── */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
+.toggle-row:last-child{border-bottom:none}
+.toggle-label{font-size:15px;font-weight:600;color:var(--ink)}
+.toggle-sub{font-size:12px;color:var(--ink3);margin-top:2px}
+.toggle{position:relative;width:48px;height:28px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-track{
+  position:absolute;inset:0;border-radius:14px;
+  background:#e0d8d0;transition:background .2s;cursor:pointer
+}
+.toggle input:checked + .toggle-track{background:linear-gradient(145deg,#d4836a,#c4714a)}
+.toggle-knob{
+  position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;
+  background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.15);transition:transform .2s
+}
+.toggle input:checked ~ .toggle-knob{transform:translateX(20px)}
+
+/* ─── spending card (full width) ─────────────────────── */
+.spend-card{
+  background:var(--card);border-radius:22px;
+  border:1px solid rgba(196,113,74,.1);box-shadow:0 4px 18px var(--sh);
+  overflow:hidden;cursor:pointer;transition:all .25s;margin-bottom:12px
+}
+.spend-card:hover{box-shadow:0 8px 30px rgba(100,60,30,.12);transform:translateY(-2px)}
+.spend-card.done::after{content:'';display:block;height:3px;background:linear-gradient(90deg,var(--terra-l),var(--terra));margin-top:-3px}
+.spend-top{padding:18px 20px 14px;display:flex;align-items:flex-start;gap:14px}
+.spend-body{padding:0 20px 18px}
+.spend-big{
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:26px;font-weight:400;color:var(--text);
-  margin-bottom:6px;font-style:italic
+  font-size:40px;font-weight:300;line-height:1
 }
-.sheet-sub{font-size:14px;color:var(--text3);margin-bottom:26px;line-height:1.5}
+.spend-big.ok{color:var(--terra)}
+.spend-big.warn{color:#c48838}
+.spend-big.over{color:#c04040}
+.spend-of{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;color:var(--ink4);font-weight:300}
+.spend-bar-bg{height:6px;background:rgba(196,113,74,.1);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.spend-bar{height:100%;border-radius:6px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.spend-bar.ok{background:linear-gradient(90deg,#d4836a,#c4714a)}
+.spend-bar.over{background:linear-gradient(90deg,#e07070,#c04040)}
+.spend-st{font-size:13px;font-weight:700}
+.spend-st.ok{color:var(--terra)}
+.spend-st.over{color:#c04040}
+.spend-st.warn{color:#c48838}
+.spend-via{font-size:10px;font-weight:700;color:var(--ink4);background:rgba(196,113,74,.1);padding:3px 9px;border-radius:8px;letter-spacing:.08em;text-transform:uppercase;margin-left:auto;flex-shrink:0}
+.spend-manual{display:flex;gap:8px;margin-top:12px}
+.spend-manual input{flex:1;background:linear-gradient(135deg,#fdf9f4,#faf5ee);border:1.5px solid rgba(196,113,74,.2);border-radius:12px;padding:11px 14px;font-size:14px;color:var(--ink);outline:none;transition:all .2s}
+.spend-manual input:focus{border-color:var(--terra);box-shadow:0 0 0 3px rgba(196,113,74,.1)}
+.spend-manual button{background:linear-gradient(145deg,#d4836a,#c4714a);color:#fff;border:none;border-radius:12px;padding:11px 18px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(196,113,74,.28)}
 
-/* ── timeline ── */
-.tl-item{display:flex;gap:14px;margin-bottom:14px}
-.tl-dot{
-  width:10px;height:10px;border-radius:50%;
-  background:linear-gradient(145deg,#d4836a,#c4714a);
-  flex-shrink:0;margin-top:5px;
-  box-shadow:0 2px 6px rgba(196,113,74,.3)
-}
-.tl-card{
-  flex:1;background:rgba(255,255,255,.85);
-  border-radius:18px;padding:14px 17px;
-  border:1.5px solid rgba(196,113,74,.1);
-  box-shadow:0 2px 8px var(--shadow2)
-}
-.tl-week{font-size:10px;font-weight:700;color:var(--text4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
-.tl-note{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:16px;color:var(--text);line-height:1.55;font-style:italic
-}
-.tl-empty{font-size:13px;color:var(--text4);font-style:italic}
-.tl-field{font-size:14px;color:var(--text);margin-bottom:6px;line-height:1.4}
-.tl-field:last-child{margin-bottom:0}
-.tl-flabel{
-  font-size:10px;font-weight:700;color:var(--terra);
-  letter-spacing:.08em;text-transform:uppercase;margin-right:8px;
-  background:rgba(196,113,74,.1);padding:2px 7px;border-radius:6px
-}
-
-/* ── confetti ── */
-.confetti-piece{position:fixed;top:-10px;border-radius:3px;pointer-events:none;z-index:200}
-@keyframes confetti-fall{
-  0%{transform:translateY(0) rotate(0deg);opacity:1}
-  80%{opacity:1}
-  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
-}
-
-/* ── celebration toast ── */
-.celebrate-toast{
-  position:fixed;left:50%;transform:translateX(-50%) scale(.8) translateY(20px);
-  bottom:110px;z-index:201;
-  background:rgba(255,253,249,.97);
-  backdrop-filter:blur(20px);
-  border-radius:28px;padding:22px 32px;
+/* ─── celebration ─────────────────────────────────────── */
+.confetti-piece{position:fixed;top:-10px;border-radius:3px;pointer-events:none;z-index:300}
+@keyframes cf-fall{0%{transform:translateY(0) rotate(0deg);opacity:1}85%{opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.toast{
+  position:fixed;left:50%;bottom:110px;z-index:301;
+  background:rgba(255,253,249,.97);backdrop-filter:blur(20px);
+  border-radius:26px;padding:20px 30px;
   border:1px solid rgba(196,113,74,.15);
-  box-shadow:0 16px 60px rgba(140,68,40,.2),0 4px 12px rgba(0,0,0,.06);
-  text-align:center;
-  opacity:0;transition:all .45s cubic-bezier(.34,1.56,.64,1);
-  pointer-events:none;white-space:nowrap
+  box-shadow:0 16px 60px rgba(140,68,40,.18),0 4px 12px rgba(0,0,0,.06);
+  text-align:center;pointer-events:none;white-space:nowrap;
+  transform:translateX(-50%) scale(.8) translateY(20px);opacity:0;
+  transition:all .45s cubic-bezier(.34,1.56,.64,1)
 }
-.celebrate-toast.show{opacity:1;transform:translateX(-50%) scale(1) translateY(0)}
-.celebrate-emoji{font-size:36px;margin-bottom:8px}
-.celebrate-title{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:22px;font-weight:400;color:var(--text);
-  letter-spacing:-.2px;font-style:italic
+.toast.show{opacity:1;transform:translateX(-50%) scale(1) translateY(0)}
+.toast-em{font-size:34px;margin-bottom:6px}
+.toast-t{font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;font-style:italic;color:var(--ink)}
+.toast-s{font-size:13px;color:var(--ink3);margin-top:3px}
+
+/* ─── reading nights ──────────────────────────────────── */
+.night-grid{display:flex;gap:6px;margin-bottom:10px}
+.night-btn{
+  flex:1;height:36px;border-radius:10px;
+  border:2px solid rgba(196,113,74,.15);background:rgba(255,255,255,.7);
+  cursor:pointer;font-size:11px;font-weight:700;color:var(--ink4);transition:all .2s
 }
-.celebrate-sub{font-size:13px;color:var(--text3);margin-top:4px;font-weight:500}
+.night-btn.on{border-color:transparent;background:linear-gradient(145deg,#d4836a,#c4714a);color:#fff;box-shadow:0 2px 8px rgba(196,113,74,.28)}
 
-/* ── animations ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .35s cubic-bezier(.33,1,.68,1) both}
+/* ─── delete btn ──────────────────────────────────────── */
+.del-btn{
+  width:100%;padding:14px;border-radius:14px;border:1.5px solid rgba(200,50,50,.2);
+  background:rgba(200,50,50,.06);color:#c04040;font-size:15px;font-weight:700;cursor:pointer;
+  margin-top:20px;transition:all .2s
+}
+.del-btn:hover{background:rgba(200,50,50,.12)}
 
-@keyframes popIn{0%{transform:scale(.9);opacity:0}60%{transform:scale(1.02)}100%{transform:scale(1);opacity:1}}
-.pop-in{animation:popIn .3s cubic-bezier(.34,1.56,.64,1) both}
+/* ─── animations ──────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .32s cubic-bezier(.33,1,.68,1) both}
 </style>
 </head>
 <body>
 
-<!-- ══ ONBOARDING ══════════════════════════════════════════════════════════ -->
-<div id="ob-wrap">
-  <div class="ob-card" id="ob-card">
-    <!-- steps injected by JS -->
-  </div>
-</div>
-
-<!-- ══ MAIN APP ════════════════════════════════════════════════════════════ -->
-<div id="app" style="display:none">
+<!-- ══ MAIN APP ════════════════════════════════════════ -->
+<div id="pg-app" class="page active">
   <div id="topbar">
-    <div>
-      <div class="greeting-name" id="greeting-name"></div>
-      <div class="greeting-sub" id="greeting-sub"></div>
+    <div class="tb-left">
+      <div class="tb-name serif" id="tb-name">Hey, Sophie</div>
+      <div class="tb-sub" id="tb-sub">3 days left</div>
     </div>
-    <div class="nav-right">
-      <div class="tab-pills">
-        <button class="tab-pill active" id="tab-weekly" onclick="switchTab('weekly')">Weekly</button>
-        <button class="tab-pill" id="tab-history" onclick="switchTab('history')">History</button>
+    <div class="tb-right">
+      <div class="pill-tabs">
+        <button class="pill active" onclick="switchTab('weekly')">Week</button>
+        <button class="pill" onclick="switchTab('history')">History</button>
       </div>
-      <button class="icon-btn" onclick="openSheet('settings-sheet')" title="Settings">⚙️</button>
+      <button class="icon-btn" onclick="openSheet('sh-settings')" title="Settings">⚙️</button>
     </div>
   </div>
 
-  <!-- Week nav (shared) -->
-  <div class="week-nav">
-    <button class="week-nav-arrow" id="wk-prev" onclick="changeWeek(-1)">←</button>
-    <div>
-      <div class="week-label-big" id="wk-label"></div>
-      <div class="week-label-small" id="wk-sub"></div>
+  <div class="wk-nav">
+    <button class="wk-arr" id="wk-prev" onclick="changeWeek(-1)">←</button>
+    <div class="wk-mid">
+      <div class="wk-range" id="wk-range">May 19–25</div>
+      <div class="wk-now" id="wk-now">THIS WEEK</div>
     </div>
-    <button class="week-nav-arrow" id="wk-next" onclick="changeWeek(1)">→</button>
+    <button class="wk-arr" id="wk-next" onclick="changeWeek(1)">→</button>
   </div>
 
   <!-- Weekly screen -->
-  <div class="screen active" id="screen-weekly">
+  <div id="sc-weekly">
     <div id="nudge-wrap"></div>
-    <div class="progress-card" id="progress-card">
-      <div class="progress-eyebrow">This week</div>
-      <div class="progress-score">
-        <div class="progress-num" id="prog-num">0</div>
-        <div class="progress-denom" id="prog-denom">/6</div>
+    <div class="hero">
+      <div class="hero-ey">THIS WEEK</div>
+      <div class="hero-score">
+        <div class="hero-n serif" id="hero-n">0</div>
+        <div class="hero-d serif" id="hero-d">/0</div>
       </div>
-      <div class="progress-status" id="prog-status">Not started</div>
-      <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+      <div class="hero-status serif" id="hero-status">Not started</div>
+      <div class="hero-track"><div class="hero-fill" id="hero-fill" style="width:0%"></div></div>
     </div>
     <div class="day-strip" id="day-strip"></div>
-    <div class="section-label">Habits</div>
-    <div class="habit-stack" id="habit-stack"></div>
+    <div class="sec-label">Habits</div>
+    <div class="dash-grid" id="dash-grid"></div>
     <div id="memory-wrap"></div>
   </div>
 
   <!-- History screen -->
-  <div class="screen" id="screen-history">
-    <div class="stat-strip" id="stat-strip"></div>
-    <div class="section-label" style="margin-bottom:12px">Last 12 weeks</div>
+  <div id="sc-history" style="display:none">
+    <div class="stat-row" id="stat-row"></div>
+    <div class="sec-label" style="margin-bottom:12px">Last 12 weeks</div>
     <div class="hist-list" id="hist-list"></div>
   </div>
 </div>
 
-<!-- ══ OVERLAYS ═══════════════════════════════════════════════════════════ -->
+<!-- ══ OVERLAYS ════════════════════════════════════════ -->
 
-<!-- Log note -->
-<div class="overlay" id="log-sheet" onclick="handleOverlayClick(event,'log-sheet')">
+<!-- Log habit sheet -->
+<div class="overlay" id="sh-log" onclick="maybeClose(event,'sh-log')">
   <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div id="log-sheet-content"></div>
+    <div class="sh-handle"></div>
+    <div id="sh-log-body"></div>
   </div>
 </div>
 
-<!-- Date timeline -->
-<div class="overlay" id="timeline-sheet" onclick="handleOverlayClick(event,'timeline-sheet')">
-  <div class="sheet sheet-bg">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title" id="tl-title"></div>
-    <div class="sheet-sub">Every date logged</div>
-    <div id="tl-list"></div>
-    <button class="btn btn-primary" style="margin-top:16px" id="tl-log-btn" onclick="openLogFromTimeline()">+ Log this week</button>
+<!-- Add / Edit habit sheet -->
+<div class="overlay" id="sh-habit" onclick="maybeClose(event,'sh-habit')">
+  <div class="sheet sheet-warm">
+    <div class="sh-handle"></div>
+    <div id="sh-habit-body"></div>
   </div>
 </div>
 
-<!-- Edit habit -->
-<div class="overlay" id="edit-sheet" onclick="handleOverlayClick(event,'edit-sheet')">
+<!-- Settings sheet -->
+<div class="overlay" id="sh-settings" onclick="maybeClose(event,'sh-settings')">
   <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title">Edit habit</div>
-    <div class="sheet-sub">Make it personal to you</div>
-    <div class="field-wrap">
-      <div class="field-label">Name</div>
-      <input type="text" class="field-input" id="edit-label-input" placeholder="Habit name"/>
-    </div>
-    <div class="field-wrap">
-      <div class="field-label">Emoji</div>
-      <div class="emoji-grid" id="edit-emoji-grid"></div>
-    </div>
-    <div style="display:flex;gap:10px">
-      <button class="btn-sm btn-sm-ghost" onclick="closeSheet('edit-sheet')">Cancel</button>
-      <button class="btn-sm btn-sm-primary" style="flex:1" onclick="saveEditHabit()">Save</button>
-    </div>
-  </div>
-</div>
-
-<!-- Settings -->
-<div class="overlay" id="settings-sheet" onclick="handleOverlayClick(event,'settings-sheet')">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title">Settings</div>
-    <div class="field-wrap" style="margin-top:8px">
-      <div class="field-label">Your name</div>
-      <input type="text" class="field-input" id="settings-name" placeholder="Your name"/>
-    </div>
-    <div class="field-wrap">
-      <div class="field-label">Weekly spending budget</div>
-      <div class="prefix-row">
-        <span class="prefix-sign">$</span>
-        <input type="number" class="prefix-input" id="settings-budget" placeholder="500"/>
+    <div class="sh-handle"></div>
+    <div class="sh-title">Settings</div>
+    <div style="margin-top:20px">
+      <div class="inp-wrap">
+        <div class="inp-label">Your name</div>
+        <input type="text" class="inp" id="set-name"/>
+      </div>
+      <div class="inp-wrap">
+        <div class="inp-label">Weekly spending budget</div>
+        <div style="display:flex;align-items:center;background:linear-gradient(135deg,#fdf9f4,#faf5ee);border:1.5px solid rgba(196,113,74,.2);border-radius:14px;overflow:hidden">
+          <span style="padding:14px 6px 14px 16px;font-size:16px;color:var(--terra);font-weight:700">$</span>
+          <input type="number" style="flex:1;background:transparent;border:none;padding:14px 16px 14px 4px;font-size:16px;color:var(--ink);outline:none" id="set-budget"/>
+        </div>
+      </div>
+      <div class="inp-wrap">
+        <div class="inp-label">Up Bank token <span style="color:var(--ink4);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
+        <input type="password" class="inp" id="set-token" placeholder="up:yeah:••••••••"/>
+        <div style="font-size:12px;color:var(--ink3);margin-top:6px;line-height:1.5">Up app → Settings → API → Create token</div>
       </div>
     </div>
-    <div class="field-wrap">
-      <div class="field-label">Up Bank token <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
-      <input type="password" class="field-input" id="settings-token" placeholder="up:yeah:••••••••"/>
-      <div style="font-size:12px;color:#8a8078;margin-top:6px;line-height:1.5">Up app → Settings → API → Create token. Read-only.</div>
+    <div class="btn-row">
+      <button class="btn-sm btn-sm-g" onclick="closeSheet('sh-settings')">Cancel</button>
+      <button class="btn-sm btn-sm-p" style="flex:1" onclick="saveSettings()">Save</button>
     </div>
-    <button class="btn btn-primary" onclick="saveSettings()">Save</button>
   </div>
 </div>
 
-<!-- Confetti container -->
-<div id="confetti-wrap" style="position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden"></div>
-<div class="celebrate-toast" id="celebrate-toast">
-  <div class="celebrate-emoji">🎉</div>
-  <div class="celebrate-title" id="celebrate-title"></div>
-  <div class="celebrate-sub" id="celebrate-sub"></div>
+<!-- Confetti + Toast -->
+<div id="confetti-wrap" style="position:fixed;inset:0;pointer-events:none;z-index:300;overflow:hidden"></div>
+<div class="toast" id="toast">
+  <div class="toast-em">🎉</div>
+  <div class="toast-t" id="toast-t"></div>
+  <div class="toast-s" id="toast-s"></div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════════════════════════════
-// CONSTANTS & STATE
-// ══════════════════════════════════════════════════════════════════════════════
-const STORAGE_KEY = 'ritual-v5';
-const EMOJIS = ['💼','🍷','🍳','🤝','📚','💳','✨','🌿','🎨','🏃','🧘','🎵','🌍','💪','🎯','🌱'];
-const DAY_LETTERS = ['M','T','W','T','F','S','S'];
-const DEFAULT_HABITS = [
-  {id:'career',   label:'Career conversation', prompt:'Who did you connect with?', emoji:'💼', type:'weekly', isDate:false},
-  {id:'date',     label:'Date',                 prompt:'Who with & where?',          emoji:'🍷', type:'weekly', isDate:true},
-  {id:'recipe',   label:'New recipe',           prompt:'What did you make?',         emoji:'🍳', type:'weekly', isDate:false},
-  {id:'friends',  label:'Friends catch-up',     prompt:'Who did you see?',           emoji:'🤝', type:'weekly', isDate:false},
-  {id:'reading',  label:'Reading',              prompt:'What are you reading?',      emoji:'📚', type:'nights', target:3, isDate:false},
-  {id:'spending', label:'Under spending goal',  prompt:'Weekly budget',              emoji:'💳', type:'spending', isDate:false},
+'use strict';
+
+// ══════════════════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════════════════
+const SK = 'ritual-v6';
+const DAYS = ['M','T','W','T','F','S','S'];
+const EMOJIS = ['💼','🍷','🍳','🤝','📚','💳','🏃','🧘','✈️','🎨','🎵','💪','🌿','📝','🎯','🌍','🍿','🧁','☕','🛁','🎭','🌅','💐','🥂'];
+
+// Field templates
+const TEMPLATES = [
+  {id:'person-place', name:'Person + Place', desc:'Great for dates, catch-ups, events', icon:'🤝', fields:[
+    {id:'who',   label:'Who',   type:'text', placeholder:'e.g. James, Sarah & Tom'},
+    {id:'where', label:'Where', type:'text', placeholder:'e.g. Ester, Newtown'},
+    {id:'note',  label:'Notes', type:'textarea', placeholder:'How was it?', optional:true},
+  ]},
+  {id:'person-topic', name:'Person + Topic', desc:'Career convos, mentoring, networking', icon:'💼', fields:[
+    {id:'who',   label:'Who',   type:'text', placeholder:'e.g. Sarah Chen, Google'},
+    {id:'topic', label:'Topic', type:'text', placeholder:'e.g. Product strategy, new role'},
+    {id:'note',  label:'Key takeaway', type:'textarea', placeholder:'What did you learn?', optional:true},
+  ]},
+  {id:'make-rate', name:'Make + Rate', desc:'Recipes, crafts, creative projects', icon:'🍳', fields:[
+    {id:'name',   label:'What',   type:'text', placeholder:'e.g. Mushroom risotto'},
+    {id:'rating', label:'Rating', type:'stars'},
+    {id:'note',   label:'Notes', type:'textarea', placeholder:'Would you make again?', optional:true},
+  ]},
+  {id:'book', name:'Book + Rating', desc:'Reading tracker', icon:'📚', fields:[
+    {id:'book',   label:'Book',   type:'text', placeholder:'e.g. Atomic Habits'},
+    {id:'author', label:'Author', type:'text', placeholder:'e.g. James Clear', optional:true},
+    {id:'rating', label:'Rating', type:'stars'},
+    {id:'note',   label:'Thoughts', type:'textarea', placeholder:'What did you think?', optional:true},
+  ]},
+  {id:'nights', name:'Night tracker', desc:'Track how many nights per week', icon:'🌙', fields:[], special:'nights', target:3},
+  {id:'spending', name:'Spending goal', desc:'Track weekly spend vs budget', icon:'💳', fields:[], special:'spending'},
+  {id:'simple', name:'Just done / not done', desc:'Simple weekly checkbox', icon:'✅', fields:[
+    {id:'note', label:'Notes', type:'textarea', placeholder:'Any details…', optional:true},
+  ]},
 ];
 
-let state = null;
-let currentWeek = getWeekKey();
+const DEFAULT_HABITS = [
+  {id:'career',   label:'Career conversation', emoji:'💼', templateId:'person-topic',  done:{}, entries:{}, streakCache:0},
+  {id:'date',     label:'Date',                emoji:'🍷', templateId:'person-place',  done:{}, entries:{}, streakCache:0},
+  {id:'recipe',   label:'New recipe',          emoji:'🍳', templateId:'make-rate',      done:{}, entries:{}, streakCache:0},
+  {id:'friends',  label:'Friends catch-up',    emoji:'🤝', templateId:'person-place',  done:{}, entries:{}, streakCache:0},
+  {id:'reading',  label:'Reading',             emoji:'📚', templateId:'book',           done:{}, entries:{}, nights:{}, streakCache:0},
+  {id:'spending', label:'Under spending goal', emoji:'💳', templateId:'spending',       done:{}, entries:{}, streakCache:0},
+];
+
+// ══════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════
+let S = null; // { userName, habits, budget, upToken, celebrated }
+let currentWeek = todayWeekKey();
 let currentTab = 'weekly';
 let loggingId = null;
-let editingId = null;
+let editingId = null; // null = new habit
+let obStep = 0;
+let obName = '';
+let obBudget = '';
+let obToken = '';
 let upSpend = null;
+let upLoading = false;
+let upError = null;
+let _starRating = 0;
+let _nightsSel = [];
 
-// ══════════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // DATE HELPERS
-// ══════════════════════════════════════════════════════════════════════════════
-function getWeekKey(d = new Date()) {
+// ══════════════════════════════════════════════════════
+function todayWeekKey(d = new Date()) {
   const x = new Date(d); x.setHours(0,0,0,0);
   x.setDate(x.getDate() - ((x.getDay()+6)%7));
   return x.toISOString().slice(0,10);
 }
+function nextWeekKey() {
+  const d = new Date(todayWeekKey()); d.setDate(d.getDate()+7);
+  return d.toISOString().slice(0,10);
+}
 function offsetWeek(wk, n) {
-  const d = new Date(wk); d.setDate(d.getDate() + n*7);
+  const d = new Date(wk); d.setDate(d.getDate()+n*7);
   return d.toISOString().slice(0,10);
 }
 function weekDates(wk) {
-  return Array.from({length:7}, (_,i) => {
-    const d = new Date(wk); d.setDate(d.getDate()+i); return d;
-  });
+  return Array.from({length:7}, (_,i) => { const d=new Date(wk); d.setDate(d.getDate()+i); return d; });
 }
 function fmtRange(wk) {
-  const dates = weekDates(wk);
-  const s = dates[0], e = dates[6];
+  const [s,e] = [weekDates(wk)[0], weekDates(wk)[6]];
   const mo = d => d.toLocaleDateString('en-AU',{month:'short'});
-  return s.getMonth()===e.getMonth()
-    ? `${mo(s)} ${s.getDate()}–${e.getDate()}`
-    : `${mo(s)} ${s.getDate()} – ${mo(e)} ${e.getDate()}`;
+  return s.getMonth()===e.getMonth() ? `${mo(s)} ${s.getDate()}–${e.getDate()}` : `${mo(s)} ${s.getDate()} – ${mo(e)} ${e.getDate()}`;
 }
 function daysLeft() {
   const now = new Date(); now.setHours(0,0,0,0);
-  const end = new Date(getWeekKey()); end.setDate(end.getDate()+6);
+  const end = new Date(todayWeekKey()); end.setDate(end.getDate()+6);
   return Math.max(0, Math.round((end-now)/86400000));
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // STORAGE
-// ══════════════════════════════════════════════════════════════════════════════
-function loadState() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || null; }
-  catch { return null; }
-}
-function saveState() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+// ══════════════════════════════════════════════════════
+function load() { try { return JSON.parse(localStorage.getItem(SK)) || null; } catch { return null; } }
+function save() { try { localStorage.setItem(SK, JSON.stringify(S)); } catch {} }
+
+// ══════════════════════════════════════════════════════
+// HABIT LOGIC
+// ══════════════════════════════════════════════════════
+function tmpl(h) { return TEMPLATES.find(t=>t.id===h.templateId) || TEMPLATES[TEMPLATES.length-1]; }
+
+function isHabitDone(h, wk) {
+  wk = wk || currentWeek;
+  const t = tmpl(h);
+  if (t.special === 'nights') return (h.nights[wk] || []).length >= (t.target||3);
+  return !!(h.done[wk]);
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// HABIT LOGIC
-// ══════════════════════════════════════════════════════════════════════════════
-function getEntry(id, wk) { return (state.data[`${wk||currentWeek}:${id}`] || {}); }
-function getNights(wk) { return state.data[`${wk||currentWeek}:reading:nights`] || []; }
-function isHabitDone(id, wk) {
-  wk = wk || currentWeek;
-  const h = state.habits.find(x=>x.id===id);
-  if (!h) return false;
-  if (h.type==='nights') return getNights(wk).length >= (h.target||3);
-  return !!(getEntry(id,wk).done);
-}
-function getStreak(id) {
-  let s=0, wk=currentWeek;
-  while (isHabitDone(id, wk)) { s++; wk=offsetWeek(wk,-1); }
-  return s;
-}
 function totalDone(wk) {
   wk = wk || currentWeek;
-  return state.habits.filter(h => isHabitDone(h.id, wk)).length;
+  return S.habits.filter(h => isHabitDone(h, wk)).length;
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// ONBOARDING
-// ══════════════════════════════════════════════════════════════════════════════
-let obStep = 0;
-let obName = '';
-let obHabits = DEFAULT_HABITS.map(h=>({...h}));
-let obBudget = '';
-let obToken = '';
-let obEditIdx = null;
-let obEditLabel = '';
-let obEditEmoji = '';
+function getStreak(h) {
+  let s=0, wk=currentWeek;
+  while (isHabitDone(h, wk)) { s++; wk=offsetWeek(wk,-1); if(s>52) break; }
+  return s;
+}
 
+function previewText(h, wk) {
+  wk = wk || currentWeek;
+  const e = h.entries[wk] || {};
+  if (e.who && e.where) return `${e.who} · ${e.where}`;
+  if (e.who) return e.who;
+  if (e.name) return e.name;
+  if (e.book) return e.book;
+  if (e.note) return e.note;
+  const t = tmpl(h);
+  if (t.special === 'nights') { const n = (h.nights[wk]||[]).length; return n > 0 ? `${n} nights` : ''; }
+  if (t.special === 'spending') {
+    const amt = upSpend !== null ? upSpend : (h.entries[wk]||{}).manualAmount;
+    if (amt != null) return `$${Number(amt).toFixed(0)} / $${S.budget}`;
+  }
+  return '';
+}
+
+// ══════════════════════════════════════════════════════
+// ONBOARDING
+// ══════════════════════════════════════════════════════
 function renderOb() {
-  const card = document.getElementById('ob-card');
-  if (obStep===0) {
-    card.innerHTML = `
-      <div class="ob-eyebrow">Welcome</div>
-      <div class="ob-title">What should we<br>call you?</div>
-      <div class="ob-sub">We'll personalise your weekly check-ins.</div>
-      <div class="field-wrap">
-        <input type="text" class="field-input" id="ob-name" placeholder="Your name" autocomplete="given-name"/>
+  const box = document.getElementById('ob-box');
+  if (obStep === 0) {
+    box.innerHTML = `
+      <div class="ob-logo">Ritual.</div>
+      <div class="ob-tag">Your weekly life tracker — intentional living made simple.</div>
+      <div class="ob-step-label">Getting started</div>
+      <div class="ob-q">What should we call you?</div>
+      <div class="inp-wrap">
+        <input type="text" class="inp" id="ob-name-inp" placeholder="Your name" autocomplete="given-name"/>
       </div>
-      <button class="btn btn-primary" id="ob-next1" onclick="obNext1()" disabled>Continue →</button>
-    `;
-    const inp = document.getElementById('ob-name');
+      <button class="btn btn-p" id="ob-btn1" disabled onclick="obNext()">Continue →</button>`;
+    const inp = document.getElementById('ob-name-inp');
+    inp.addEventListener('input', e => { obName=e.target.value.trim(); document.getElementById('ob-btn1').disabled=!obName; });
+    inp.addEventListener('keydown', e => { if(e.key==='Enter'&&obName) obNext(); });
     inp.focus();
-    inp.addEventListener('input', e => {
-      obName = e.target.value.trim();
-      document.getElementById('ob-next1').disabled = !obName;
-    });
-    inp.addEventListener('keydown', e => { if(e.key==='Enter'&&obName) obNext1(); });
-  } else if (obStep===1 && obEditIdx===null) {
-    card.innerHTML = `
-      <div class="ob-eyebrow">Step 2 of 3</div>
-      <div class="ob-title">Make it yours</div>
-      <div class="ob-sub">Tap any habit to rename it. Totally optional.</div>
-      ${obHabits.map((h,i)=>`
-        <div class="ob-habit-row" onclick="obStartEdit(${i})">
-          <span class="ob-habit-emoji">${h.emoji}</span>
-          <div class="ob-habit-label">${h.label}</div>
-          <div class="ob-habit-edit">Edit</div>
-        </div>`).join('')}
-      <button class="btn btn-primary" style="margin-top:8px" onclick="obStep=2;renderOb()">Continue →</button>
-    `;
-  } else if (obStep===1 && obEditIdx!==null) {
-    card.innerHTML = `
-      <div class="ob-eyebrow">Customise habit</div>
-      <div class="ob-title">Rename it</div>
-      <div class="field-wrap">
-        <input type="text" class="field-input" id="ob-edit-inp" value="${obEditLabel}" placeholder="Habit name"/>
-      </div>
-      <div class="field-wrap">
-        <div class="field-label">Emoji</div>
-        <div class="emoji-grid">${EMOJIS.map(em=>`<button class="emoji-opt${obEditEmoji===em?' sel':''}" onclick="obSetEmoji('${em}')">${em}</button>`).join('')}</div>
-      </div>
-      <button class="btn btn-primary" onclick="obSaveEdit()">Save</button>
-    `;
-    document.getElementById('ob-edit-inp').focus();
-    document.getElementById('ob-edit-inp').addEventListener('input', e => { obEditLabel = e.target.value; });
-  } else if (obStep===2) {
-    card.innerHTML = `
-      <div class="ob-eyebrow">Step 3 of 3</div>
-      <div class="ob-title">Spending goal 💳</div>
-      <div class="ob-sub">Set your weekly budget. Connect Up Bank to sync your spend automatically.</div>
-      <div class="field-wrap">
-        <div class="field-label">Weekly budget</div>
-        <div class="prefix-row">
-          <span class="prefix-sign">$</span>
-          <input type="number" class="prefix-input" id="ob-budget" placeholder="500" value="${obBudget}"/>
+  } else if (obStep === 1) {
+    box.innerHTML = `
+      <div class="ob-step-label">Step 2 of 3</div>
+      <div class="ob-q">Set your spending goal</div>
+      <div class="ob-hint">We'll track your weekly spend automatically with Up Bank, or you can enter it manually.</div>
+      <div class="inp-wrap">
+        <div class="inp-label">Weekly budget</div>
+        <div style="display:flex;align-items:center;background:linear-gradient(135deg,#fdf9f4,#faf5ee);border:1.5px solid rgba(196,113,74,.2);border-radius:14px;overflow:hidden">
+          <span style="padding:14px 6px 14px 16px;font-size:16px;color:var(--terra);font-weight:700">$</span>
+          <input type="number" style="flex:1;background:transparent;border:none;padding:14px 16px 14px 4px;font-size:16px;color:var(--ink);outline:none" id="ob-budget-inp" placeholder="500" value="${obBudget}"/>
         </div>
       </div>
-      <div class="field-wrap">
-        <div class="field-label">Up Bank token <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
-        <input type="password" class="field-input" id="ob-token" placeholder="up:yeah:••••••••" value="${obToken}"/>
-        <div style="font-size:12px;color:#8a8078;margin-top:6px;line-height:1.5">Up app → Settings → API → Create token</div>
+      <div class="inp-wrap">
+        <div class="inp-label">Up Bank token <span style="color:var(--ink4);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
+        <input type="password" class="inp" id="ob-token-inp" placeholder="up:yeah:••••••••" value="${obToken}"/>
+        <div style="font-size:12px;color:var(--ink3);margin-top:6px;line-height:1.5">Up app → Settings → API → Create token</div>
       </div>
-      <button class="btn btn-primary" id="ob-finish" onclick="obFinish()" ${!obBudget?'disabled':''}>Let's go →</button>
-      <button class="btn btn-ghost" onclick="obSkip()">Skip for now</button>
-    `;
-    const bi = document.getElementById('ob-budget');
-    bi.addEventListener('input', e => {
-      obBudget = e.target.value;
-      document.getElementById('ob-finish').disabled = !obBudget;
-    });
-    document.getElementById('ob-token').addEventListener('input', e => { obToken = e.target.value; });
+      <button class="btn btn-p" id="ob-btn2" onclick="obFinish()" ${!obBudget?'disabled':''}>Let's go →</button>
+      <button class="btn btn-g" onclick="obFinish(true)" style="margin-top:10px">Skip for now</button>`;
+    const bi = document.getElementById('ob-budget-inp');
+    bi.addEventListener('input', e => { obBudget=e.target.value; document.getElementById('ob-btn2').disabled=!obBudget; });
+    document.getElementById('ob-token-inp').addEventListener('input', e => { obToken=e.target.value; });
   }
 }
 
-function obNext1() { obStep=1; renderOb(); }
-function obStartEdit(i) { obEditIdx=i; obEditLabel=obHabits[i].label; obEditEmoji=obHabits[i].emoji; renderOb(); }
-function obSetEmoji(em) { obEditEmoji=em; renderOb(); }
-function obSaveEdit() {
-  if (obEditIdx!==null) { obHabits[obEditIdx]={...obHabits[obEditIdx],label:obEditLabel||obHabits[obEditIdx].label,emoji:obEditEmoji}; }
-  obEditIdx=null; renderOb();
-}
-function obFinish() {
-  obBudget = document.getElementById('ob-budget').value || '500';
-  obToken  = document.getElementById('ob-token').value.trim();
-  initState(obName, obHabits, parseFloat(obBudget)||500, obToken);
-}
-function obSkip() { initState(obName, obHabits, 500, ''); }
-
-function initState(name, habits, budget, upToken) {
-  state = { userName:name, habits, data:{}, celebrated:{}, budget, upToken };
-  saveState();
-  document.getElementById('ob-wrap').style.display='none';
-  document.getElementById('app').style.display='block';
+function obNext() { obStep=1; renderOb(); }
+function obFinish(skip) {
+  if (!skip) {
+    obBudget = document.getElementById('ob-budget-inp')?.value || '500';
+    obToken  = document.getElementById('ob-token-inp')?.value.trim() || '';
+  }
+  S = {
+    userName: obName,
+    habits: DEFAULT_HABITS.map(h => ({...h, done:{}, entries:{}, nights:{}})),
+    budget: parseFloat(obBudget)||500,
+    upToken: obToken,
+    celebrated: {}
+  };
+  save();
   bootApp();
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// APP BOOT
-// ══════════════════════════════════════════════════════════════════════════════
-function getNextWeekKey() {
-  // Returns next Monday's date key (upcoming week to track)
-  const now = new Date(); now.setHours(0,0,0,0);
-  const thisMon = new Date(now); thisMon.setDate(now.getDate() - ((now.getDay()+6)%7));
-  const nextMon = new Date(thisMon); nextMon.setDate(thisMon.getDate()+7);
-  return nextMon.toISOString().slice(0,10);
-}
-
+// ══════════════════════════════════════════════════════
+// BOOT
+// ══════════════════════════════════════════════════════
 function bootApp() {
-  // First boot: show next week so user starts fresh on Monday
-  const hasPriorData = Object.keys(state.data).length > 0;
-  currentWeek = hasPriorData ? getWeekKey() : getNextWeekKey();
+  document.getElementById('pg-onboard').classList.remove('active');
+  document.getElementById('pg-app').classList.add('active');
+  // Start from next Monday on fresh install
+  const hasData = S.habits.some(h => Object.keys(h.done||{}).length > 0);
+  if (!hasData) currentWeek = nextWeekKey();
   renderAll();
-  if (state.upToken) fetchUpSpend();
+  if (S.upToken) fetchUp();
 }
 
+// ══════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════
 function renderAll() {
-  const firstName = state.userName.split(' ')[0];
+  const isNow = currentWeek === todayWeekKey();
   const dl = daysLeft();
-  const isNow = currentWeek === getWeekKey();
+  const fn = S.userName.split(' ')[0];
 
-  // Greeting
-  document.getElementById('greeting-name').textContent = `Hey, ${firstName} 👋`;
-  document.getElementById('greeting-sub').textContent = isNow
+  document.getElementById('tb-name').textContent = `Hey, ${fn}`;
+  document.getElementById('tb-sub').textContent = isNow
     ? (dl===0 ? 'Last day of the week' : `${dl} day${dl!==1?'s':''} left`)
     : fmtRange(currentWeek);
-
-  // Week nav
-  document.getElementById('wk-label').textContent = fmtRange(currentWeek);
-  document.getElementById('wk-sub').textContent = isNow ? 'This week' : '';
+  document.getElementById('wk-range').textContent = fmtRange(currentWeek);
+  document.getElementById('wk-now').textContent = isNow ? 'THIS WEEK' : '';
   document.getElementById('wk-next').disabled = isNow;
 
-  if (currentTab==='weekly') renderWeekly();
+  if (currentTab === 'weekly') renderWeekly();
   else renderHistory();
 }
 
 function renderWeekly() {
   renderNudge();
-  renderProgress();
+  renderHero();
   renderDayStrip();
-  renderHabits();
+  renderDashGrid();
   renderMemory();
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// RENDER WEEKLY
-// ══════════════════════════════════════════════════════════════════════════════
 function renderNudge() {
-  const isNow = currentWeek===getWeekKey();
-  const dl = daysLeft();
-  const rem = state.habits.length - totalDone();
-  const wrap = document.getElementById('nudge-wrap');
-  if (isNow && rem>0 && dl<=2) {
-    wrap.innerHTML = `
-      <div class="nudge fade-up">
-        <div>
-          <div class="nudge-text">Don't break your streak!</div>
-          <div class="nudge-sub">${rem} habit${rem!==1?'s':''} still to log</div>
-        </div>
-        <div class="nudge-badge">
-          <div class="nudge-badge-num">${dl}</div>
-          <div class="nudge-badge-label">day${dl!==1?'s':''} left</div>
-        </div>
-      </div>`;
-  } else { wrap.innerHTML=''; }
+  const isNow = currentWeek===todayWeekKey(), dl=daysLeft(), rem=S.habits.length-totalDone();
+  document.getElementById('nudge-wrap').innerHTML = isNow&&rem>0&&dl<=2 ? `
+    <div class="nudge fade-up">
+      <div>
+        <div class="nudge-txt">Don't break your streak!</div>
+        <div class="nudge-sub">${rem} habit${rem!==1?'s':''} still to log this week</div>
+      </div>
+      <div class="nudge-badge">
+        <div class="nudge-n">${dl}</div>
+        <div class="nudge-lbl">day${dl!==1?'s':''} left</div>
+      </div>
+    </div>` : '';
 }
 
-function renderProgress() {
-  const done = totalDone();
-  const total = state.habits.length;
-  const pct = (done/total)*100;
-  document.getElementById('prog-num').textContent = done;
-  document.getElementById('prog-denom').textContent = `/${total}`;
-  document.getElementById('prog-fill').style.width = pct+'%';
-  const statuses = ['Not started','Getting going','Halfway','Almost there','Almost there','Almost there','Complete ✦'];
-  document.getElementById('prog-status').textContent = done===total ? 'Complete ✦' : statuses[Math.min(done,3)];
+function renderHero() {
+  const done = totalDone(), total = S.habits.length;
+  document.getElementById('hero-n').textContent = done;
+  document.getElementById('hero-d').textContent = `/${total}`;
+  document.getElementById('hero-fill').style.width = total ? `${(done/total)*100}%` : '0%';
+  const statuses = ['Not started','Getting going','Halfway there','Almost there','Almost there','Complete ✦'];
+  document.getElementById('hero-status').textContent = done===total&&total>0?'Complete ✦':statuses[Math.min(done,3)];
 }
 
 function renderDayStrip() {
   const dates = weekDates(currentWeek);
   const today = new Date(); today.setHours(0,0,0,0);
-  const done = totalDone();
   document.getElementById('day-strip').innerHTML = dates.map((d,i) => {
-    const isToday = d.getTime()===today.getTime();
-    return `<div class="day-cell${isToday?' today':''}">
-      <div class="day-letter">${DAY_LETTERS[i]}</div>
-      <div class="day-num">${d.getDate()}</div>
-      <div class="day-dot${isToday&&done>0?' vis':''}"></div>
+    const isTd = d.getTime()===today.getTime();
+    return `<div class="day-cell${isTd?' today':''}">
+      <div class="day-l">${DAYS[i]}</div>
+      <div class="day-n">${d.getDate()}</div>
+      <div class="day-dot${isTd&&totalDone()>0?' on':''}"></div>
     </div>`;
   }).join('');
 }
 
-function renderHabits() {
-  const stack = document.getElementById('habit-stack');
-  stack.innerHTML = state.habits.map(h => renderHabitCard(h)).join('');
-}
+function renderDashGrid() {
+  const grid = document.getElementById('dash-grid');
+  let html = '';
 
-function renderHabitCard(h) {
-  const done = isHabitDone(h.id);
-  const streak = getStreak(h.id);
-  const streakHtml = streak>0 ? `<span class="streak">🔥 ${streak}w</span> · ` : '';
+  S.habits.forEach(h => {
+    const t = tmpl(h);
+    if (t.special === 'spending') return; // rendered separately as full-width
 
-  if (h.type==='nights') {
-    const ns = getNights();
-    const target = h.target||3;
-    const hit = ns.length>=target;
-    const readEntry = getEntry('reading');
-    const book = readEntry.book || '';
-    const rating = readEntry.rating || 0;
-    const daysHtml = DAY_LETTERS.map((l,i) =>
-      `<button class="night-btn${ns.includes(i)?' on':''}" onclick="toggleNight(${i})">${l}</button>`
-    ).join('');
-    const starsHtml = [1,2,3,4,5].map(n =>
-      `<button class="star-btn${rating>=n?' lit':''}" onclick="rateReading(${n})">★</button>`
-    ).join('');
-    const bookHtml = book
-      ? `<div class="reading-book" onclick="openReadingLog()">
-          <span class="reading-book-emoji">📖</span>
-          <span class="reading-book-title">${book}</span>
-          <span class="reading-book-edit">Edit</span>
-        </div>`
-      : `<div class="reading-book reading-book-empty" onclick="openReadingLog()">
-          <span class="reading-book-emoji">📖</span>
-          <span class="reading-book-title" style="color:#c0b8b0">+ What are you reading?</span>
+    const done = isHabitDone(h);
+    const streak = getStreak(h);
+    const preview = previewText(h);
+    const streakHtml = streak>1 ? `<span class="streak">🔥 ${streak}w</span>` : '';
+
+    html += `<div class="hcard${done?' done':''}" onclick="openLog('${h.id}')">
+      <div class="hcard-emoji">${h.emoji}</div>
+      <div class="hcard-name">${h.label}</div>
+      <div class="hcard-meta">${streakHtml}${streakHtml&&t.special==='nights'?' · ':''}</div>
+      ${preview ? `<div class="hcard-preview">${preview}</div>` : ''}
+      <div class="hcard-check">
+        <svg class="hcard-tick" width="13" height="10" viewBox="0 0 13 10" fill="none">
+          <path d="M1.5 5l3.5 3.5L11.5 1" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>`;
+  });
+
+  // Spending card (full width)
+  const sh = S.habits.find(h => tmpl(h).special==='spending');
+  if (sh) {
+    const done = isHabitDone(sh);
+    const amt = upSpend !== null ? upSpend : (sh.entries[currentWeek]||{}).manualAmount ?? null;
+    const over = amt!=null && amt>S.budget;
+    const warn = amt!=null && !over && amt>=S.budget*0.85;
+    const cls = over?'over':warn?'warn':'ok';
+    const pct = amt!=null ? Math.min((amt/S.budget)*100,100) : 0;
+    const streak = getStreak(sh);
+    const streakHtml = streak>1 ? `<span class="streak">🔥 ${streak}w</span>` : '';
+
+    let bodyHtml = '';
+    if (upLoading) {
+      bodyHtml = '<div style="font-size:13px;color:var(--ink3);font-style:italic">Syncing with Up Bank…</div>';
+    } else if (upError) {
+      bodyHtml = `<div style="font-size:13px;color:#c04040;margin-bottom:10px">⚠️ Could not connect to Up Bank</div>
+        <div class="spend-manual">
+          <input type="number" id="spend-inp" placeholder="Enter spend manually"/>
+          <button onclick="saveManualSpend()">Save</button>
         </div>`;
-    return `<div class="hcard${hit?' done':''}">
-      <div class="hcard-top">
-        <div class="hcard-emoji">${h.emoji}</div>
-        <div class="hcard-info">
-          <div class="hcard-name">
-            <span class="hcard-name-text">${h.label}</span>
-            <button class="edit-habit-btn" onclick="openEditHabit('${h.id}')">✎</button>
-          </div>
-          <div class="hcard-sub">${streakHtml}${target} nights/week</div>
+    } else if (amt != null) {
+      bodyHtml = `
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px">
+          <div class="spend-big ${cls}">${'$'}${Number(amt).toFixed(0)}</div>
+          <div class="spend-of">/ $${S.budget}</div>
+          ${S.upToken&&!upError?'<div class="spend-via">via Up ↗</div>':''}
         </div>
-        <div class="check-btn${hit?' checked':''}" style="pointer-events:none">
-          <svg class="check-icon" width="14" height="11" viewBox="0 0 14 11" fill="none">
-            <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+        <div class="spend-bar-bg"><div class="spend-bar ${over?'over':'ok'}" style="width:${pct}%"></div></div>
+        <div class="spend-st ${cls}">${over?`$${(amt-S.budget).toFixed(0)} over budget`:done?`$${(S.budget-amt).toFixed(0)} under — on track ✦`:`$${(S.budget-amt).toFixed(0)} remaining`}</div>
+        ${!S.upToken?`<div class="spend-manual" style="margin-top:12px"><input type="number" id="spend-inp" placeholder="Update"/><button onclick="saveManualSpend()">Save</button></div>`:''}`;
+    } else {
+      bodyHtml = `
+        <div style="font-size:14px;color:var(--ink3);margin-bottom:12px">Connect Up Bank to sync automatically, or enter manually.</div>
+        <div class="spend-manual">
+          <input type="number" id="spend-inp" placeholder="This week's spend"/>
+          <button onclick="saveManualSpend()">Save</button>
+        </div>
+        ${!S.upToken?`<button onclick="openSheet('sh-settings')" style="margin-top:10px;background:none;border:1.5px solid var(--line);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--terra);cursor:pointer;width:100%">Connect Up Bank →</button>`:''}`;
+    }
+
+    html += `<div class="spend-card${done?' done':''} wide" onclick="void(0)">
+      <div class="spend-top">
+        <div style="font-size:28px">${sh.emoji}</div>
+        <div style="flex:1">
+          <div style="font-size:16px;font-weight:700;color:var(--ink)">${sh.label}</div>
+          <div style="font-size:12px;color:var(--ink3);margin-top:3px">${streakHtml} Goal: $${S.budget}/wk</div>
         </div>
       </div>
-      <div class="nights-wrap">
-        ${bookHtml}
-        <div class="nights-grid" style="margin-top:10px">${daysHtml}</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
-          <div class="nights-count"><span>${ns.length}</span>/${target} nights${hit?' ✦ Done!':''}</div>
-          <div class="stars-row">${starsHtml}</div>
-        </div>
-      </div>
+      <div class="spend-body">${bodyHtml}</div>
     </div>`;
   }
 
-  if (h.type==='spending') {
-    const spendData = getEntry(h.id);
-    const amt = upSpend!==null ? upSpend : (spendData.manualAmount ?? null);
-    const over = amt!==null && amt>state.budget;
-    const warn = amt!==null && !over && amt>=state.budget*0.85;
-    const cls = over?'over':warn?'warn':'ok';
-    const pct = amt!==null ? Math.min((amt/state.budget)*100,100) : 0;
-
-    let spendBodyHtml = '';
-    if (upLoading) {
-      spendBodyHtml = '<div style="font-size:13px;color:#b0a898;font-style:italic;padding:4px 0">Syncing with Up Bank…</div>';
-    } else if (upError) {
-      spendBodyHtml = `<div style="font-size:13px;color:#c05050;margin-bottom:10px">⚠️ ${upError}</div>`;
-      spendBodyHtml += `<div class="spend-manual">
-        <input type="number" id="spend-manual-inp" placeholder="Enter spend manually"/>
-        <button onclick="saveManualSpend()">Save</button>
-      </div>`;
-    } else if (amt!==null) {
-      spendBodyHtml = `
-        <div class="spend-amt-row">
-          <div class="spend-amt ${cls}">$${amt.toFixed(0)}</div>
-          <div class="spend-budget">/ $${state.budget}</div>
-          ${state.upToken ? '<div class="spend-via">via Up Bank ↗</div>' : ''}
-        </div>
-        <div class="spend-bar-track"><div class="spend-bar-fill ${over?'over':'ok'}" style="width:${pct}%"></div></div>
-        <div class="spend-status ${cls}">${over ? '$'+((amt-state.budget).toFixed(0))+' over budget' : done ? '$'+((state.budget-amt).toFixed(0))+' under — on track ✦' : '$'+((state.budget-amt).toFixed(0))+' remaining'}</div>
-        ${!state.upToken ? '<div class="spend-manual" style="margin-top:10px"><input type="number" id="spend-manual-inp" placeholder="Update amount"/><button onclick="saveManualSpend()">Update</button></div>' : ''}
-      `;
-    } else if (!state.upToken) {
-      spendBodyHtml = `
-        <div style="font-size:13px;color:#8a8078;margin-bottom:12px;line-height:1.5">Connect Up Bank to sync automatically, or enter manually below.</div>
-        <div class="spend-manual">
-          <input type="number" id="spend-manual-inp" placeholder="This week's spend"/>
-          <button onclick="saveManualSpend()">Save</button>
-        </div>
-        <button onclick="openSheet('settings-sheet')" style="margin-top:10px;background:none;border:1.5px solid #e0d8d0;border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600;color:#9b7fa6;cursor:pointer;width:100%">Connect Up Bank →</button>
-      `;
-    } else {
-      spendBodyHtml = '<div style="font-size:13px;color:#b0a898;font-style:italic">Waiting for settled transactions…</div>';
-    }
-
-    return '<div class="hcard' + (done?' done':'') + '">' +
-      '<div class="hcard-top">' +
-        '<div class="hcard-emoji">' + h.emoji + '</div>' +
-        '<div class="hcard-info">' +
-          '<div class="hcard-name">' +
-            '<span class="hcard-name-text">' + h.label + '</span>' +
-            '<button class="edit-habit-btn" onclick="openEditHabit(\'' + h.id + '\')">✎</button>' +
-          '</div>' +
-          '<div class="hcard-sub">' + streakHtml + 'Goal: $' + state.budget + '/wk</div>' +
-        '</div>' +
-        '<div class="check-btn' + (done?' checked':'') + '" style="pointer-events:none">' +
-          '<svg class="check-icon" width="14" height="11" viewBox="0 0 14 11" fill="none">' +
-            '<path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>' +
-          '</svg>' +
-        '</div>' +
-      '</div>' +
-      '<div class="spend-wrap">' + spendBodyHtml + '</div>' +
-    '</div>';
-  }
-
-  // Standard
-  const entry = getEntry(h.id);
-  const note = entry.note;
-  const bottomHtml = note
-    ? `<div class="hcard-note-text">"${note}"</div><div class="hcard-note-action">${h.isDate?'History →':'Edit'}</div>`
-    : `<div class="hcard-note-add">+ ${h.prompt}</div>`;
-
-  return `<div class="hcard${done?' done':''}">
-    <div class="hcard-top">
-      <div class="hcard-emoji">${h.emoji}</div>
-      <div class="hcard-info">
-        <div class="hcard-name">
-          <span class="hcard-name-text">${h.label}</span>
-          <button class="edit-habit-btn" onclick="openEditHabit('${h.id}')">✎</button>
-        </div>
-        <div class="hcard-sub">${streakHtml}${h.prompt}</div>
-      </div>
-      <div class="check-btn${done?' checked':''}" onclick="toggleHabit('${h.id}')">
-        <svg class="check-icon" width="14" height="11" viewBox="0 0 14 11" fill="none">
-          <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </div>
-    <div class="hcard-bottom" onclick="${h.isDate||h.id==='reading'||h.id==='career'?`openTimeline('${h.id}')`:`openLog('${h.id}')`}">
-      ${bottomHtml}
-    </div>
+  // Add habit button
+  html += `<div class="add-card" onclick="openAddHabit()">
+    <div class="add-card-icon">＋</div>
+    <div class="add-card-label">Add habit</div>
   </div>`;
+
+  grid.innerHTML = html;
+
+  // Make wide cards span full grid
+  grid.querySelectorAll('.wide').forEach(el => el.style.gridColumn = '1/-1');
 }
 
 function renderMemory() {
-  const lastMonth = offsetWeek(getWeekKey(), -4);
-  const memos = state.habits
-    .filter(h => h.type!=='spending'&&h.type!=='nights')
-    .map(h => ({...h, note: (state.data[`${lastMonth}:${h.id}`]||{}).note}))
-    .filter(h => h.note);
+  const lastMonth = offsetWeek(todayWeekKey(), -4);
+  const memos = S.habits.map(h => ({h, p:previewText(h, lastMonth)})).filter(x=>x.p);
   const wrap = document.getElementById('memory-wrap');
   if (!memos.length) { wrap.innerHTML=''; return; }
   wrap.innerHTML = `
-    <div class="section-label">This time last month</div>
-    <div class="memory-card fade-up">
-      ${memos.map(h=>`
-        <div class="memory-item">
-          <span class="memory-emoji">${h.emoji}</span>
-          <div class="memory-text"><span class="memory-habit">${h.label}:</span> ${h.note}</div>
+    <div class="sec-label">This time last month</div>
+    <div style="background:linear-gradient(145deg,#fdf0e6,#f9e8d8);border-radius:22px;padding:18px 20px;margin-bottom:28px;border:1px solid rgba(196,113,74,.15);box-shadow:0 4px 14px rgba(196,113,74,.08)">
+      ${memos.map(({h,p})=>`
+        <div style="display:flex;gap:12px;margin-bottom:10px;align-items:flex-start">
+          <span style="font-size:18px">${h.emoji}</span>
+          <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-style:italic;color:#5a4a3a;flex:1;line-height:1.5">
+            <span style="font-weight:600;font-style:normal;color:var(--terra2)">${h.label}:</span> ${p}
+          </div>
         </div>`).join('')}
     </div>`;
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// RENDER HISTORY
-// ══════════════════════════════════════════════════════════════════════════════
 function renderHistory() {
-  const thisWeek = getWeekKey();
+  const thisWeek = todayWeekKey();
   const histWeeks = Array.from({length:12}, (_,i)=>offsetWeek(thisWeek,-i));
-  const perfectCount = histWeeks.filter(wk=>totalDone(wk)===state.habits.length).length;
-  const bestStreak = Math.max(...state.habits.map(h=>getStreak(h.id)), 0);
-  const totalCount = Object.keys(state.data).filter(k=>state.data[k]?.done).length;
+  const perfectCount = histWeeks.filter(wk=>totalDone(wk)===S.habits.length).length;
+  const bestStreak = S.habits.length > 0 ? Math.max(...S.habits.map(h=>getStreak(h)), 0) : 0;
+  const totalAll = S.habits.reduce((acc,h)=>acc+Object.values(h.done||{}).filter(Boolean).length,0);
 
-  document.getElementById('stat-strip').innerHTML = [
-    {val:perfectCount, lbl:'Perfect weeks'},
-    {val:bestStreak,   lbl:'Best streak'},
-    {val:totalCount,   lbl:'Total done'},
+  document.getElementById('stat-row').innerHTML = [
+    {v:perfectCount, l:'Perfect weeks'},
+    {v:bestStreak,   l:'Best streak'},
+    {v:totalAll,     l:'Total logged'},
   ].map(s=>`<div class="stat-card">
-    <div class="stat-val">${s.val}</div>
-    <div class="stat-lbl">${s.lbl}</div>
+    <div class="stat-v serif">${s.v}</div>
+    <div class="stat-l">${s.l}</div>
   </div>`).join('');
 
   document.getElementById('hist-list').innerHTML = histWeeks.map(wk => {
-    const score = totalDone(wk);
-    const perfect = score===state.habits.length;
-    const pips = state.habits.map(h => {
-      const done = isHabitDone(h.id,wk);
-      return `<div class="hist-pip${done?(perfect?' perfect':' done'):''}">${done?h.emoji:''}</div>`;
-    }).join('');
-    return `<div class="hist-row${wk===currentWeek?' current':''}" onclick="jumpToWeek('${wk}')">
+    const score = totalDone(wk), perfect = score===S.habits.length&&S.habits.length>0;
+    return `<div class="hist-row${wk===currentWeek?' cur':''}" onclick="jumpWeek('${wk}')">
       <div class="hist-date">${fmtRange(wk)}</div>
-      <div class="hist-pips">${pips}</div>
-      <div class="hist-score${perfect?' full':''}">${score}/${state.habits.length}</div>
+      <div class="hist-pips">${S.habits.map(h=>`
+        <div class="hist-pip${isHabitDone(h,wk)?(perfect?' perfect':' done'):''}">${isHabitDone(h,wk)?h.emoji:''}</div>`).join('')}</div>
+      <div class="hist-sc${perfect?' full':''}">${score}/${S.habits.length}</div>
     </div>`;
   }).join('');
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// ACTIONS
-// ══════════════════════════════════════════════════════════════════════════════
-function toggleHabit(id) {
-  const k = `${currentWeek}:${id}`;
-  const cur = state.data[k] || {};
-  state.data[k] = {...cur, done: !cur.done};
-  saveState();
-  const done = totalDone();
-  if (done===state.habits.length && !state.celebrated[currentWeek]) {
-    state.celebrated[currentWeek] = true;
-    saveState();
-    celebrate();
-  }
-  renderWeekly();
-}
-
-function toggleNight(i) {
-  const k = `${currentWeek}:reading:nights`;
-  const cur = state.data[k] || [];
-  state.data[k] = cur.includes(i) ? cur.filter(d=>d!==i) : [...cur,i];
-  saveState();
-  const ns = state.data[k];
-  const target = (state.habits.find(h=>h.id==='reading')||{}).target||3;
-  const done = totalDone();
-  if (ns.length>=target && done===state.habits.length && !state.celebrated[currentWeek]) {
-    state.celebrated[currentWeek]=true; saveState(); celebrate();
-  }
-  renderWeekly();
-}
-
-function saveManualSpend() {
-  const inp = document.getElementById('spend-manual-inp');
-  const amt = parseFloat(inp.value);
-  if (isNaN(amt)) return;
-  const k = `${currentWeek}:spending`;
-  state.data[k] = {done: amt<=state.budget, manualAmount: amt};
-  saveState(); inp.value='';
-  const done = totalDone();
-  if (done===state.habits.length && !state.celebrated[currentWeek]) {
-    state.celebrated[currentWeek]=true; saveState(); celebrate();
-  }
-  renderWeekly();
-}
-
-function changeWeek(dir) {
-  currentWeek = offsetWeek(currentWeek, dir);
-  upSpend = null;
-  if (currentWeek!==getWeekKey() || !state.upToken) {}
-  else if (state.upToken) fetchUpSpend();
-  renderAll();
-}
-
-function jumpToWeek(wk) {
-  currentWeek = wk;
-  switchTab('weekly');
-}
-
-function switchTab(tab) {
-  currentTab = tab;
-  document.getElementById('screen-weekly').classList.toggle('active', tab==='weekly');
-  document.getElementById('screen-history').classList.toggle('active', tab==='history');
-  document.getElementById('tab-weekly').classList.toggle('active', tab==='weekly');
-  document.getElementById('tab-history').classList.toggle('active', tab==='history');
-  renderAll();
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // LOG SHEET
-// ══════════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 function openLog(id) {
   loggingId = id;
-  const h = state.habits.find(x=>x.id===id);
-  const e = getEntry(id);
-  const header = `<div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
-    <span style="font-size:26px">${h.emoji}</span>
-    <div class="sheet-title">${h.label}</div>
-  </div>`;
+  const h = S.habits.find(x=>x.id===id);
+  const t = tmpl(h);
+  const e = h.entries[currentWeek] || {};
+  _starRating = e.rating || 0;
+  _nightsSel = [...(h.nights[currentWeek] || [])];
 
-  let body = '';
-  if (id === 'date') {
-    body = `
-      <div class="sheet-sub" style="margin-bottom:20px">Log your date details</div>
-      <div class="field-wrap">
-        <div class="field-label">Who with</div>
-        <input type="text" class="field-input" id="log-who" placeholder="e.g. James" value="${e.who||''}"/>
+  let fieldsHtml = '';
+
+  if (t.special === 'nights') {
+    const target = t.target||3;
+    const nightsHtml = DAYS.map((l,i)=>`<button class="night-btn${_nightsSel.includes(i)?' on':''}" onclick="toggleNightLog(${i})">${l}</button>`).join('');
+    fieldsHtml = `
+      <div class="inp-wrap">
+        <div class="inp-label">Tap nights you read</div>
+        <div class="night-grid">${nightsHtml}</div>
+        <div style="font-size:13px;color:var(--ink3);font-weight:600;margin-top:6px">
+          <span style="color:var(--terra);font-weight:800">${_nightsSel.length}</span>/${target} nights
+        </div>
       </div>
-      <div class="field-wrap">
-        <div class="field-label">Where</div>
-        <input type="text" class="field-input" id="log-where" placeholder="e.g. Ester, Newtown" value="${e.where||''}"/>
+      <div class="inp-wrap">
+        <div class="inp-label">Book</div>
+        <input type="text" class="inp" id="lf-book" placeholder="What are you reading?" value="${e.book||''}"/>
       </div>
-      <div class="field-wrap">
-        <div class="field-label">Notes <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
-        <textarea class="field-input" id="log-note" placeholder="How was it?" rows="2">${e.note||''}</textarea>
+      <div class="inp-wrap">
+        <div class="inp-label">Rating <span style="color:var(--ink4);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">optional</span></div>
+        <div class="stars">${[1,2,3,4,5].map(n=>`<span class="star${_starRating>=n?' on':''}" onclick="setStarLog(${n})">★</span>`).join('')}</div>
       </div>`;
-  } else if (id === 'career') {
-    body = `
-      <div class="sheet-sub" style="margin-bottom:20px">Log your conversation</div>
-      <div class="field-wrap">
-        <div class="field-label">Who</div>
-        <input type="text" class="field-input" id="log-who" placeholder="e.g. Sarah Chen, Google" value="${e.who||''}"/>
-      </div>
-      <div class="field-wrap">
-        <div class="field-label">What did you discuss</div>
-        <input type="text" class="field-input" id="log-topic" placeholder="e.g. Product strategy, new role" value="${e.topic||''}"/>
-      </div>
-      <div class="field-wrap">
-        <div class="field-label">Notes <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
-        <textarea class="field-input" id="log-note" placeholder="Key takeaways…" rows="2">${e.note||''}</textarea>
-      </div>`;
+  } else if (t.special === 'spending') {
+    // Spending is handled inline in the card
+    closeSheet('sh-log'); return;
   } else {
-    body = `
-      <div class="sheet-sub" style="margin-bottom:20px">${h.prompt}</div>
-      <div class="field-wrap">
-        <textarea class="field-input" id="log-note" placeholder="Add details…" rows="3">${e.note||''}</textarea>
-      </div>`;
+    t.fields.forEach(f => {
+      if (f.type==='text') {
+        fieldsHtml += `<div class="inp-wrap">
+          <div class="inp-label">${f.label}${f.optional?' <span style="color:var(--ink4);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">optional</span>':''}</div>
+          <input type="text" class="inp" id="lf-${f.id}" placeholder="${f.placeholder}" value="${e[f.id]||''}"/>
+        </div>`;
+      } else if (f.type==='textarea') {
+        fieldsHtml += `<div class="inp-wrap">
+          <div class="inp-label">${f.label}${f.optional?' <span style="color:var(--ink4);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">optional</span>':''}</div>
+          <textarea class="inp" id="lf-${f.id}" placeholder="${f.placeholder}" rows="2">${e[f.id]||''}</textarea>
+        </div>`;
+      } else if (f.type==='stars') {
+        fieldsHtml += `<div class="inp-wrap">
+          <div class="inp-label">${f.label}</div>
+          <div class="stars">${[1,2,3,4,5].map(n=>`<span class="star${_starRating>=n?' on':''}" onclick="setStarLog(${n})">★</span>`).join('')}</div>
+        </div>`;
+      }
+    });
   }
 
-  document.getElementById('log-sheet-content').innerHTML = header + body + `
-    <div style="display:flex;gap:10px;margin-top:4px">
-      <button class="btn-sm btn-sm-ghost" onclick="closeSheet('log-sheet')">Cancel</button>
-      <button class="btn-sm btn-sm-primary" style="flex:1" onclick="saveLog()">Save</button>
+  document.getElementById('sh-log-body').innerHTML = `
+    <div class="sh-head">
+      <div class="sh-emoji">${h.emoji}</div>
+      <div>
+        <div class="sh-title">${h.label}</div>
+        <div style="font-size:13px;color:var(--ink3)">Log this week</div>
+      </div>
+    </div>
+    <div style="margin-top:20px">${fieldsHtml}</div>
+    <div class="btn-row">
+      <button class="btn-sm btn-sm-g" onclick="closeSheet('sh-log')">Cancel</button>
+      <button class="btn-sm btn-sm-p" style="flex:1" onclick="saveLog()">
+        ${isHabitDone(h) ? 'Update' : 'Mark done ✦'}
+      </button>
     </div>`;
 
-  openSheet('log-sheet');
-  setTimeout(() => {
-    const first = document.querySelector('#log-sheet-content input, #log-sheet-content textarea');
-    if (first) first.focus();
-  }, 350);
+  openSheet('sh-log');
+  setTimeout(() => document.querySelector('#sh-log .inp')?.focus(), 350);
+}
+
+function toggleNightLog(i) {
+  _nightsSel = _nightsSel.includes(i) ? _nightsSel.filter(d=>d!==i) : [..._nightsSel, i];
+  // Re-render night buttons
+  document.querySelectorAll('#sh-log .night-btn').forEach((btn,idx) => {
+    btn.classList.toggle('on', _nightsSel.includes(idx));
+  });
+  const h = S.habits.find(x=>x.id===loggingId);
+  const target = (tmpl(h).target)||3;
+  const countEl = document.querySelector('#sh-log .inp-wrap div[style]');
+  if (countEl) countEl.innerHTML = `<span style="color:var(--terra);font-weight:800">${_nightsSel.length}</span>/${target} nights`;
+}
+
+function setStarLog(n) {
+  _starRating = n;
+  document.querySelectorAll('#sh-log .star').forEach((s,i) => s.classList.toggle('on', i<n));
 }
 
 function saveLog() {
-  if (!loggingId) return;
-  const k = `${currentWeek}:${loggingId}`;
-  const cur = state.data[k] || {};
-  if (loggingId === 'date') {
-    const who   = (document.getElementById('log-who')||{}).value||'';
-    const where = (document.getElementById('log-where')||{}).value||'';
-    const note  = (document.getElementById('log-note')||{}).value||'';
-    state.data[k] = {...cur, who: who.trim(), where: where.trim(), note: note.trim()};
-  } else if (loggingId === 'career') {
-    const who   = (document.getElementById('log-who')||{}).value||'';
-    const topic = (document.getElementById('log-topic')||{}).value||'';
-    const note  = (document.getElementById('log-note')||{}).value||'';
-    state.data[k] = {...cur, who: who.trim(), topic: topic.trim(), note: note.trim()};
-  } else if (loggingId === 'reading') {
-    const book = (document.getElementById('log-book')||{}).value||'';
-    const note = (document.getElementById('log-note')||{}).value||'';
-    const rating = _logRating || cur.rating || 0;
-    state.data[k] = {...cur, book: book.trim(), note: note.trim(), rating};
-    _logRating = 0;
+  const h = S.habits.find(x=>x.id===loggingId);
+  const t = tmpl(h);
+  const e = {};
+
+  if (t.special === 'nights') {
+    h.nights[currentWeek] = _nightsSel;
+    const book = document.getElementById('lf-book')?.value.trim() || '';
+    if (book || _starRating) {
+      h.entries[currentWeek] = {...(h.entries[currentWeek]||{}), book, rating:_starRating};
+    }
   } else {
-    const note = (document.getElementById('log-note')||{}).value||'';
-    state.data[k] = {...cur, note: note.trim()};
+    t.fields.forEach(f => {
+      if (f.type==='stars') { e.rating = _starRating; }
+      else { const el=document.getElementById(`lf-${f.id}`); if(el) e[f.id]=el.value.trim(); }
+    });
+    h.entries[currentWeek] = e;
+    // Auto-mark done if any required field is filled
+    const hasData = t.fields.filter(f=>!f.optional).some(f=>{
+      if(f.type==='stars') return _starRating>0;
+      return !!(e[f.id]);
+    });
+    const allOptional = t.fields.every(f=>f.optional);
+    if (hasData || allOptional) h.done[currentWeek] = true;
   }
-  saveState();
-  loggingId = null;
-  closeSheet('log-sheet');
+
+  // Check if nights target met
+  if (t.special==='nights') {
+    h.done[currentWeek] = _nightsSel.length >= (t.target||3);
+  }
+
+  save();
+  closeSheet('sh-log');
+  checkCelebrate();
   renderWeekly();
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// TIMELINE SHEET
-// ══════════════════════════════════════════════════════════════════════════════
-let timelineId = null;
-function openTimeline(id) {
-  timelineId = id;
-  const h = state.habits.find(x=>x.id===id);
-  document.getElementById('tl-title').textContent = `${h.emoji} ${h.label}`;
-  const thisWeek = getWeekKey();
-  const histWeeks = Array.from({length:12},(_,i)=>offsetWeek(thisWeek,-i));
-  const doneWeeks = histWeeks.filter(wk=>isHabitDone(id,wk));
-  document.getElementById('tl-list').innerHTML = doneWeeks.length===0
-    ? '<div style="text-align:center;padding:40px 0;color:#c0b8b0;font-size:14px;font-weight:600">Nothing logged yet</div>'
-    : doneWeeks.map(wk=>{
-        const e = state.data[`${wk}:${id}`]||{};
-        let inner = '';
-        if (id==='date') {
-          inner = [
-            e.who   ? `<div class="tl-field"><span class="tl-flabel">With</span> ${e.who}</div>` : '',
-            e.where ? `<div class="tl-field"><span class="tl-flabel">Where</span> ${e.where}</div>` : '',
-            e.note  ? `<div class="tl-field"><span class="tl-flabel">Notes</span> ${e.note}</div>` : '',
-          ].filter(Boolean).join('') || '<div class="tl-empty">No details logged</div>';
-        } else if (id==='career') {
-          inner = [
-            e.who   ? `<div class="tl-field"><span class="tl-flabel">Who</span> ${e.who}</div>` : '',
-            e.topic ? `<div class="tl-field"><span class="tl-flabel">Topic</span> ${e.topic}</div>` : '',
-            e.note  ? `<div class="tl-field"><span class="tl-flabel">Notes</span> ${e.note}</div>` : '',
-          ].filter(Boolean).join('') || '<div class="tl-empty">No details logged</div>';
-        } else if (id==='reading') {
-          const stars = e.rating ? '★'.repeat(e.rating)+'☆'.repeat(5-e.rating) : '';
-          inner = [
-            e.book   ? `<div class="tl-field"><span class="tl-flabel">Book</span> ${e.book}</div>` : '',
-            e.rating ? `<div class="tl-field"><span class="tl-flabel">Rating</span> <span style="color:#f0a030">${stars}</span></div>` : '',
-            e.note   ? `<div class="tl-field"><span class="tl-flabel">Thoughts</span> ${e.note}</div>` : '',
-          ].filter(Boolean).join('') || '<div class="tl-empty">No details logged</div>';
-        } else {
-          inner = e.note ? `<div class="tl-note">"${e.note}"</div>` : '<div class="tl-empty">No details logged</div>';
-        }
-        return `<div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-card">
-            <div class="tl-week">${fmtRange(wk)}</div>
-            ${inner}
-          </div>
-        </div>`;
-      }).join('');
-  openSheet('timeline-sheet');
+// ══════════════════════════════════════════════════════
+// ADD / EDIT HABIT
+// ══════════════════════════════════════════════════════
+let _newEmoji = '✨';
+let _newLabel = '';
+let _newTemplateId = 'simple';
+let _habitStep = 0;
+
+function openAddHabit() {
+  editingId = null;
+  _newEmoji = '✨'; _newLabel = ''; _newTemplateId = 'simple'; _habitStep = 0;
+  renderHabitSheet();
+  openSheet('sh-habit');
 }
 
-function openLogFromTimeline() {
-  closeSheet('timeline-sheet');
-  setTimeout(()=>{
-    if (timelineId==='reading') openReadingLog();
-    else openLog(timelineId);
-  }, 300);
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// EDIT HABIT SHEET
-// ══════════════════════════════════════════════════════════════════════════════
 function openEditHabit(id) {
   editingId = id;
-  const h = state.habits.find(x=>x.id===id);
-  document.getElementById('edit-label-input').value = h.label;
-  document.getElementById('edit-emoji-grid').innerHTML = EMOJIS.map(em=>
-    `<button class="emoji-opt${h.emoji===em?' sel':''}" onclick="selectEditEmoji('${em}')">${em}</button>`
-  ).join('');
-  openSheet('edit-sheet');
-  setTimeout(()=>document.getElementById('edit-label-input').focus(), 350);
+  const h = S.habits.find(x=>x.id===id);
+  _newEmoji = h.emoji; _newLabel = h.label; _newTemplateId = h.templateId; _habitStep = 0;
+  renderHabitSheet();
+  openSheet('sh-habit');
 }
 
-function selectEditEmoji(em) {
-  document.querySelectorAll('#edit-emoji-grid .emoji-opt').forEach(b => b.classList.remove('sel'));
-  event.target.classList.add('sel');
-}
-
-function saveEditHabit() {
-  if (!editingId) return;
-  const label = document.getElementById('edit-label-input').value.trim();
-  const sel = document.querySelector('#edit-emoji-grid .emoji-opt.sel');
-  const emoji = sel ? sel.textContent : state.habits.find(h=>h.id===editingId).emoji;
-  state.habits = state.habits.map(h => h.id===editingId ? {...h,label:label||h.label,emoji} : h);
-  saveState();
-  editingId = null;
-  closeSheet('edit-sheet');
-  renderWeekly();
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// SETTINGS SHEET
-// ══════════════════════════════════════════════════════════════════════════════
-function openSheet(id) {
-  // Populate settings when opening
-  if (id==='settings-sheet') {
-    document.getElementById('settings-name').value = state.userName;
-    document.getElementById('settings-budget').value = state.budget;
-    document.getElementById('settings-token').value = state.upToken||'';
+function renderHabitSheet() {
+  if (_habitStep === 0) {
+    const emojiHtml = EMOJIS.map(em=>
+      `<button class="em-btn${_newEmoji===em?' sel':''}" onclick="selectEmoji('${em}')">${em}</button>`
+    ).join('');
+    document.getElementById('sh-habit-body').innerHTML = `
+      <div class="sh-title">${editingId ? 'Edit habit' : 'New habit'}</div>
+      <div class="sh-sub">${editingId ? 'Update your habit details.' : 'What do you want to track?'}</div>
+      <div class="inp-wrap">
+        <div class="inp-label">Name</div>
+        <input type="text" class="inp" id="nh-label" placeholder="e.g. Weekly date" value="${_newLabel}" oninput="_newLabel=this.value"/>
+      </div>
+      <div class="inp-wrap">
+        <div class="inp-label">Emoji</div>
+        <div class="emoji-grid">${emojiHtml}</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-sm btn-sm-g" onclick="closeSheet('sh-habit')">Cancel</button>
+        <button class="btn-sm btn-sm-p" style="flex:1" onclick="habitNext()">
+          ${editingId ? 'Save' : 'Choose template →'}
+        </button>
+      </div>
+      ${editingId ? `<button class="del-btn" onclick="deleteHabit('${editingId}')">Delete habit</button>` : ''}`;
+    setTimeout(()=>document.getElementById('nh-label')?.focus(),350);
+  } else {
+    const tmplHtml = TEMPLATES.map(t=>`
+      <div class="tmpl-row${_newTemplateId===t.id?' sel':''}" onclick="selectTmpl('${t.id}')">
+        <div class="tmpl-icon">${t.icon}</div>
+        <div class="tmpl-info">
+          <div class="tmpl-name">${t.name}</div>
+          <div class="tmpl-desc">${t.desc}</div>
+        </div>
+        <div class="tmpl-check">${_newTemplateId===t.id?'<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</div>
+      </div>`).join('');
+    document.getElementById('sh-habit-body').innerHTML = `
+      <div class="sh-title">What kind of habit?</div>
+      <div class="sh-sub">Choose what you'll log each week.</div>
+      <div class="tmpl-list">${tmplHtml}</div>
+      <div class="btn-row">
+        <button class="btn-sm btn-sm-g" onclick="_habitStep=0;renderHabitSheet()">← Back</button>
+        <button class="btn-sm btn-sm-p" style="flex:1" onclick="saveHabit()">Add habit ✦</button>
+      </div>`;
   }
-  const el = document.getElementById(id);
-  el.classList.add('open');
+}
+
+function selectEmoji(em) { _newEmoji=em; renderHabitSheet(); }
+function selectTmpl(id) { _newTemplateId=id; renderHabitSheet(); }
+
+function habitNext() {
+  _newLabel = document.getElementById('nh-label')?.value.trim() || _newLabel;
+  if (!_newLabel) { document.getElementById('nh-label')?.focus(); return; }
+  if (editingId) {
+    const h = S.habits.find(x=>x.id===editingId);
+    h.label = _newLabel; h.emoji = _newEmoji; h.templateId = _newTemplateId;
+    save(); closeSheet('sh-habit'); renderWeekly();
+  } else {
+    _habitStep = 1; renderHabitSheet();
+  }
+}
+
+function saveHabit() {
+  if (!_newLabel) return;
+  const newH = {
+    id: 'h_' + Date.now(),
+    label: _newLabel, emoji: _newEmoji, templateId: _newTemplateId,
+    done:{}, entries:{}, nights:{}
+  };
+  S.habits.push(newH);
+  save(); closeSheet('sh-habit'); renderWeekly();
+}
+
+function deleteHabit(id) {
+  if (!confirm('Delete this habit?')) return;
+  S.habits = S.habits.filter(h=>h.id!==id);
+  save(); closeSheet('sh-habit'); renderWeekly();
+}
+
+// ══════════════════════════════════════════════════════
+// SETTINGS
+// ══════════════════════════════════════════════════════
+function openSheet(id) {
+  if (id==='sh-settings') {
+    document.getElementById('set-name').value = S.userName;
+    document.getElementById('set-budget').value = S.budget;
+    document.getElementById('set-token').value = S.upToken||'';
+  }
+  document.getElementById(id).classList.add('open');
   document.body.style.overflow='hidden';
 }
-
 function closeSheet(id) {
   document.getElementById(id).classList.remove('open');
   document.body.style.overflow='';
 }
-
-function handleOverlayClick(e, id) {
-  if (e.target===document.getElementById(id)) closeSheet(id);
-}
+function maybeClose(e, id) { if(e.target===document.getElementById(id)) closeSheet(id); }
 
 function saveSettings() {
-  const name = document.getElementById('settings-name').value.trim();
-  const budget = parseFloat(document.getElementById('settings-budget').value)||500;
-  const token = document.getElementById('settings-token').value.trim();
-  if (name) state.userName = name;
-  state.budget = budget;
-  state.upToken = token;
-  saveState();
-  closeSheet('settings-sheet');
-  if (token) fetchUpSpend();
+  const name = document.getElementById('set-name').value.trim();
+  const budget = parseFloat(document.getElementById('set-budget').value)||500;
+  const token = document.getElementById('set-token').value.trim();
+  if (name) S.userName = name;
+  S.budget = budget; S.upToken = token;
+  save();
+  closeSheet('sh-settings');
+  if (token) { upSpend=null; fetchUp(); }
   renderAll();
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// UP BANK
-// ══════════════════════════════════════════════════════════════════════════════
-let upLoading = false;
-let upError = null;
+// ══════════════════════════════════════════════════════
+// WEEK NAV
+// ══════════════════════════════════════════════════════
+function changeWeek(dir) {
+  currentWeek = offsetWeek(currentWeek, dir);
+  if (S.upToken && currentWeek===todayWeekKey()) fetchUp();
+  else if (dir!==0) { upSpend=null; }
+  renderAll();
+}
+function jumpWeek(wk) { currentWeek=wk; switchTab('weekly'); }
 
-function fetchUpSpend() {
-  if (!state.upToken) return;
-  upLoading = true; upError = null;
-  if (currentTab==='weekly') renderHabits();
-  fetch(`/.netlify/functions/up-spend?weekKey=${currentWeek}`, {
-    headers: {Authorization:`Bearer ${state.upToken}`}
-  })
-  .then(r => { if(!r.ok) throw new Error('Up API error ' + r.status); return r.json(); })
-  .then(j => {
-    upSpend = j.total; upLoading = false; upError = null;
-    const k = `${currentWeek}:spending`;
-    state.data[k] = {...(state.data[k]||{}), done: upSpend<=state.budget, autoAmount:upSpend};
-    saveState();
-    if (currentTab==='weekly') renderHabits();
-  })
-  .catch(e => {
-    upLoading = false;
-    upError = e.message || 'Could not connect to Up';
-    upSpend = null;
-    if (currentTab==='weekly') renderHabits();
-  });
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('sc-weekly').style.display = tab==='weekly'?'block':'none';
+  document.getElementById('sc-history').style.display = tab==='history'?'block':'none';
+  document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.textContent.toLowerCase().startsWith(tab.slice(0,4))));
+  renderAll();
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// CELEBRATION
-// ══════════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// SPENDING
+// ══════════════════════════════════════════════════════
+function saveManualSpend() {
+  const inp = document.getElementById('spend-inp');
+  const amt = parseFloat(inp?.value);
+  if (isNaN(amt)) return;
+  const sh = S.habits.find(h=>tmpl(h).special==='spending');
+  if (!sh) return;
+  sh.entries[currentWeek] = {...(sh.entries[currentWeek]||{}), manualAmount:amt};
+  sh.done[currentWeek] = amt <= S.budget;
+  save(); inp.value='';
+  checkCelebrate();
+  renderWeekly();
+}
+
+function fetchUp() {
+  if (!S.upToken) return;
+  upLoading=true; upError=null;
+  fetch(`/.netlify/functions/up-spend?weekKey=${currentWeek}`, {
+    headers:{Authorization:`Bearer ${S.upToken}`}
+  })
+  .then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
+  .then(j=>{
+    upSpend=j.total; upLoading=false; upError=null;
+    const sh=S.habits.find(h=>tmpl(h).special==='spending');
+    if(sh){ sh.done[currentWeek]=upSpend<=S.budget; save(); }
+    checkCelebrate();
+    if(currentTab==='weekly') renderWeekly();
+  })
+  .catch(e=>{ upError=e.message; upLoading=false; upSpend=null; if(currentTab==='weekly') renderWeekly(); });
+}
+
+// ══════════════════════════════════════════════════════
+// CELEBRATE
+// ══════════════════════════════════════════════════════
+function checkCelebrate() {
+  const done=totalDone(), total=S.habits.length;
+  if (done===total && total>0 && !S.celebrated[currentWeek]) {
+    S.celebrated[currentWeek]=true; save();
+    celebrate();
+  }
+}
+
 function celebrate() {
-  const firstName = state.userName.split(' ')[0];
-  const toast = document.getElementById('celebrate-toast');
-  document.getElementById('celebrate-title').textContent = `Perfect week, ${firstName}!`;
-  document.getElementById('celebrate-sub').textContent = `All ${state.habits.length} habits done.`;
+  const fn=S.userName.split(' ')[0];
+  const toast=document.getElementById('toast');
+  document.getElementById('toast-t').textContent=`Perfect week, ${fn}!`;
+  document.getElementById('toast-s').textContent=`All ${S.habits.length} habits done.`;
   toast.classList.add('show');
-  setTimeout(()=>toast.classList.remove('show'), 3000);
+  setTimeout(()=>toast.classList.remove('show'),3200);
   launchConfetti();
 }
 
 function launchConfetti() {
-  const wrap = document.getElementById('confetti-wrap');
-  wrap.innerHTML = '';
-  const colours = ['#9b7fa6','#b89cc8','#d4b8e8','#e8d0f0','#7d6289','#c4a0d4'];
-  for (let i=0;i<60;i++) {
-    const el = document.createElement('div');
-    el.className = 'confetti-piece';
-    const size = Math.random()*8+4;
-    el.style.cssText = `
-      left:${Math.random()*100}%;
-      width:${size}px;height:${size*1.5}px;
-      background:${colours[i%colours.length]};
-      border-radius:${Math.random()>0.5?'50%':'2px'};
-      animation:confetti-fall ${0.8+Math.random()*1}s linear ${Math.random()*0.6}s both;
-    `;
+  const wrap=document.getElementById('confetti-wrap'); wrap.innerHTML='';
+  const cols=['#c4714a','#d4836a','#f0ddd5','#c48838','#8c4428','#f9e8d8'];
+  for(let i=0;i<60;i++){
+    const el=document.createElement('div'); el.className='confetti-piece';
+    const sz=Math.random()*8+4;
+    el.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz*1.5}px;background:${cols[i%6]};border-radius:${Math.random()>.5?'50%':'2px'};animation:cf-fall ${.8+Math.random()*1}s linear ${Math.random()*.6}s both`;
     wrap.appendChild(el);
   }
-  setTimeout(()=>{ wrap.innerHTML=''; }, 3000);
+  setTimeout(()=>wrap.innerHTML='',3200);
 }
 
-
-// ══════════════════════════════════════════════════════════════════════════════
-// READING LOG
-// ══════════════════════════════════════════════════════════════════════════════
-function openReadingLog() {
-  loggingId = 'reading';
-  const e = getEntry('reading');
-  const rating = e.rating || 0;
-  const starsHtml = [1,2,3,4,5].map(n =>
-    `<button class="star-btn${rating>=n?' lit':''}" id="rlog-star-${n}" onclick="setLogRating(${n})"style="font-size:28px;padding:4px">★</button>`
-  ).join('');
-  document.getElementById('log-sheet-content').innerHTML = `
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
-      <span style="font-size:26px">📚</span>
-      <div class="sheet-title">Reading</div>
-    </div>
-    <div class="sheet-sub" style="margin-bottom:20px">Log this week's reading</div>
-    <div class="field-wrap">
-      <div class="field-label">Book</div>
-      <input type="text" class="field-input" id="log-book" placeholder="e.g. Atomic Habits" value="${e.book||''}"/>
-    </div>
-    <div class="field-wrap">
-      <div class="field-label">Rating <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
-      <div style="display:flex;gap:4px;margin-bottom:4px">${starsHtml}</div>
-    </div>
-    <div class="field-wrap">
-      <div class="field-label">Thoughts <span style="color:#c0b8b0;font-weight:400;text-transform:none;letter-spacing:0;font-size:12px">(optional)</span></div>
-      <textarea class="field-input" id="log-note" placeholder="What did you think?" rows="2">${e.note||''}</textarea>
-    </div>
-    <div style="display:flex;gap:10px;margin-top:4px">
-      <button class="btn-sm btn-sm-ghost" onclick="closeSheet('log-sheet')">Cancel</button>
-      <button class="btn-sm btn-sm-primary" style="flex:1" onclick="saveLog()">Save</button>
-    </div>`;
-  openSheet('log-sheet');
-  setTimeout(() => document.getElementById('log-book')?.focus(), 350);
-}
-
-let _logRating = 0;
-function setLogRating(n) {
-  _logRating = n;
-  [1,2,3,4,5].forEach(i => {
-    const b = document.getElementById('rlog-star-'+i);
-    if (b) b.classList.toggle('lit', i<=n);
-  });
-}
-
-function rateReading(n) {
-  const k = `${currentWeek}:reading`;
-  state.data[k] = {...(state.data[k]||{}), rating: n};
-  saveState();
-  renderHabits();
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 // INIT
-// ══════════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
 (function init() {
-  state = loadState();
-  if (state && state.userName) {
-    document.getElementById('ob-wrap').style.display='none';
-    document.getElementById('app').style.display='block';
+  S = load();
+  if (S && S.habits) {
+    // Migrate old habit format if needed
+    S.habits = S.habits.map(h => ({
+      ...h,
+      done: h.done||{}, entries: h.entries||{}, nights: h.nights||{}
+    }));
+    S.userName = 'Soph';
+    save();
     bootApp();
   } else {
-    renderOb();
+    S = {
+      userName: 'Soph',
+      habits: DEFAULT_HABITS.map(h => ({...h, done:{}, entries:{}, nights:{}})),
+      budget: 500,
+      upToken: '',
+      celebrated: {}
+    };
+    save();
+    bootApp();
   }
 })();
 </script>
