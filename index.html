@@ -111,7 +111,7 @@ input,textarea{user-select:text}
 .search-ic{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none}
 
 /* ── SCROLL ────────────────────────────────────────── */
-.scroll{flex:1;overflow-y:auto;padding:14px 20px 30px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
+.scroll{flex:1;overflow-y:auto;padding:14px 20px 30px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:calc(100px + max(env(safe-area-inset-bottom,16px),16px))}
 
 /* ── EMPTY ─────────────────────────────────────────── */
 .empty{text-align:center;padding:70px 20px}
@@ -173,7 +173,7 @@ input,textarea{user-select:text}
 /* ── ADD BAR ───────────────────────────────────────── */
 .add-bar{
   position:fixed;
-  bottom:calc(72px + env(safe-area-inset-bottom,0px));
+  bottom:calc(80px + max(env(safe-area-inset-bottom,16px),16px));
   left:50%;transform:translateX(-50%);
   width:100%;max-width:430px;
   padding:8px 20px 10px;
@@ -203,22 +203,21 @@ input,textarea{user-select:text}
   position:fixed;
   bottom:0;left:50%;transform:translateX(-50%);
   width:100%;max-width:430px;
-  height:calc(72px + env(safe-area-inset-bottom, 0px));
   display:flex;align-items:flex-start;
   background:rgba(255,255,255,.97);
   backdrop-filter:blur(24px);
   -webkit-backdrop-filter:blur(24px);
   border-top:1px solid rgba(0,0,0,.08);
   box-shadow:0 -2px 24px rgba(0,0,0,.08);
-  padding:6px 8px 0;
-  padding-bottom:env(safe-area-inset-bottom,0);
+  padding:10px 6px 0;
+  padding-bottom:max(env(safe-area-inset-bottom, 16px), 16px);
   z-index:50
 }
 .nav-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
   gap:4px;border:none;background:transparent;cursor:pointer;
-  padding:8px 4px 6px;border-radius:14px;transition:all .18s;
-  position:relative;min-height:60px;
+  padding:6px 4px 4px;border-radius:14px;transition:all .18s;
+  position:relative;
   -webkit-tap-highlight-color:transparent;
 }
 .nav-btn:active{transform:scale(.91);background:rgba(0,0,0,.04)}
@@ -405,7 +404,7 @@ textarea.fi{resize:none;min-height:78px;line-height:1.6}
     <button class="nav-btn" data-tab="fun"     onclick="go('fun')">     <span class="nav-icon">✨</span><span class="nav-label">Fun</span>    <span class="nav-dot" id="nd-fun"></span></button>
   </div>
   <!-- nav spacer for fixed nav -->
-  <div style="height:calc(72px + env(safe-area-inset-bottom,0px));flex-shrink:0"></div>
+  <div style="height:calc(80px + max(env(safe-area-inset-bottom,16px),16px));flex-shrink:0"></div>
 </div>
 
 <!-- Edit sheet -->
