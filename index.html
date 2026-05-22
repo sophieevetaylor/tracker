@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 <meta name="apple-mobile-web-app-title" content="Lists"/>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap');
 
 :root{
   --bg:#f4f1ec;
@@ -41,16 +41,66 @@ input,textarea{user-select:text}
 #app{max-width:430px;margin:0 auto;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
 
 /* ── HEADER ────────────────────────────────────────── */
-.hdr{flex-shrink:0;padding:52px 20px 0;background:var(--bg);position:relative;z-index:15}
-.hdr-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:4px}
-.hdr-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;font-weight:400;font-style:italic;color:var(--ink);line-height:1}
-.hdr-date{font-size:12px;color:var(--ink3);font-weight:500;margin-bottom:2px}
-.hdr-sub{font-size:14px;font-weight:600;color:var(--ink2);margin-bottom:16px;min-height:20px}
-.hdr-sub b{color:var(--ac,#e05a2b)}
-.hdr-btns{display:flex;gap:7px;padding-bottom:2px}
-.hdr-btn{width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,.9);box-shadow:0 2px 8px var(--sh);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.hdr{
+  flex-shrink:0;
+  padding:56px 20px 0;
+  background:var(--bg);
+  position:relative;z-index:15
+}
+.hdr-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(0,0,0,.07);
+  margin-bottom:0
+}
+/* logo mark */
+.hdr-logo{
+  width:38px;height:38px;border-radius:12px;
+  background:linear-gradient(145deg,var(--ac-l,#f07848),var(--ac,#e05a2b));
+  box-shadow:0 3px 12px rgba(0,0,0,.18);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:background .3s
+}
+.hdr-logo-inner{
+  width:18px;height:18px;position:relative;
+}
+/* three stacked lines — universal list icon */
+.hdr-logo-inner::before,
+.hdr-logo-inner::after,
+.hdr-logo-line{
+  content:'';display:block;position:absolute;
+  height:2.5px;border-radius:2px;background:#fff;left:0;right:0;
+  transition:all .2s
+}
+.hdr-logo-inner::before{top:0;right:5px}
+.hdr-logo-line{top:50%;transform:translateY(-50%)}
+.hdr-logo-inner::after{bottom:0;right:2px}
+
+/* date + status */
+.hdr-meta{flex:1;padding:0 14px}
+.hdr-day{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:22px;font-weight:400;font-style:italic;
+  color:var(--ink);line-height:1;margin-bottom:2px
+}
+.hdr-status{font-size:12px;font-weight:600;color:var(--ink3)}
+.hdr-status b{color:var(--ac,#e05a2b);font-weight:800}
+
+/* search btn */
+.hdr-btn{
+  width:36px;height:36px;border-radius:50%;border:none;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 2px 8px var(--sh);
+  cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;flex-shrink:0
+}
 .hdr-btn:hover{background:#fff;box-shadow:0 4px 12px var(--sh)}
 .hdr-btn.active{background:var(--ac,#e05a2b);color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+/* hide old sub line */
+.hdr-sub{display:none}
+.hdr-date{display:none}
 
 /* search */
 .search-wrap{overflow:hidden;max-height:0;transition:max-height .25s cubic-bezier(.4,0,.2,1),margin .25s}
@@ -66,7 +116,7 @@ input,textarea{user-select:text}
 /* ── EMPTY ─────────────────────────────────────────── */
 .empty{text-align:center;padding:70px 20px}
 .empty-em{font-size:52px;margin-bottom:14px}
-.empty-t{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-style:italic;color:var(--ink3);margin-bottom:6px}
+.empty-t{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-style:italic;color:var(--ink3);margin-bottom:6px}
 .empty-s{font-size:14px;color:var(--ink4)}
 
 /* ── TASK ITEM ─────────────────────────────────────── */
@@ -178,7 +228,7 @@ input,textarea{user-select:text}
 .sheet{background:var(--card);border-radius:28px 28px 0 0;width:100%;max-width:430px;padding:0 22px 52px;max-height:92vh;overflow-y:auto;transform:translateY(100%);box-shadow:0 -8px 40px rgba(0,0,0,.12);transition:transform .3s cubic-bezier(.32,0,.67,0)}
 .overlay.open .sheet{transform:translateY(0);transition:transform .36s cubic-bezier(.33,1,.68,1)}
 .sh-handle{width:44px;height:4px;background:#e0d8d0;border-radius:3px;margin:15px auto 22px}
-.sh-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-style:italic;color:var(--ink);margin-bottom:20px}
+.sh-title{font-family:'Playfair Display',Georgia,serif;font-size:24px;font-style:italic;color:var(--ink);margin-bottom:20px}
 .fi{width:100%;background:#faf8f4;border:1.5px solid rgba(0,0,0,.09);border-radius:13px;padding:13px 14px;font-size:15px;color:var(--ink);outline:none;transition:border-color .15s}
 .fi:focus{border-color:var(--ac,#e05a2b);box-shadow:0 0 0 3px rgba(0,0,0,.05)}
 .fi::placeholder{color:var(--ink4)}
@@ -230,7 +280,7 @@ textarea.fi{resize:none;min-height:78px;line-height:1.6}
 .qty-btn:active{transform:scale(.9)}
 .qty-btn.qty-plus{color:var(--grocery-c);font-weight:600}
 .qty-num{
-  font-family:'Cormorant Garamond',Georgia,serif;
+  font-family:'Playfair Display',Georgia,serif;
   font-size:22px;font-weight:400;color:var(--ink);
   min-width:28px;text-align:center;line-height:1;
   transition:all .2s
@@ -255,7 +305,7 @@ textarea.fi{resize:none;min-height:78px;line-height:1.6}
 }
 .cart-txt{font-size:14px;font-weight:700;color:#fff}
 .cart-sub{font-size:12px;color:rgba(255,255,255,.7);margin-top:2px}
-.cart-count{font-family:'Cormorant Garamond',Georgia,serif;font-size:42px;font-weight:300;color:#fff;line-height:1}
+.cart-count{font-family:'Playfair Display',Georgia,serif;font-size:42px;font-weight:300;color:#fff;line-height:1}
 
 /* custom grocery item add */
 .groc-add-row{display:flex;gap:8px;margin-top:10px}
@@ -282,9 +332,9 @@ textarea.fi{resize:none;min-height:78px;line-height:1.6}
 .admin-section{margin-bottom:28px}
 .admin-sec-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px}
 .admin-sec-icon{font-size:18px}
-.admin-sec-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-style:italic;color:var(--ink);font-weight:400;flex:1}
+.admin-sec-title{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-style:italic;color:var(--ink);font-weight:400;flex:1}
 .admin-sec-count{background:var(--ac,#c0507a);color:#fff;font-size:10px;font-weight:800;border-radius:10px;padding:2px 8px;min-width:22px;text-align:center}
-.admin-empty{font-size:13px;color:var(--ink4);font-style:italic;padding:10px 4px 14px;font-family:'Cormorant Garamond',Georgia,serif}
+.admin-empty{font-size:13px;color:var(--ink4);font-style:italic;padding:10px 4px 14px;font-family:'Playfair Display',Georgia,serif}
 .admin-add-row{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.7);border-radius:14px;border:1.5px dashed rgba(0,0,0,.1);padding:8px 8px 8px 14px;margin-top:8px}
 .admin-add-inp{flex:1;background:transparent;border:none;outline:none;font-size:15px;color:var(--ink)}
 .admin-add-inp::placeholder{color:var(--ink4)}
@@ -296,18 +346,26 @@ textarea.fi{resize:none;min-height:78px;line-height:1.6}
 
 <div id="app">
   <div class="hdr" id="hdr">
-    <div class="hdr-row">
-      <div>
-        <div class="hdr-date" id="hdr-date"></div>
-        <div class="hdr-title">Hey, Soph 👋</div>
+    <div class="hdr-inner">
+      <!-- logo mark -->
+      <div class="hdr-logo" id="hdr-logo">
+        <div class="hdr-logo-inner">
+          <span class="hdr-logo-line"></span>
+        </div>
       </div>
-      <div class="hdr-btns">
-        <button class="hdr-btn" id="search-btn" onclick="toggleSearch()" title="Search">🔍</button>
+      <!-- date + status -->
+      <div class="hdr-meta">
+        <div class="hdr-day" id="hdr-day"></div>
+        <div class="hdr-status" id="hdr-status"></div>
       </div>
+      <!-- search -->
+      <button class="hdr-btn" id="search-btn" onclick="toggleSearch()" title="Search">🔍</button>
     </div>
-    <div class="hdr-sub" id="hdr-sub"></div>
+    <!-- keep these hidden for JS compat -->
+    <div class="hdr-sub" id="hdr-sub" style="display:none"></div>
+    <div class="hdr-date" id="hdr-date" style="display:none"></div>
     <div class="search-wrap" id="search-wrap">
-      <div class="search-row">
+      <div class="search-row" style="margin-top:12px">
         <span class="search-ic">🔍</span>
         <input class="search-inp" id="search-inp" placeholder="Search all lists…" oninput="onSearch()" onkeydown="if(event.key==='Escape')toggleSearch()"/>
       </div>
@@ -511,17 +569,28 @@ function renderAll(){
   ['work','errands','projects','fun'].forEach(tl=>processDue(S.tasks[tl]||[]));
 
   // header
-  document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'});
   const pending = allTasks().filter(t=>!t.done).length;
   const grInCart = grocInCartCount();
   const adminPending = ['errands','projects'].reduce((a,id)=>a+(S.tasks[id]||[]).filter(x=>!x.done).length,0);
-  document.getElementById('hdr-sub').innerHTML = tab==='today'
-    ? (todayTasks().filter(t=>!t.done).length>0 ? `<b>${todayTasks().filter(t=>!t.done).length}</b> thing${todayTasks().filter(t=>!t.done).length!==1?'s':''} on your plate today` : `You're all caught up today 🎉`)
-    : tab==='grocery'
-    ? (grInCart>0 ? `<b>${grInCart}</b> item${grInCart!==1?'s':''} in your cart` : `What do you need this week?`)
-    : tab==='admin'
-    ? (adminPending>0 ? `<b>${adminPending}</b> item${adminPending!==1?'s':''} to take care of` : `Life admin all clear ✦`)
-    : (pending>0 ? `<b>${pending}</b> task${pending!==1?'s':''} across all lists` : `All clear! ✦`);
+  const now = new Date();
+  const dayEl = document.getElementById('hdr-day');
+  const stEl  = document.getElementById('hdr-status');
+  if(dayEl) dayEl.textContent = now.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long'});
+  let statusHtml = '';
+  if(tab==='today'){
+    const n=todayTasks().filter(t=>!t.done).length;
+    statusHtml = n>0 ? `<b>${n}</b> task${n!==1?'s':''} today` : `All clear today ✦`;
+  } else if(tab==='grocery'){
+    statusHtml = grInCart>0 ? `<b>${grInCart}</b> item${grInCart!==1?'s':''} in cart` : `Nothing in cart`;
+  } else if(tab==='admin'){
+    statusHtml = adminPending>0 ? `<b>${adminPending}</b> to take care of` : `Life admin clear ✦`;
+  } else {
+    const n=(S.tasks[tab]||[]).filter(t=>!t.done).length;
+    statusHtml = n>0 ? `<b>${n}</b> task${n!==1?'s':''} pending` : `All done ✦`;
+  }
+  if(stEl) stEl.innerHTML = statusHtml;
+  const logo = document.getElementById('hdr-logo');
+  if(logo){ const cfg=TABS[tab]||TABS.today; logo.style.background=`linear-gradient(145deg,${cfg.acL},${cfg.ac})`; }
 
   // nav dots
   Object.keys(TABS).forEach(t=>{
