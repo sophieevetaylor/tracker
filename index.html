@@ -528,8 +528,8 @@ button,summary,label.btn,.dchip,.task,a{touch-action:manipulation}
 .wkrange{font-size:14px}
 .wknav button{min-width:36px;height:34px;border-radius:10px;font-size:16px;font-weight:600}
 .wkthemes{gap:6px;margin-top:14px}
-.wkth{border-radius:10px;padding:7px 9px 8px}
-.wkth b{font-size:13.5px}
+.wkth{border-radius:10px;padding:7px 7px 8px}
+.wkth b{font-size:min(13.5px,3.45vw)}
 .wkgrid{margin-top:4px}
 .wklab{font-size:12px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--faint);border-bottom:0;margin:16px 2px 4px;padding:0}
 .week .task,.monthnow .task{font-size:16px;padding:7px 2px;gap:12px}
@@ -1004,7 +1004,7 @@ var WEEKLY = [
 ];
 var NIGHTS = [
   ["Sun","Cooking","culture",[0]],["Mon","Finances","wealth",[1]],["Tue","Fitness","body",[2]],
-  ["Wed","Culture","culture",[3]],["Thu","Date night","love",[4]],["Weekend","Friends and family","nylife",[5,6]]
+  ["Wed","Culture","portfolio",[3]],["Thu","Date night","love",[4]],["Weekend","Fam & friends","nylife",[5,6]]
 ];
 var WK0 = new Date(2026, 11, 27), WKN = 53;
 function wkStart(i){ return new Date(2026, 11, 27 + i * 7); }
@@ -1749,7 +1749,7 @@ function renderWeek(){
       var dow = new Date().getDay(), live = i === cur;
       return '<div class="wkthemes" role="list" aria-label="Your nights">'+NIGHTS.map(function(n){
         var on = live && n[3].indexOf(dow) >= 0;
-        return '<div class="wkth'+(on?' on':'')+'" role="listitem" style="'+tagStyle(n[2])+'"'+(on?' aria-current="date"':'')+'><span class="wkd">'+esc(n[0])+(on?' · tonight':'')+'</span><b>'+esc(n[1])+'</b></div>';
+        return '<div class="wkth'+(on?' on':'')+'" role="listitem" style="'+tagStyle(n[2])+'"'+(on?' aria-current="date"':'')+'><span class="wkd">'+(on ? (n[3].length > 1 ? 'This weekend' : esc(n[0])+' · tonight') : esc(n[0]))+'</span><b>'+esc(n[1])+'</b></div>';
       }).join("")+'</div>';
     })()+
     '<div class="wkgrid">'+
