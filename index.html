@@ -593,7 +593,7 @@ details.amod > summary{min-height:48px}
 .rsrc a{padding:4px 0;display:inline-block}
 
 /* Year: segmented control */
-.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;padding:3px;margin:10px 0 14px;border-radius:11px;background:var(--soft);position:sticky;top:calc(var(--sat) + 6px);z-index:25;box-shadow:0 0 0 6px var(--appbg)}
+.seg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:3px;margin:10px 0 14px;border-radius:11px;background:var(--soft);position:sticky;top:calc(var(--sat) + 6px);z-index:25;box-shadow:0 0 0 6px var(--appbg)}
 .seg button{border:0;background:none;border-radius:8px;min-height:34px;font:inherit;font-size:14px;font-weight:650;color:var(--muted);cursor:pointer}
 .seg button[aria-selected="true"]{background:var(--card);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.1),0 1px 1px rgba(0,0,0,.04)}
 .segpane[hidden]{display:none!important}
@@ -696,6 +696,34 @@ details.amod > summary{min-height:48px}
 }
 .mncard,.mnsec,#settings,#foundations,details.toggle,.gcard{scroll-margin-top:calc(var(--sat) + 14px)}
 #v-learn details.amod{scroll-margin-top:calc(var(--sat) + 64px)}
+
+/* Year > Trips */
+.trsum{padding:14px 16px 14px}
+.trbig{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.trbig b{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.trbig span{color:var(--muted);font-size:15px}
+.trsum.over .trbig b{color:var(--love)}
+.trsum .lbar{height:8px;margin:12px 0 10px}
+.trlegend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13.5px;color:var(--muted)}
+.trlegend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.trlegend .ap{background:var(--nylife)}
+.trlegend .pl{background:color-mix(in srgb,var(--nylife) 40%,transparent)}
+.trcount{font-size:14px;font-weight:600;margin-top:10px}
+.trnote,.trhols{font-size:12.5px;color:var(--faint);margin-top:4px}
+.trhols{padding:8px 2px 0;border-top:1px solid var(--line);margin-top:0}
+.trq{padding:4px 14px 10px}
+.trqh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:12px 2px 6px}
+.trqh b{font-size:15.5px;font-weight:700}
+.trqh span{color:var(--muted);font-size:13px;white-space:nowrap}
+.trow{display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 2px;border-top:1px solid var(--line);text-decoration:none;color:var(--text)}
+.trmain{flex:1;min-width:0}
+.trmain b{display:block;font-size:15.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trmain small{display:block;color:var(--muted);font-size:13px;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trow.open b{color:var(--muted);font-weight:500}
+.trow.open small{color:var(--faint)}
+.trside{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex:none}
+.trside small{color:var(--muted);font-size:12.5px;white-space:nowrap}
+.trow .chev{color:var(--faint);font-size:20px;margin-left:-2px}
 </style>
 </head>
 <body>
@@ -719,6 +747,7 @@ details.amod > summary{min-height:48px}
     <header class="vhead"><h1 class="vtitle">2027</h1><p class="vsub">The year New York becomes home.</p></header>
     <div class="seg" role="tablist" aria-label="Year sections" id="seg">
       <button type="button" role="tab" data-seg="plan" aria-selected="true">Plan</button>
+      <button type="button" role="tab" data-seg="trips" aria-selected="false">Trips</button>
       <button type="button" role="tab" data-seg="learn" aria-selected="false">Learn</button>
       <button type="button" role="tab" data-seg="beauty" aria-selected="false">Beauty</button>
       <button type="button" role="tab" data-seg="more" aria-selected="false">More</button>
@@ -748,6 +777,8 @@ details.amod > summary{min-height:48px}
         <div class="tbody"><div class="twrap" style="margin-top:4px"><table class="nt reading" id="readingList"></table></div></div>
       </details>
     </div>
+
+    <div class="segpane" id="s-trips" hidden><div id="tripsView"></div></div>
 
     <div class="segpane" id="s-beauty" hidden>
       <p class="lead">Tick each one when it's done. Edit once you've booked.</p>
@@ -2387,7 +2418,7 @@ document.addEventListener("submit", function(e){
 });
 
 /* ===================== app shell ===================== */
-var VIEWS = ["week","month","year"], SEGS = ["plan","learn","beauty","more"], curView = "week", curSeg = "plan", scrollPos = {};
+var VIEWS = ["week","month","year"], SEGS = ["plan","trips","learn","beauty","more"], curView = "week", curSeg = "plan", scrollPos = {};
 function showView(v, tapAgain){
   if (VIEWS.indexOf(v) < 0) v = "week";
   if (v === curView){
@@ -2408,7 +2439,8 @@ function showView(v, tapAgain){
 function setSeg(sg){
   if (SEGS.indexOf(sg) < 0) sg = "plan";
   if (sg !== curSeg) scrollPos["year-" + curSeg] = window.scrollY;
-  var map = { plan:"s-plan", learn:"v-learn", beauty:"s-beauty", more:"s-more" };
+  var map = { plan:"s-plan", trips:"s-trips", learn:"v-learn", beauty:"s-beauty", more:"s-more" };
+  if (sg === "trips") renderTripsView();
   SEGS.forEach(function(x){ document.getElementById(map[x]).hidden = x !== sg; });
   var bs = document.querySelectorAll("[data-seg]");
   for (var i=0;i<bs.length;i++) bs[i].setAttribute("aria-selected", bs[i].getAttribute("data-seg") === sg ? "true" : "false");
@@ -2610,13 +2642,54 @@ renderTasks = function(){ _renderTasks(); renderMonthView(); renderPreLink(); ap
 var _renderBeauty = renderBeauty;
 renderBeauty = function(){ _renderBeauty(); renderMonthView(); };
 var _apply = apply;
-apply = function(){ _apply(); renderPreLinkCount(); };
+apply = function(){ _apply(); renderPreLinkCount(); if (curSeg === "trips") renderTripsView(); };
 
 if ("serviceWorker" in navigator && location.protocol === "https:"){
   window.addEventListener("load", function(){ navigator.serviceWorker.register("/sw.js").catch(function(){}); });
 }
 document.documentElement.setAttribute("data-view", "week");
 
+
+
+/* Year > Trips: every trip and the year's leave in one place. Edits happen on the quarter's trip card. */
+function renderTripsView(){
+  var el = document.getElementById("tripsView"); if (!el) return;
+  var planned = 0, approved = 0, counts = { Booked:0, Planning:0, Idea:0, Open:0 };
+  var dl = function(d){ var r = Math.round(d * 2) / 2; return r + (r === 1 ? " day" : " days"); };
+  TRIP_ORDER.forEach(function(id){ var d = tdays(id); planned += d; if (state.done[id+"-approved"]) approved += d; counts[tripLabel(id)]++; });
+  var left = ANNUAL - planned, over = left < 0;
+  var ap = Math.min(approved, ANNUAL), pl = Math.min(Math.max(planned - approved, 0), ANNUAL - ap);
+  var countLine = [["Booked","booked"],["Planning","planning"],["Idea",""],["Open","open"]].filter(function(c){ return counts[c[0]]; })
+    .map(function(c){ var n = counts[c[0]]; return n + " " + (c[0] === "Idea" ? (n === 1 ? "idea" : "ideas") : c[1]); }).join(" · ");
+  var h = '<section class="mnsec trsum'+(over ? ' over' : '')+'">'+
+    '<div class="trbig"><b>'+dl(over ? -left : left).split(" ")[0]+'</b><span>'+(over ? 'days over your '+ANNUAL+' days of leave' : 'of '+ANNUAL+' days of leave left')+'</span></div>'+
+    '<div class="lbar" aria-hidden="true"><span class="ap" style="width:'+(ap/ANNUAL*100)+'%"></span><span class="pl" style="width:'+(pl/ANNUAL*100)+'%"></span></div>'+
+    '<div class="trlegend"><span><i class="ap"></i>'+dl(approved)+' approved</span><span><i class="pl"></i>'+dl(Math.max(planned - approved, 0))+' planned, not yet approved</span></div>'+
+    '<div class="trcount">'+countLine+'</div>'+
+    '<div class="trnote">US public holidays and the Christmas shutdown don\'t use leave.</div>'+
+  '</section>';
+  HOL.forEach(function(q, qi){
+    var ids = q.trips.map(function(t){ return t.id; });
+    var filled = ids.filter(function(id){ return tripLabel(id) !== "Open"; }), open = ids.filter(function(id){ return tripLabel(id) === "Open"; });
+    var qd = 0; ids.forEach(function(id){ qd += tdays(id); });
+    var hols = PUBLIC_HOLS.filter(function(x){ return x[2] === qi; }).map(function(x){ return esc(x[0])+' '+esc(x[1]); }).join(" · ");
+    h += '<section class="mnsec trq"><div class="trqh"><b>'+q.q+' '+esc(q.name)+'</b><span>'+(qd ? dl(qd)+' of leave' : 'No leave')+'</span></div>'+
+      filled.concat(open).map(function(id){
+        var t = TRIP_BY_ID[id], label = tripLabel(id), d = tdays(id), n = tripSteps(id);
+        var dest = String(tv(id, "dest")).trim(), dates = String(tv(id, "dates")).trim(), who = String(tv(id, "who")).trim();
+        var kind = t.big ? "Big trip" : "Weekend away";
+        if (label === "Open") return '<a class="trow open" href="#trip-'+id+'" data-goto="'+id+'"><div class="trmain"><b>'+kind+'</b>'+
+          (t.ideas ? '<small>Ideas: '+esc(t.ideas)+'</small>' : '')+'</div><div class="trside">'+tag("review", "Open")+(d ? '<small>'+dl(d)+'</small>' : '')+'</div><span class="chev" aria-hidden="true">›</span></a>';
+        var sub = [dates, who ? "with " + who : ""].filter(Boolean).join(" · ") || "Dates to set";
+        var leave = d ? dl(d) + (state.done[id+"-approved"] ? " ✓" : "") : "No leave";
+        return '<a class="trow" href="#trip-'+id+'" data-goto="'+id+'"><div class="trmain"><b>'+esc(dest)+'</b><small>'+esc(sub)+'</small></div>'+
+          '<div class="trside">'+tag(LABEL_TAG[label], label === "Planning" ? "Planning " + n + "/" + STEPS.length : label)+'<small>'+leave+'</small></div><span class="chev" aria-hidden="true">›</span></a>';
+      }).join("")+
+      (hols ? '<div class="trhols">Long weekends: '+hols+'</div>' : '')+
+    '</section>';
+  });
+  el.innerHTML = h;
+}
 
 /* ===================== boot ===================== */
 (function(){
